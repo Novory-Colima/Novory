@@ -54,7 +54,7 @@ const problems = [
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 problems-grid">
     {problems.map((problem) => (
-      <Card class="p-10 group hover:bg-white/[0.02] border-white/5 transition-all duration-500 bg-bg-secondary/30">
+      <Card class="p-10 group hover:bg-white/2 border-white/5 transition-all duration-500 bg-bg-secondary/30">
         <div class="flex items-center justify-between mb-8">
           <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-accent group-hover:text-white group-hover:bg-accent group-hover:shadow-glow transition-all duration-500">
             <problem.icon class="w-7 h-7" />
@@ -72,7 +72,7 @@ const problems = [
   </div>
 
   <div class="mt-24 text-center">
-    <div class="inline-block p-px rounded-full bg-gradient-to-r from-transparent via-accent/30 to-transparent">
+    <div class="inline-block p-px rounded-full bg-linear-to-r from-transparent via-accent/30 to-transparent">
       <p class="px-8 py-4 text-text-secondary italic text-lg bg-bg-primary rounded-full">
         "La tecnología adecuada puede transformar cada uno de estos desafíos en oportunidades de crecimiento."
       </p>

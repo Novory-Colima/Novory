@@ -11,7 +11,10 @@ const { id, class: className, container = true, ...rest } = Astro.props;
 
 <section 
   id={id} 
-  class:list={['py-20 md:py-32 relative overflow-hidden', className]}
+  class:list={[
+    'py-16 md:py-24 lg:py-32 relative overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]', 
+    className
+  ]}
   {...rest}
 >
   {container ? (

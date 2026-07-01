@@ -95,10 +95,10 @@
   --color-text-light: #aaaaaa;
 
   /* Títulos y texto principal en modo claro (gris muy oscuro) */
-  --color-text-dark-titles: #333333;
+  --color-text-dark-titles: #222222;
 
   /* Párrafos y subtítulos en modo claro (gris medio) */
-  --color-text-dark: #555555;
+  --color-text-dark: #444444;
 }
 
 @layer base {
@@ -179,7 +179,7 @@
 
   .nav-link-underline::after {
     content: '';
-    @apply absolute w-0 h-[1px] bottom-[-2px] left-0 bg-accent transition-all duration-200 ease-standard;
+    @apply absolute w-0 h-px -bottom-0.5 left-0 bg-accent transition-all duration-200 ease-standard;
   }
 
   .nav-link-underline:hover::after {
@@ -224,16 +224,16 @@
 
   /* Hover gradiente para fondos (botones, bloques) */
   .hover-brand-gradient {
-    @apply hover:bg-gradient-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple;
+    @apply hover:bg-linear-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple;
   }
 
   /* Hover gradiente para texto (links, iconos, títulos) */
   .hover-brand-gradient-text {
-    @apply hover:bg-gradient-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple hover:bg-clip-text hover:text-transparent;
+    @apply hover:bg-linear-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple hover:bg-clip-text hover:text-transparent;
   }
 
   /* Hover gradiente para borde (cards) */
   .hover-brand-gradient-border {
-    @apply hover:border-transparent hover:bg-gradient-to-r hover:from-[var(--color-brand-cyan)] hover:via-[var(--color-brand-blue)] hover:to-[var(--color-brand-purple)] hover:bg-clip-border;
+    @apply hover:border-transparent hover:bg-linear-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple hover:bg-clip-border;
   }
 }

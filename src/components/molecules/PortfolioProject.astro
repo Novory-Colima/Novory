@@ -20,7 +20,7 @@ const { title, problem, solution, result, technologies, image, side = 'right', h
   
   <!-- Image/Visual -->
   <div class:list={['lg:col-span-7 relative group', side === 'left' ? 'lg:order-2' : 'lg:order-1']}>
-    <div class="aspect-[16/10] md:aspect-[16/9] rounded-[30px] md:rounded-[40px] overflow-hidden bg-light-surface dark:bg-white/[0.03] border border-light-border/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative transition-colors">
+    <div class="aspect-16/10 md:aspect-video rounded-[30px] md:rounded-[40px] overflow-hidden bg-light-surface dark:bg-white/3 border border-light-border/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative transition-colors">
        
        <!-- Placeholder visual (Si hay imagen, deberías usar <img src={image} /> aquí) -->
        <div class="absolute inset-0 bg-brand-blue/5 flex items-center justify-center text-brand-blue/20">
@@ -31,13 +31,13 @@ const { title, problem, solution, result, technologies, image, side = 'right', h
        <div class="absolute inset-0 bg-brand-blue/10 dark:bg-brand-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 backdrop-blur-[1px] md:backdrop-blur-[2px]"></div>
        
        <!-- Título sobre la imagen (Gradiente que adapta al tema) -->
-       <div class="absolute inset-x-0 bottom-0 p-6 md:p-8 lg:p-12 bg-gradient-to-t from-light-base via-light-base/60 dark:from-dark-base dark:via-dark-base/40 to-transparent">
+       <div class="absolute inset-x-0 bottom-0 p-6 md:p-8 lg:p-12 bg-linear-to-t from-light-base via-light-base/60 dark:from-dark-base dark:via-dark-base/40 to-transparent">
           <h3 class="text-text-dark-titles dark:text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter transition-colors">{title}</h3>
        </div>
     </div>
     
     <!-- Floating "Result" Badge (Modo claro = fondo blanco, Oscuro = fondo negro) -->
-    <div class="absolute -top-4 -right-4 md:-top-6 md:-right-6 lg:top-12 lg:-right-12 p-6 md:p-8 rounded-[var(--radius-xl)] bg-light-base/90 dark:bg-dark-base/90 backdrop-blur-2xl border border-brand-blue/20 dark:border-brand-cyan/40 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-glow rotate-3 md:rotate-6 group-hover:rotate-0 group-hover:scale-105 md:group-hover:scale-110 transition-all duration-700 ease-[cubic-bezier(0.4,0.0,0.2,1)] z-30">
+    <div class="absolute -top-4 -right-4 md:-top-6 md:-right-6 lg:top-12 lg:-right-12 p-6 md:p-8 rounded-(--radius-xl) bg-light-base/90 dark:bg-dark-base/90 backdrop-blur-2xl border border-brand-blue/20 dark:border-brand-cyan/40 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-glow rotate-3 md:rotate-6 group-hover:rotate-0 group-hover:scale-105 md:group-hover:scale-110 transition-all duration-700 ease-[cubic-bezier(0.4,0.0,0.2,1)] z-30">
        <div class="text-[10px] md:text-[11px] text-brand-blue dark:text-brand-cyan uppercase tracking-[0.2em] font-black mb-1 md:mb-2">Transformación</div>
        <div class="text-2xl md:text-3xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">{result}</div>
     </div>
@@ -48,7 +48,7 @@ const { title, problem, solution, result, technologies, image, side = 'right', h
     
     <!-- Etiqueta de sección -->
     <div class="flex items-center gap-3">
-        <div class="w-8 h-[2px] bg-brand-blue dark:bg-brand-cyan"></div>
+        <div class="w-8 h-0.5 bg-brand-blue dark:bg-brand-cyan"></div>
         <span class="text-brand-blue dark:text-brand-cyan font-bold text-xs md:text-sm tracking-[0.3em] uppercase">Caso de Éxito</span>
     </div>
 
@@ -76,7 +76,7 @@ const { title, problem, solution, result, technologies, image, side = 'right', h
 
     <!-- CTA -->
     <div class="pt-2 md:pt-4">
-      <Button variant="primary" size="lg" href={href} class="group/btn !rounded-full w-full sm:w-auto">
+      <Button variant="primary" size="lg" href={href} class="group/btn w-full sm:w-auto">
         <span class="mr-3 font-black uppercase tracking-widest text-xs md:text-sm">Ver caso completo</span>
         <span class="group-hover/btn:translate-x-2 transition-transform duration-300">→</span>
       </Button>

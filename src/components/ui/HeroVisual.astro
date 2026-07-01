@@ -7,7 +7,7 @@ import Card from '../molecules/Card.astro';
   <div class="absolute inset-0 bg-accent/20 blur-[120px] rounded-full scale-75 animate-pulse-slow"></div>
   
   <!-- Central Dashboard Mockup -->
-  <div class="relative z-10 w-[90%] h-[75%] glass-panel border-white/10 shadow-2xl p-5 flex flex-col gap-5 bg-white/[0.02]">
+  <div class="relative z-10 w-[90%] h-[75%] glass-panel border-white/10 shadow-2xl p-5 flex flex-col gap-5 bg-white/2">
     <!-- Header -->
     <div class="flex items-center justify-between border-b border-white/5 pb-4">
       <div class="flex gap-2">
@@ -38,8 +38,8 @@ import Card from '../molecules/Card.astro';
              <div class="w-full h-4 bg-white/5 rounded"></div>
           </div>
         </div>
-        <div class="h-2/3 bg-white/[0.03] rounded-xl border border-white/5 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent"></div>
+        <div class="h-2/3 bg-white/3 rounded-xl border border-white/5 relative overflow-hidden">
+          <div class="absolute inset-0 bg-linear-to-br from-accent/5 to-transparent"></div>
           <!-- Tiny graph simulation -->
           <svg class="absolute bottom-0 left-0 w-full h-24" viewBox="0 0 100 20" preserveAspectRatio="none">
             <path d="M0,20 L0,15 Q25,5 50,12 T100,2 L100,20 Z" fill="url(#grad)" opacity="0.2"></path>
@@ -57,7 +57,7 @@ import Card from '../molecules/Card.astro';
 
   <!-- Floating Elements -->
   <!-- Card 1: Growth -->
-  <Card class="absolute -top-4 -right-8 w-52 h-36 z-20 !p-5 flex flex-col justify-between -rotate-3 animate-float-slow backdrop-blur-2xl">
+  <Card class="absolute -top-4 -right-8 w-52 h-36 z-20 p-5! flex flex-col justify-between -rotate-3 animate-float-slow backdrop-blur-2xl">
     <div class="flex justify-between items-start">
       <div class="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center border border-accent/30">
         <div class="w-5 h-5 bg-accent rounded-sm shadow-glow"></div>
@@ -71,7 +71,7 @@ import Card from '../molecules/Card.astro';
   </Card>
 
   <!-- Card 2: Automation Status -->
-  <Card class="absolute -bottom-8 -left-12 w-64 h-40 z-20 !p-5 flex flex-col gap-4 rotate-3 animate-float-slow-delayed backdrop-blur-2xl">
+  <Card class="absolute -bottom-8 -left-12 w-64 h-40 z-20 p-5! flex flex-col gap-4 rotate-3 animate-float-slow-delayed backdrop-blur-2xl">
     <div class="flex items-center justify-between">
       <div class="text-sm font-bold text-white">Sistemas Activos</div>
       <div class="flex gap-1">
