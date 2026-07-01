@@ -10,7 +10,13 @@ const { class: className, hoverable = true, ...rest } = Astro.props;
 
 <div
   class:list={[
-    "glass-panel p-8 border-white/5 transition-all duration-500 ease-standard relative overflow-hidden",
+    // Base & Responsividad (Padding adaptativo)
+    "p-6 md:p-8 rounded-[var(--radius-xl)] relative overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]",
+    
+    // Glassmorphism adaptativo (Claro/Oscuro)
+    "bg-light-surface/40 dark:bg-white/5 backdrop-blur-xl border border-light-border/50 dark:border-white/10",
+    
+    // Efectos Hover
     hoverable &&
       "hover:-translate-y-1.5 hover:scale-[1.01] hover-brand-gradient-border hover:border-accent/20 hover:shadow-glow group",
     className,
