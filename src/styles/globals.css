@@ -38,15 +38,19 @@
 
 
   /* COLORES REDES SOCIALES */
-  --color-github: #443399;      /* Morado GitHub */
-  --color-gmail: #EA4335;       /* Rojo Gmail */
-  --color-linkedin: #0A66C2;    /* Azul LinkedIn */
-  --color-whatsapp: #25D366;    /* Verde WhatsApp */
-  
+  --color-github: #443399;
+  /* Morado GitHub */
+  --color-gmail: #EA4335;
+  /* Rojo Gmail */
+  --color-linkedin: #0A66C2;
+  /* Azul LinkedIn */
+  --color-whatsapp: #25D366;
+  /* Verde WhatsApp */
+
   /* COLORES DE MARCA (LOGOTIPO Y DEGRADADOS) */
 
   /* Cian claro: Punto superior del degradado de la 'N' */
-  --color-brand-cyan: #77bbff;
+  --color-brand-cyan: #44a2ff;
 
   /* Azul vibrante: Color central del degradado del logo */
   --color-brand-blue: #4466ff;
@@ -226,5 +230,10 @@
   /* Hover gradiente para texto (links, iconos, títulos) */
   .hover-brand-gradient-text {
     @apply hover:bg-gradient-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple hover:bg-clip-text hover:text-transparent;
+  }
+
+  /* Hover gradiente para borde (cards) */
+  .hover-brand-gradient-border {
+    @apply hover:border-transparent hover:bg-gradient-to-r hover:from-[var(--color-brand-cyan)] hover:via-[var(--color-brand-blue)] hover:to-[var(--color-brand-purple)] hover:bg-clip-border;
   }
 }
