@@ -24,31 +24,31 @@ const projects = [
 ];
 ---
 
-<Section id="portafolio" class="bg-bg-primary relative overflow-hidden">
+<Section id="portafolio" class="bg-light-base dark:bg-bg-primary relative overflow-hidden transition-colors duration-500">
   <!-- Section Background Decorative Glow -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 blur-[200px] rounded-full pointer-events-none"></div>
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-100 md:w-150 h-100 md:h-150 bg-brand-cyan/15 dark:bg-brand-blue/5 blur-[150px] md:blur-[200px] rounded-full pointer-events-none transition-colors"></div>
 
-  <div class="max-w-4xl mx-auto text-center mb-24 flex flex-col gap-6 section-header">
-    <h2 class="text-white">Historias reales de transformación digital.</h2>
-    <p class="text-text-secondary text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+  <div class="max-w-4xl mx-auto text-center mb-16 md:mb-24 flex flex-col gap-4 md:gap-6 section-header relative z-10 px-4">
+    <h2 class="text-text-dark-titles dark:text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors">Historias reales de transformación digital.</h2>
+    <p class="text-text-dark dark:text-text-secondary text-lg md:text-xl lg:text-2xl leading-relaxed max-w-3xl mx-auto transition-colors">
       Cada proyecto representa un desafío superado. <br class="hidden md:block" />
       Diseñamos herramientas que impulsan negocios, no solo páginas web.
     </p>
   </div>
 
-  <div class="flex flex-col">
+  <div class="flex flex-col gap-10 md:gap-0">
     {projects.map((project) => (
       <PortfolioProject {...project} />
     ))}
   </div>
 
-  <div class="mt-32 text-center relative py-20">
+  <div class="mt-20 md:mt-32 text-center relative py-16 md:py-20">
     <!-- Decorative background line -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
-       <div class="w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 dark:opacity-10 transition-opacity">
+       <div class="w-full max-w-4xl h-px bg-linear-to-r from-transparent via-brand-blue dark:via-brand-cyan to-transparent"></div>
     </div>
     
-    <p class="text-white/40 italic text-xl md:text-2xl font-light tracking-wide max-w-3xl mx-auto relative z-10">
+    <p class="text-text-dark/60 dark:text-white/40 italic text-lg md:text-xl lg:text-2xl font-light tracking-wide max-w-3xl mx-auto relative z-10 px-6 transition-colors">
       "El visitante nunca compra un diseño. <br class="hidden md:block" /> Compra la transformación que ese diseño produjo."
     </p>
   </div>

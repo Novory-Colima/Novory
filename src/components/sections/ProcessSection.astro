@@ -41,36 +41,36 @@ const steps = [
 ];
 ---
 
-<Section id="proceso" class="bg-bg-primary relative">
+<Section id="proceso" class="bg-light-surface/30 dark:bg-dark-elevated/20 relative transition-colors duration-500">
   <!-- Decorative background elements -->
-  <div class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-accent/5 blur-[180px] rounded-full -translate-x-1/2 pointer-events-none"></div>
+  <div class="absolute top-1/2 left-0 w-100 md:w-150 h-100 md:h-150 bg-brand-cyan/10 dark:bg-brand-blue/5 blur-[120px] md:blur-[180px] rounded-full -translate-x-1/2 pointer-events-none transition-colors"></div>
 
-  <div class="max-w-4xl mx-auto text-center mb-28 flex flex-col gap-6 section-header">
-    <h2 class="text-white">Así convertimos una idea en resultados.</h2>
-    <p class="text-text-secondary text-lg md:text-xl leading-relaxed">
+  <div class="max-w-4xl mx-auto text-center mb-20 md:mb-28 flex flex-col gap-4 md:gap-6 section-header px-4">
+    <h2 class="text-text-dark-titles dark:text-white text-3xl md:text-5xl font-bold tracking-tight transition-colors">Así convertimos una idea en resultados.</h2>
+    <p class="text-text-dark dark:text-text-secondary text-base md:text-lg lg:text-xl leading-relaxed transition-colors">
       Cada proyecto sigue un proceso claro, colaborativo y enfocado en generar valor real <br class="hidden md:block" /> para tu negocio desde el primer día.
     </p>
   </div>
 
-  <div class="relative max-w-5xl mx-auto px-4 md:px-0">
+  <div class="relative max-w-5xl mx-auto px-6 md:px-0">
     <!-- Vertical Line -->
-    <div class="absolute left-8 md:left-1/2 top-4 bottom-4 w-0.5 bg-white/5 md:-translate-x-1/2 overflow-hidden rounded-full">
-       <div id="timeline-progress" class="w-full h-0 bg-accent shadow-glow transition-all duration-300"></div>
+    <div class="absolute left-10 md:left-1/2 top-4 bottom-4 w-1 bg-light-border/40 dark:bg-white/5 md:-translate-x-1/2 overflow-hidden rounded-full transition-colors">
+       <div id="timeline-progress" class="w-full h-0 bg-brand-blue dark:bg-brand-cyan shadow-[0_0_15px_rgba(68,102,255,0.5)] transition-all duration-300"></div>
     </div>
 
-    <div class="flex flex-col gap-16 md:gap-32">
+    <div class="flex flex-col gap-12 md:gap-24">
       {steps.map((step, index) => (
         <div class:list={['relative flex items-center md:justify-between timeline-item opacity-0 translate-y-10', index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row']}>
           <!-- Content -->
-          <div class:list={['pl-20 md:pl-0 md:w-[42%] flex flex-col gap-4', index % 2 === 0 ? 'md:text-left' : 'md:text-right']}>
-            <span class="text-accent font-bold text-sm tracking-widest uppercase mb-1">Paso {index + 1}</span>
-            <h3 class="text-3xl font-bold text-white tracking-tight">{step.title}</h3>
-            <p class="text-text-secondary text-base md:text-lg leading-relaxed">{step.description}</p>
+          <div class:list={['pl-16 md:pl-0 md:w-[42%] flex flex-col gap-2 md:gap-4', index % 2 === 0 ? 'md:text-left' : 'md:text-right']}>
+            <span class="text-brand-blue dark:text-brand-cyan font-bold text-xs md:text-sm tracking-widest uppercase mb-1 transition-colors">Paso {index + 1}</span>
+            <h3 class="text-2xl md:text-3xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">{step.title}</h3>
+            <p class="text-text-dark dark:text-text-secondary text-sm md:text-base lg:text-lg leading-relaxed transition-colors">{step.description}</p>
           </div>
 
           <!-- Icon/Node -->
-          <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl glass-panel border-accent/30 bg-bg-primary z-10 flex items-center justify-center text-accent shadow-glow group hover:scale-110 hover:border-accent transition-all duration-500">
-             <step.icon class="w-7 h-7" />
+          <div class="absolute left-6 md:left-1/2 -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-light-base dark:bg-dark-base border border-light-border dark:border-brand-blue/30 z-10 flex items-center justify-center text-brand-blue dark:text-brand-cyan shadow-sm dark:shadow-glow group hover:scale-110 hover:border-brand-blue dark:hover:border-brand-cyan hover:bg-brand-blue hover:text-white transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
+             <step.icon class="w-5 h-5 md:w-7 md:h-7" />
           </div>
 
           <!-- Spacer for md layout -->

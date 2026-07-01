@@ -11,104 +11,102 @@ const trustItems = [
 ];
 ---
 
-<Section id="contacto" class="bg-bg-primary relative overflow-hidden">
-  <!-- Decorative background elements -->
-  <div class="absolute bottom-0 right-0 w-200 h-200 bg-accent/4 blur-[150px] rounded-full translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<Section id="contacto" class="bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
+  <div class="absolute bottom-0 right-0 w-100 h-100 md:w-200 md:h-200 bg-brand-cyan/15 dark:bg-brand-blue/5 blur-[120px] md:blur-[150px] rounded-full translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-start relative z-10">
-    <!-- Left Column: Context -->
-    <div class="lg:col-span-5 flex flex-col gap-12 sticky top-32">
-      <div class="flex flex-col gap-8">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-32 items-start relative z-10">
+    <div class="lg:col-span-5 flex flex-col gap-10 md:gap-12 lg:sticky lg:top-32">
+      <div class="flex flex-col gap-6 md:gap-8">
         <div class="flex items-center gap-3">
-           <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+           <div class="w-10 h-10 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue dark:text-brand-cyan transition-colors">
               <Sparkles class="w-5 h-5" />
            </div>
-           <span class="text-accent font-black text-xs md:text-sm tracking-[0.4em] uppercase">Contacto</span>
+           <span class="text-brand-blue dark:text-brand-cyan font-black text-xs md:text-sm tracking-[0.3em] uppercase transition-colors">Contacto</span>
         </div>
-        <h2 class="text-white text-5xl md:text-7xl font-bold tracking-tighter leading-[1.05]">¿Listo para transformar tu negocio?</h2>
-        <p class="text-text-secondary text-xl md:text-2xl leading-relaxed font-light max-w-xl">
+        <h2 class="text-text-dark-titles dark:text-text-light-titles text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[1.05] transition-colors">¿Listo para transformar tu negocio?</h2>
+        <p class="text-text-dark dark:text-text-light text-lg md:text-xl lg:text-2xl leading-relaxed font-medium md:font-light max-w-xl transition-colors">
           Cuéntanos un poco sobre tu visión. Nos encantará ayudarte a encontrar la mejor ruta tecnológica para tu éxito.
         </p>
       </div>
 
-      <div class="flex flex-col gap-8 py-4">
+      <div class="flex flex-col gap-6 md:gap-8 py-2 md:py-4">
         {trustItems.map((item) => (
-          <div class="flex items-start gap-5 text-white group">
-            <div class="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center text-accent shrink-0 mt-0.5 group-hover:bg-accent group-hover:text-white transition-all duration-300">
-               <CheckCircle2 class="w-4 h-4" />
+          <div class="flex items-start gap-4 md:gap-5 text-text-dark-titles dark:text-white group transition-colors">
+            <div class="w-6 h-6 md:w-7 md:h-7 rounded-full bg-brand-cyan/20 dark:bg-brand-blue/20 flex items-center justify-center text-brand-blue dark:text-brand-cyan shrink-0 mt-0.5 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+               <CheckCircle2 class="w-4 h-4 md:w-5 md:h-5" />
             </div>
-            <span class="text-xl font-medium text-white/90">{item}</span>
+            <span class="text-lg md:text-xl font-medium text-text-dark dark:text-white/90 transition-colors">{item}</span>
           </div>
         ))}
       </div>
 
-      <div class="mt-4 flex flex-col gap-8 pt-12 border-t border-white/5">
-         <div class="flex items-center gap-6 group cursor-pointer">
-            <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-glow">
-               <Mail class="w-6 h-6" />
+      <div class="mt-2 md:mt-4 flex flex-col gap-6 md:gap-8 pt-8 md:pt-12 border-t border-light-border/50 dark:border-white/5 transition-colors">
+         <div class="flex items-center gap-5 md:gap-6 group cursor-pointer">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-light-surface dark:bg-white/5 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 shadow-sm dark:shadow-glow border border-light-border/50 dark:border-transparent">
+               <Mail class="w-5 h-5 md:w-6 md:h-6" />
             </div>
             <div class="flex flex-col gap-1">
-               <span class="text-[11px] text-text-secondary uppercase tracking-[0.2em] font-black">Email directo</span>
-               <a href="mailto:hola@novory.com" class="text-xl md:text-2xl font-bold text-white hover:text-accent transition-colors">hola@novory.com</a>
+               <span class="text-[10px] md:text-[11px] text-text-dark dark:text-text-light uppercase tracking-[0.2em] font-black transition-colors">Email directo</span>
+               <a href="mailto:hola@novory.com" class="text-lg md:text-xl lg:text-2xl font-bold text-text-dark-titles dark:text-white hover:text-brand-blue dark:hover:text-brand-cyan transition-colors">hola@novory.com</a>
             </div>
          </div>
-         <div class="flex items-center gap-6 group cursor-pointer">
-            <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-glow">
-               <Phone class="w-6 h-6" />
+   
+         <div class="flex items-center gap-5 md:gap-6 group cursor-pointer">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-light-surface dark:bg-white/5 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 shadow-sm dark:shadow-glow border border-light-border/50 dark:border-transparent">
+               <Phone class="w-5 h-5 md:w-6 md:h-6" />
             </div>
             <div class="flex flex-col gap-1">
-               <span class="text-[11px] text-text-secondary uppercase tracking-[0.2em] font-black">WhatsApp Business</span>
-               <a href="#" class="text-xl md:text-2xl font-bold text-white hover:text-accent transition-colors">+34 600 000 000</a>
+               <span class="text-[10px] md:text-[11px] text-text-dark dark:text-text-light uppercase tracking-[0.2em] font-black transition-colors">WhatsApp Business</span>
+               <a href="#" class="text-lg md:text-xl lg:text-2xl font-bold text-text-dark-titles dark:text-white hover:text-brand-blue dark:hover:text-brand-cyan transition-colors">+34 600 000 000</a>
             </div>
          </div>
       </div>
     </div>
 
-    <!-- Right Column: Form -->
-    <div class="lg:col-span-7">
-      <div class="glass-panel p-10 md:p-16 border-white/10 bg-white/2 shadow-2xl relative overflow-hidden">
-        <!-- Inner glow -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+    <div class="lg:col-span-7 mt-10 lg:mt-0">
+      <div class="bg-light-surface/60 dark:bg-white/5 backdrop-blur-xl p-8 md:p-10 lg:p-16 rounded-(--radius-xl) border border-light-border/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-500">
+        
+        <div class="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-brand-cyan/20 dark:bg-brand-cyan/10 blur-[80px] md:blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
 
-        <form id="contact-form" class="flex flex-col gap-10 relative z-10">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="flex flex-col gap-4">
-              <label for="name" class="text-[11px] font-black text-text-muted tracking-[0.2em] uppercase ml-1">Tu Nombre</label>
-              <input type="text" id="name" name="name" required class="bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all placeholder:text-white/10" placeholder="Juan Pérez" />
+        <form id="contact-form" class="flex flex-col gap-8 md:gap-10 relative z-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            <div class="flex flex-col gap-3 md:gap-4">
+              <label for="name" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Tu Nombre</label>
+              <input type="text" id="name" name="name" required class="bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-(--radius-lg) px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-1 focus:ring-brand-blue/30 transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20" placeholder="Ej. Juan Pérez" />
             </div>
-            <div class="flex flex-col gap-4">
-              <label for="email" class="text-[11px] font-black text-text-muted tracking-[0.2em] uppercase ml-1">Correo Electrónico</label>
-              <input type="email" id="email" name="email" required class="bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all placeholder:text-white/10" placeholder="juan@ejemplo.com" />
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="flex flex-col gap-4">
-              <label for="phone" class="text-[11px] font-black text-text-muted tracking-[0.2em] uppercase ml-1">Teléfono / WhatsApp</label>
-              <input type="tel" id="phone" name="phone" required class="bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all placeholder:text-white/10" placeholder="+34 000 000 000" />
-            </div>
-            <div class="flex flex-col gap-4">
-              <label for="business" class="text-[11px] font-black text-text-muted tracking-[0.2em] uppercase ml-1">Nombre del Negocio</label>
-              <input type="text" id="business" name="business" required class="bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all placeholder:text-white/10" placeholder="Mi Negocio Local" />
+            <div class="flex flex-col gap-3 md:gap-4">
+              <label for="email" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Correo Electrónico</label>
+              <input type="email" id="email" name="email" required class="bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-(--radius-lg) px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-1 focus:ring-brand-blue/30 transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20" placeholder="juan@ejemplo.com" />
             </div>
           </div>
 
-          <div class="flex flex-col gap-4">
-            <label for="industry" class="text-[11px] font-black text-text-muted tracking-[0.2em] uppercase ml-1">¿A qué se dedica tu negocio?</label>
-            <input type="text" id="industry" name="industry" required class="bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all placeholder:text-white/10" placeholder="Ej. Restaurante, Clínica Dental, Taller, etc." />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            <div class="flex flex-col gap-3 md:gap-4">
+              <label for="phone" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Teléfono / WhatsApp</label>
+              <input type="tel" id="phone" name="phone" required class="bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-(--radius-lg) px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-1 focus:ring-brand-blue/30 transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20" placeholder="+52 312 000 0000" />
+            </div>
+            <div class="flex flex-col gap-3 md:gap-4">
+              <label for="business" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Nombre del Negocio</label>
+              <input type="text" id="business" name="business" required class="bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-(--radius-lg) px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-1 focus:ring-brand-blue/30 transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20" placeholder="Mi Negocio Local" />
+            </div>
           </div>
 
-          <div class="flex flex-col gap-4">
-            <label for="message" class="text-[11px] font-black text-text-muted tracking-[0.2em] uppercase ml-1">Cuéntanos sobre tus objetivos</label>
-            <textarea id="message" name="message" rows="5" class="bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all resize-none placeholder:text-white/10" placeholder="Hola, me gustaría digitalizar mis pedidos y aparecer en Google..."></textarea>
+          <div class="flex flex-col gap-3 md:gap-4">
+            <label for="industry" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">¿A qué se dedica tu negocio?</label>
+            <input type="text" id="industry" name="industry" required class="bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-(--radius-lg) px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-1 focus:ring-brand-blue/30 transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20" placeholder="Ej. Restaurante, Clínica Dental, Taller..." />
           </div>
 
-          <div class="pt-6">
-            <Button variant="primary" size="hero" type="submit" class="w-full py-6! rounded-2xl! group/sub">
-              <span class="font-black uppercase tracking-[0.3em] text-sm">Agendar Asesoría Gratuita</span>
-              <Sparkles class="ml-3 w-5 h-5 group-hover/sub:scale-125 transition-transform" />
+          <div class="flex flex-col gap-3 md:gap-4">
+            <label for="message" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Cuéntanos sobre tus objetivos</label>
+            <textarea id="message" name="message" rows="4" class="bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-(--radius-lg) px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-1 focus:ring-brand-blue/30 transition-all resize-none placeholder:text-text-dark/50 dark:placeholder:text-white/20" placeholder="Hola, me gustaría digitalizar mis pedidos..."></textarea>
+          </div>
+
+          <div class="pt-4 md:pt-6">
+            <Button variant="primary" size="hero" type="submit" class="w-full group/sub">
+              <span class="font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-xs md:text-sm">Agendar Asesoría Gratuita</span>
+              <Sparkles class="ml-2 md:ml-3 w-4 h-4 md:w-5 md:h-5 group-hover/sub:scale-125 transition-transform" />
             </Button>
-            <p class="text-center text-text-secondary text-sm mt-6 font-medium italic">Al enviar, serás redirigido a WhatsApp para una atención inmediata.</p>
+            <p class="text-center text-text-dark dark:text-text-light text-xs md:text-sm mt-4 md:mt-6 font-medium italic transition-colors">Al enviar, serás redirigido a WhatsApp para una atención inmediata.</p>
           </div>
         </form>
       </div>
