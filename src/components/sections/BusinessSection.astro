@@ -1,0 +1,103 @@
+---
+import Section from '../layout/Section.astro';
+import Card from '../molecules/Card.astro';
+import { Utensils, Stethoscope, Scale, Dumbbell, Sofa, Store } from '@lucide/astro';
+
+const businessTypes = [
+  {
+    name: 'Restaurantes',
+    description: 'Reservas, menús digitales, pedidos y atención automatizada.',
+    icon: Utensils,
+  },
+  {
+    name: 'Clínicas Dentales',
+    description: 'Gestión de citas, recordatorios automáticos y presencia local.',
+    icon: Stethoscope,
+  },
+  {
+    name: 'Despachos Jurídicos',
+    description: 'Captación de clientes, organización de consultas y autoridad digital.',
+    icon: Scale,
+  },
+  {
+    name: 'Gimnasios',
+    description: 'Inscripciones online, horarios dinámicos y fidelización de socios.',
+    icon: Dumbbell,
+  },
+  {
+    name: 'Mueblerías',
+    description: 'Catálogos digitales, realidad aumentada básica y ventas guiadas.',
+    icon: Sofa,
+  },
+  {
+    name: 'Comercios Locales',
+    description: 'Visibilidad en Google, inventario digital y conexión omnicanal.',
+    icon: Store,
+  },
+];
+---
+
+<Section id="empresas" class="bg-bg-primary/50 relative">
+  <!-- Decorative background elements -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-accent/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+  <div class="text-center max-w-3xl mx-auto mb-20 flex flex-col gap-6 section-header">
+    <h2 class="text-white">Ayudamos a negocios que quieren crecer.</h2>
+    <p class="text-text-secondary text-lg leading-relaxed">
+      No importa si apenas estás comenzando o ya tienes años operando. <br class="hidden md:block" /> 
+      Creamos soluciones digitales adaptadas a cada negocio.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 business-grid">
+    {businessTypes.map((item) => (
+      <Card class="flex flex-col gap-6 p-8 border-white/5 hover:border-accent/30 group bg-white/[0.01]">
+        <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white group-hover:shadow-glow transition-all duration-500 ease-standard">
+          <item.icon class="w-7 h-7" />
+        </div>
+        <div class="flex flex-col gap-3">
+          <h3 class="text-2xl font-bold text-white tracking-tight">{item.name}</h3>
+          <p class="text-text-secondary text-base leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      </Card>
+    ))}
+  </div>
+</Section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initAnimations() {
+    gsap.from('.section-header', {
+      scrollTrigger: {
+        trigger: '.section-header',
+        start: 'top 85%',
+      },
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+    });
+
+    gsap.from('.business-grid > div', {
+      scrollTrigger: {
+        trigger: '.business-grid',
+        start: 'top 80%',
+      },
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power3.out',
+    });
+  }
+
+  window.addEventListener('load', initAnimations);
+  // Re-init for Astro view transitions if used
+  document.addEventListener('astro:page-load', initAnimations);
+</script>

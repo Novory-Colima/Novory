@@ -1,0 +1,114 @@
+---
+import Section from '../layout/Section.astro';
+import Card from '../molecules/Card.astro';
+import { Heart, Target, Lightbulb, Zap, Shield, Users } from '@lucide/astro';
+
+const values = [
+  { icon: Target, title: 'Resultados reales' },
+  { icon: Lightbulb, title: 'Innovación' },
+  { icon: Heart, title: 'Compromiso' },
+  { icon: Shield, title: 'Transparencia' },
+  { icon: Zap, title: 'Calidad extrema' },
+  { icon: Users, title: 'Cercanía' }
+];
+---
+
+<Section id="nosotros" class="bg-bg-primary relative overflow-hidden">
+  <!-- Subtle background glow -->
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/[0.02] blur-[150px] rounded-full pointer-events-none"></div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-center relative z-10">
+    <!-- Left Column: Story -->
+    <div class="lg:col-span-7 flex flex-col gap-10 about-content">
+      <div class="flex items-center gap-3">
+         <div class="w-10 h-[2px] bg-accent"></div>
+         <span class="text-accent font-black text-xs md:text-sm tracking-[0.4em] uppercase">Nuestra Misión</span>
+      </div>
+      
+      <h2 class="text-white text-5xl md:text-7xl font-bold tracking-tighter leading-[1.05]">¿Por qué existe Novory?</h2>
+      
+      <div class="flex flex-col gap-8 text-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl">
+        <p>
+          Durante años vimos cómo muchos negocios locales tenían productos y servicios de excelencia, pero su presencia digital no reflejaba esa misma calidad.
+        </p>
+        <p>
+          Muchos dependían exclusivamente de redes sociales volátiles, otros perdían clientes por procesos manuales lentos, y la mayoría simplemente no sabía por dónde empezar.
+        </p>
+        <p>
+          <span class="text-white font-bold">Novory nació para cerrar esa brecha.</span> Creemos que la tecnología de alto nivel no debe ser un privilegio de grandes corporaciones, sino una herramienta para que los negocios locales prosperen.
+        </p>
+      </div>
+
+      <div class="inline-flex flex-col gap-2 p-6 border-l-2 border-accent bg-accent/5 rounded-r-2xl">
+        <p class="text-white font-medium italic text-xl md:text-2xl leading-relaxed">
+          "Diseñamos herramientas que ayudan a las personas a trabajar mejor, ahorrar tiempo y hacer crecer sus sueños."
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column: Visual/Founders/Values -->
+    <div class="lg:col-span-5 flex flex-col gap-10 about-visual opacity-0 translate-y-10">
+      <Card class="!p-0 bg-white/[0.02] border-white/10 overflow-hidden group/founder shadow-2xl">
+         <div class="aspect-[4/3] bg-bg-secondary flex items-center justify-center text-accent/10 relative overflow-hidden">
+            <Users class="w-32 h-32 group-hover/founder:scale-110 transition-transform duration-1000" stroke-width="0.3" />
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent opacity-80"></div>
+            
+            <!-- Floating badge in visual -->
+            <div class="absolute bottom-6 right-6 px-4 py-2 glass-panel border-accent/20 bg-accent/10 rounded-full">
+               <span class="text-[10px] text-accent font-black tracking-widest uppercase">Est. 2024</span>
+            </div>
+         </div>
+         <div class="p-10 flex flex-col gap-3">
+            <h3 class="text-3xl font-bold text-white tracking-tight">Cercanía y Capacidad</h3>
+            <p class="text-text-secondary text-base leading-relaxed">No somos una corporación distante. Somos un equipo apasionado obsesionado con la excelencia técnica y humana.</p>
+         </div>
+      </Card>
+
+      <div class="grid grid-cols-2 gap-4">
+        {values.map((value) => (
+          <div class="flex items-center gap-4 p-5 glass-panel border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-accent/20 transition-all duration-300 group/value">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/40 group-hover/value:text-accent group-hover/value:bg-accent/10 transition-colors">
+               <value.icon class="w-5 h-5" />
+            </div>
+            <span class="text-sm md:text-base font-bold text-white/80 group-hover/value:text-white transition-colors">{value.title}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initAbout() {
+    gsap.to('.about-visual', {
+      scrollTrigger: {
+        trigger: '#nosotros',
+        start: 'top 75%',
+      },
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: 'power4.out',
+    });
+
+    gsap.from('.about-content > *', {
+      scrollTrigger: {
+        trigger: '#nosotros',
+        start: 'top 80%',
+      },
+      opacity: 0,
+      y: 40,
+      stagger: 0.15,
+      duration: 1.2,
+      ease: 'power3.out',
+    });
+  }
+
+  window.addEventListener('load', initAbout);
+  document.addEventListener('astro:page-load', initAbout);
+</script>

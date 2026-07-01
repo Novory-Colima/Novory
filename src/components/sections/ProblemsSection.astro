@@ -1,0 +1,105 @@
+---
+import Section from '../layout/Section.astro';
+import Card from '../molecules/Card.astro';
+import { Smartphone, MapPin, MessageSquare, Clock, TrendingDown, ClipboardList } from '@lucide/astro';
+
+const problems = [
+  {
+    icon: Smartphone,
+    title: 'Solo tengo Facebook.',
+    description: 'Mi negocio depende completamente de redes sociales y no tengo una página web profesional.',
+    emoji: '📱'
+  },
+  {
+    icon: MapPin,
+    title: 'No aparezco en Google.',
+    description: 'Mis clientes tienen dificultades para encontrarme cuando buscan mis servicios.',
+    emoji: '📍'
+  },
+  {
+    icon: MessageSquare,
+    title: 'Respondo lo mismo siempre.',
+    description: 'Pierdo mucho tiempo contestando preguntas repetitivas por WhatsApp o mensajes.',
+    emoji: '💬'
+  },
+  {
+    icon: Clock,
+    title: 'No tengo tiempo.',
+    description: 'Mi operación diaria consume todo mi tiempo y no puedo enfocarme en crecer.',
+    emoji: '⏳'
+  },
+  {
+    icon: TrendingDown,
+    title: 'Competencia profesional.',
+    description: 'Otros negocios generan mayor confianza porque tienen una mejor presencia digital.',
+    emoji: '📉'
+  },
+  {
+    icon: ClipboardList,
+    title: 'Procesos manuales.',
+    description: 'Copiar datos y organizar información consume horas valiosas cada semana.',
+    emoji: '📋'
+  }
+];
+---
+
+<Section id="problemas" class="bg-bg-primary">
+  <div class="max-w-4xl mx-auto text-center mb-24 flex flex-col gap-6 section-header">
+    <h2 class="text-white">¿Te identificas con alguno de estos desafíos?</h2>
+    <p class="text-text-secondary text-lg leading-relaxed">
+      Muchos negocios locales enfrentan los mismos retos todos los días. <br class="hidden md:block" />
+      La buena noticia es que la mayoría tienen solución mediante tecnología bien implementada.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 problems-grid">
+    {problems.map((problem) => (
+      <Card class="p-10 group hover:bg-white/[0.02] border-white/5 transition-all duration-500 bg-bg-secondary/30">
+        <div class="flex items-center justify-between mb-8">
+          <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-accent group-hover:text-white group-hover:bg-accent group-hover:shadow-glow transition-all duration-500">
+            <problem.icon class="w-7 h-7" />
+          </div>
+          <span class="text-3xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">{problem.emoji}</span>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300 tracking-tight">
+          {problem.title}
+        </h3>
+        <p class="text-text-secondary text-base leading-relaxed">
+          {problem.description}
+        </p>
+      </Card>
+    ))}
+  </div>
+
+  <div class="mt-24 text-center">
+    <div class="inline-block p-px rounded-full bg-gradient-to-r from-transparent via-accent/30 to-transparent">
+      <p class="px-8 py-4 text-text-secondary italic text-lg bg-bg-primary rounded-full">
+        "La tecnología adecuada puede transformar cada uno de estos desafíos en oportunidades de crecimiento."
+      </p>
+    </div>
+  </div>
+</Section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initProblems() {
+    gsap.from('.problems-grid > div', {
+      scrollTrigger: {
+        trigger: '.problems-grid',
+        start: 'top 80%',
+      },
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: 'power3.out',
+    });
+  }
+
+  window.addEventListener('load', initProblems);
+  document.addEventListener('astro:page-load', initProblems);
+</script>

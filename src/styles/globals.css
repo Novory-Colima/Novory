@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* Font imports */
+@import "@fontsource/space-grotesk/index.css";
+@import "@fontsource/inter/index.css";
+
+@theme {
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Colors from Fase 4.1 */
+  --color-bg-primary: #050816;
+  --color-bg-secondary: #0B1020;
+  /* Adjusted for WCAG AA contrast (4.5:1) with white text */
+  --color-accent: #3d68ff;
+  --color-accent-glow: #66BBFF;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B8C0D9;
+  --color-text-muted: #8a94b0; /* Added for labels */
+  --color-border-alpha: rgba(255, 255, 255, 0.08);
+  --color-glass-alpha: rgba(255, 255, 255, 0.04);
+
+  /* Radius from Fase 4.1 */
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Shadows/Glows */
+  --shadow-glow: 0 0 20px rgba(79, 125, 255, 0.15);
+  --shadow-glow-strong: 0 0 30px rgba(79, 125, 255, 0.3);
+  
+  /* Motion tokens from Fase 6.4 */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 700ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+  }
+
+  /* Typographic scale from Fase 4.1 */
+  h1 { font-size: clamp(3rem, 10vw, 4.5rem); } /* 72px approx */
+  h2 { font-size: clamp(2.5rem, 8vw, 3.5rem); } /* 56px approx */
+  h3 { font-size: clamp(2rem, 6vw, 2.5rem); }   /* 40px approx */
+  h4 { font-size: 1.5rem; }                    /* 24px approx */
+
+  p {
+    color: var(--color-text-secondary);
+  }
+
+  a {
+    transition: all var(--duration-fast) var(--ease-standard);
+  }
+}
+
+@layer components {
+  /* Common component styles from Fase 4.2 */
+  .glass-panel {
+    background: var(--color-glass-alpha);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-alpha);
+    border-radius: var(--radius-xl);
+  }
+
+  .nav-link-underline {
+    @apply relative;
+  }
+  
+  .nav-link-underline::after {
+    content: '';
+    @apply absolute w-0 h-[1px] bottom-[-2px] left-0 bg-accent transition-all duration-200 ease-standard;
+  }
+  
+  .nav-link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+@utility container-novory {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;   /* 24px Mobile */
+  padding-right: 1.5rem;
+  
+  @media (min-width: 768px) {
+    padding-left: 3rem;   /* 48px Tablet */
+    padding-right: 3rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding-left: 6rem;   /* 96px Desktop */
+    padding-right: 6rem;
+  }
+}
+
+@utility text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--color-text-primary), var(--color-accent));
+}
+
+@utility bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/feTurbulence%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}

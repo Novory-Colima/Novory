@@ -1,0 +1,69 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const formatDate = (date: Date) => date.toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={entry.data.title}>
+  <article class="pt-40 pb-32 container-novory relative overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/[0.04] blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+    <div class="max-w-3xl mx-auto flex flex-col gap-16 relative z-10">
+      <div class="flex flex-col gap-10">
+        <a href="/blog" class="text-accent font-black hover:underline underline-offset-8 decoration-2 text-xs tracking-[0.3em] uppercase transition-all duration-300">← Volver al blog</a>
+        
+        <div class="flex flex-col gap-6">
+          <div class="flex items-center gap-4 text-[10px] text-text-secondary font-black uppercase tracking-[0.25em]">
+            <span class="text-accent">{formatDate(entry.data.pubDate)}</span>
+            <span class="opacity-20">|</span>
+            <span>Escrito por {entry.data.author}</span>
+          </div>
+          <h1 class="text-white text-5xl md:text-8xl font-bold tracking-tighter leading-[0.95]">{entry.data.title}</h1>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5">
+          {entry.data.tags.map((tag) => (
+            <span class="px-5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] font-black uppercase tracking-widest">{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Article content styling -->
+      <div class="prose prose-invert prose-xl max-w-none 
+        prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight 
+        prose-p:text-text-secondary prose-p:leading-[1.8] prose-p:font-light
+        prose-strong:text-white prose-strong:font-bold
+        prose-li:text-text-secondary prose-li:marker:text-accent
+        prose-blockquote:border-accent prose-blockquote:bg-accent/5 prose-blockquote:py-2 prose-blockquote:rounded-r-2xl
+        border-t border-white/5 pt-16">
+        <Content />
+      </div>
+
+      <!-- Bottom simple CTA -->
+      <div class="mt-20 p-12 glass-panel border-accent/20 bg-accent/[0.02] rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8">
+         <div class="flex flex-col gap-2">
+            <h3 class="text-2xl font-bold text-white tracking-tight">¿Te gustó este artículo?</h3>
+            <p class="text-text-secondary">Suscríbete a nuestro newsletter para recibir más ideas.</p>
+         </div>
+         <button class="px-8 py-4 bg-accent text-white font-black uppercase tracking-widest text-xs rounded-full shadow-glow hover:scale-105 active:scale-95 transition-all duration-300">Suscribirme</button>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

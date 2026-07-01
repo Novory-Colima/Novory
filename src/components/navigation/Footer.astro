@@ -1,0 +1,100 @@
+---
+import { Camera, Globe, Share2, MessageCircle } from '@lucide/astro';
+
+const currentYear = new Date().getFullYear();
+
+const navSections = [
+  {
+    title: 'Navegación',
+    links: [
+      { name: 'Inicio', href: '/' },
+      { name: 'Nosotros', href: '/nosotros' },
+      { name: 'Portafolio', href: '/portafolio' },
+      { name: 'Blog', href: '/blog' },
+      { name: 'Contacto', href: '/contacto' },
+    ],
+  },
+  {
+    title: 'Servicios',
+    links: [
+      { name: 'Desarrollo Web', href: '/servicios#web' },
+      { name: 'SEO Local', href: '/servicios#seo' },
+      { name: 'Automatizaciones', href: '/servicios#auto' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { name: 'Privacidad', href: '/legal/privacidad' },
+      { name: 'Términos', href: '/legal/terminos' },
+    ],
+  },
+];
+---
+
+<footer class="bg-bg-secondary pt-24 pb-12 border-t border-white/5 relative overflow-hidden">
+  <!-- Subtle background glow -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-96 bg-accent/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="container-novory relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+      <!-- Brand -->
+      <div class="flex flex-col gap-6">
+        <a href="/" class="group">
+          <!-- Logo claro -->
+          <img src="/assets/novory-logotipo-horizontal-color-clear-svg.svg"
+              alt="Logo Novory"
+              class="w-20 sm:w-24 md:w-28 lg:w-32 transition-transform group-hover:scale-105 dark:hidden" />
+          <!-- Logo oscuro -->
+          <img src="/assets/novory-logotipo-horizontal-color-dark-svg.svg"
+              alt="Logo Novory"
+              class="w-20 sm:w-24 md:w-28 lg:w-32 transition-transform group-hover:scale-105 hidden dark:block" />
+        </a>
+        <p class="text-text-secondary text-sm max-w-xs leading-relaxed">
+          Ayudamos a negocios locales a crecer utilizando tecnología moderna. Creamos herramientas digitales que generan resultados reales.
+        </p>
+        <div class="flex items-center gap-5 mt-2">
+          <a href="#" class="text-text-secondary hover:text-accent transition-colors" aria-label="Instagram">
+            <Camera class="w-5 h-5" />
+          </a>
+          <a href="#" class="text-text-secondary hover:text-accent transition-colors" aria-label="LinkedIn">
+            <Globe class="w-5 h-5" />
+          </a>
+          <a href="#" class="text-text-secondary hover:text-accent transition-colors" aria-label="Twitter">
+            <Share2 class="w-5 h-5" />
+          </a>
+          <a href="#" class="text-text-secondary hover:text-accent transition-colors" aria-label="WhatsApp">
+            <MessageCircle class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      {navSections.map((section) => (
+        <div class="flex flex-col gap-6">
+          <h3 class="text-white font-bold text-lg">{section.title}</h3>
+          <ul class="flex flex-col gap-3">
+            {section.links.map((link) => (
+              <li>
+                <a href={link.href} class="text-text-secondary text-sm hover:text-accent transition-colors inline-block py-1">
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="flex flex-col lg:flex-row items-center justify-between pt-10 border-t border-white/5 gap-8">
+      <div class="flex flex-col items-center lg:items-start gap-2">
+        <p class="text-text-secondary text-[11px] uppercase tracking-wider">
+          &copy; {currentYear} Novory. Todos los derechos reservados.
+        </p>
+      </div>
+      <p class="text-text-secondary text-sm italic font-medium text-center lg:text-right max-w-md">
+        "No desarrollamos únicamente sitios web. Construimos herramientas para impulsar tu negocio."
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,42 @@
+---
+import '../styles/globals.css';
+import Navbar from '../components/navigation/Navbar.astro';
+import Footer from '../components/navigation/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title, 
+  description = "Novory ayuda a negocios locales a crecer utilizando tecnología moderna. Creamos sitios web optimizados, SEO Local y automatizaciones." 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | Novory</title>
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Novory" />
+    <meta name="theme-color" content="#050816" />
+  </head>
+  <body class="bg-bg-primary text-text-primary selection:bg-accent/30 selection:text-white">
+    <div class="fixed inset-0 bg-noise pointer-events-none z-50"></div>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,120 @@
+---
+import Section from '../layout/Section.astro';
+import { Compass, PencilRuler, Palette, Code, Zap, Rocket, HeartHandshake } from '@lucide/astro';
+
+const steps = [
+  {
+    title: 'Descubrimiento',
+    description: 'Comprendemos completamente tu negocio, público objetivo y desafíos actuales para sentar las bases del éxito.',
+    icon: Compass,
+  },
+  {
+    title: 'Estrategia',
+    description: 'Definimos la arquitectura, estrategia SEO y automatizaciones ideales diseñadas específicamente para tus objetivos.',
+    icon: PencilRuler,
+  },
+  {
+    title: 'Diseño',
+    description: 'Creamos una experiencia moderna, intuitiva y optimizada para la conversión, respetando la identidad de tu marca.',
+    icon: Palette,
+  },
+  {
+    title: 'Desarrollo',
+    description: 'Construimos tu producto utilizando tecnología de alto rendimiento, asegurando solidez y escalabilidad.',
+    icon: Code,
+  },
+  {
+    title: 'Optimización',
+    description: 'Afinamos cada detalle: velocidad de carga, SEO Local y cumplimiento de los Core Web Vitals de Google.',
+    icon: Zap,
+  },
+  {
+    title: 'Lanzamiento',
+    description: 'Tu proyecto cobra vida con dominio, hosting y analítica configurada para medir cada resultado desde el día uno.',
+    icon: Rocket,
+  },
+  {
+    title: 'Acompañamiento',
+    description: 'Nuestra relación no termina con la entrega. Te acompañamos en la evolución continua de tu negocio digital.',
+    icon: HeartHandshake,
+  },
+];
+---
+
+<Section id="proceso" class="bg-bg-primary relative">
+  <!-- Decorative background elements -->
+  <div class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-accent/5 blur-[180px] rounded-full -translate-x-1/2 pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto text-center mb-28 flex flex-col gap-6 section-header">
+    <h2 class="text-white">Así convertimos una idea en resultados.</h2>
+    <p class="text-text-secondary text-lg md:text-xl leading-relaxed">
+      Cada proyecto sigue un proceso claro, colaborativo y enfocado en generar valor real <br class="hidden md:block" /> para tu negocio desde el primer día.
+    </p>
+  </div>
+
+  <div class="relative max-w-5xl mx-auto px-4 md:px-0">
+    <!-- Vertical Line -->
+    <div class="absolute left-8 md:left-1/2 top-4 bottom-4 w-0.5 bg-white/5 md:-translate-x-1/2 overflow-hidden rounded-full">
+       <div id="timeline-progress" class="w-full h-0 bg-accent shadow-glow transition-all duration-300"></div>
+    </div>
+
+    <div class="flex flex-col gap-16 md:gap-32">
+      {steps.map((step, index) => (
+        <div class:list={['relative flex items-center md:justify-between timeline-item opacity-0 translate-y-10', index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row']}>
+          <!-- Content -->
+          <div class:list={['pl-20 md:pl-0 md:w-[42%] flex flex-col gap-4', index % 2 === 0 ? 'md:text-left' : 'md:text-right']}>
+            <span class="text-accent font-bold text-sm tracking-widest uppercase mb-1">Paso {index + 1}</span>
+            <h3 class="text-3xl font-bold text-white tracking-tight">{step.title}</h3>
+            <p class="text-text-secondary text-base md:text-lg leading-relaxed">{step.description}</p>
+          </div>
+
+          <!-- Icon/Node -->
+          <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl glass-panel border-accent/30 bg-bg-primary z-10 flex items-center justify-center text-accent shadow-glow group hover:scale-110 hover:border-accent transition-all duration-500">
+             <step.icon class="w-7 h-7" />
+          </div>
+
+          <!-- Spacer for md layout -->
+          <div class="hidden md:block md:w-[42%]"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initTimeline() {
+    // Line progress animation
+    gsap.to('#timeline-progress', {
+      scrollTrigger: {
+        trigger: '#proceso',
+        start: 'top 30%',
+        end: 'bottom 70%',
+        scrub: 1,
+      },
+      height: '100%',
+      ease: 'none',
+    });
+
+    // Items reveal
+    gsap.utils.toArray('.timeline-item').forEach((item: any) => {
+      gsap.to(item, {
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 85%',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+      });
+    });
+  }
+
+  window.addEventListener('load', initTimeline);
+  document.addEventListener('astro:page-load', initTimeline);
+</script>

@@ -1,0 +1,80 @@
+---
+import Section from '../layout/Section.astro';
+import PortfolioProject from '../molecules/PortfolioProject.astro';
+
+const projects = [
+  {
+    title: 'DentalCare Pro',
+    problem: 'El negocio dependía completamente de Facebook para recibir pedidos y gestionar consultas, perdiendo prospectos por falta de profesionalismo digital.',
+    solution: 'Desarrollamos un ecosistema optimizado con sistema de reservas en línea, SEO Local avanzado y automatización de respuestas frecuentes.',
+    result: '+120% Citas',
+    technologies: ['Astro', 'SEO Local', 'WhatsApp AI'],
+    href: '/casos/dentalcare',
+    side: 'right' as const,
+  },
+  {
+    title: 'Mueblería HomeStyle',
+    problem: 'Procesos de venta manuales y catálogo desactualizado que dificultaban la conversión de clientes interesados.',
+    solution: 'Catálogo digital interactivo con integración de CRM y automatización de seguimiento de leads vía email y WhatsApp.',
+    result: '40% Ventas ↑',
+    technologies: ['Automation', 'Custom Web', 'CRM'],
+    href: '/casos/homestyle',
+    side: 'left' as const,
+  }
+];
+---
+
+<Section id="portafolio" class="bg-bg-primary relative overflow-hidden">
+  <!-- Section Background Decorative Glow -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 blur-[200px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto text-center mb-24 flex flex-col gap-6 section-header">
+    <h2 class="text-white">Historias reales de transformación digital.</h2>
+    <p class="text-text-secondary text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+      Cada proyecto representa un desafío superado. <br class="hidden md:block" />
+      Diseñamos herramientas que impulsan negocios, no solo páginas web.
+    </p>
+  </div>
+
+  <div class="flex flex-col">
+    {projects.map((project) => (
+      <PortfolioProject {...project} />
+    ))}
+  </div>
+
+  <div class="mt-32 text-center relative py-20">
+    <!-- Decorative background line -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
+       <div class="w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+    </div>
+    
+    <p class="text-white/40 italic text-xl md:text-2xl font-light tracking-wide max-w-3xl mx-auto relative z-10">
+      "El visitante nunca compra un diseño. <br class="hidden md:block" /> Compra la transformación que ese diseño produjo."
+    </p>
+  </div>
+</Section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initPortfolio() {
+    gsap.utils.toArray('.portfolio-reveal').forEach((project: any) => {
+      gsap.to(project, {
+        scrollTrigger: {
+          trigger: project,
+          start: 'top 85%',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+      });
+    });
+  }
+
+  window.addEventListener('load', initPortfolio);
+  document.addEventListener('astro:page-load', initPortfolio);
+</script>

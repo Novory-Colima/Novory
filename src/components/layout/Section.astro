@@ -1,0 +1,24 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  container?: boolean;
+  [key: string]: any;
+}
+
+const { id, class: className, container = true, ...rest } = Astro.props;
+---
+
+<section 
+  id={id} 
+  class:list={['py-20 md:py-32 relative overflow-hidden', className]}
+  {...rest}
+>
+  {container ? (
+    <div class="container-novory">
+      <slot />
+    </div>
+  ) : (
+    <slot />
+  )}
+</section>

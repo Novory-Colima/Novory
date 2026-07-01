@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PortfolioProject from '../components/molecules/PortfolioProject.astro';
+import Section from '../components/layout/Section.astro';
+
+const projects = await getCollection('case-studies');
+---
+
+<BaseLayout title="Portafolio de Transformación Digital">
+  <Section class="pt-40">
+    <div class="flex flex-col gap-8 mb-24 section-header">
+       <div class="flex items-center gap-3">
+         <div class="w-10 h-[2px] bg-accent"></div>
+         <span class="text-accent font-black text-xs md:text-sm tracking-[0.4em] uppercase">Nuestro Trabajo</span>
+      </div>
+      <h1 class="text-white text-6xl md:text-9xl font-bold tracking-tighter leading-[0.9] max-w-4xl">Transformaciones <br /> Reales.</h1>
+      <p class="text-text-secondary text-xl md:text-2xl max-w-3xl leading-relaxed font-light">
+        No coleccionamos sitios web, coleccionamos historias de éxito. Cada proyecto es una prueba de nuestro compromiso con el crecimiento real de nuestros clientes.
+      </p>
+    </div>
+
+    <div class="flex flex-col">
+      {projects.map((project, index) => (
+        <PortfolioProject 
+          title={project.data.title}
+          problem={project.data.problem}
+          solution={project.data.solution}
+          result={project.data.result}
+          technologies={project.data.technologies}
+          href={`/casos/${project.slug}`}
+          side={index % 2 === 0 ? 'right' : 'left'}
+        />
+      ))}
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initPortfolioPage() {
+    gsap.from('.section-header > *', {
+       opacity: 0,
+       y: 40,
+       stagger: 0.15,
+       duration: 1,
+       ease: 'power4.out'
+    });
+
+    gsap.utils.toArray('.portfolio-reveal').forEach((project: any) => {
+      gsap.to(project, {
+        scrollTrigger: {
+          trigger: project,
+          start: 'top 85%',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power4.out',
+      });
+    });
+  }
+
+  window.addEventListener('load', initPortfolioPage);
+  document.addEventListener('astro:page-load', initPortfolioPage);
+</script>
