@@ -16,7 +16,7 @@ interface Props {
 const { title, problem, solution, result, technologies, image, side = 'right', href } = Astro.props;
 ---
 
-<div class:list={['grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center py-16 md:py-24 opacity-0 portfolio-reveal translate-y-16', side === 'left' ? '' : '']}>
+<div class:list={['grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center py-16 md:py-24 opacity-0 portfolio-reveal', side === 'left' ? '' : '']}>
   
   <!-- Image/Visual -->
   <div class:list={['lg:col-span-7 relative group', side === 'left' ? 'lg:order-2' : 'lg:order-1']}>

@@ -23,7 +23,7 @@ const { Content } = await render(entry);
     <div class="max-w-4xl mx-auto flex flex-col gap-12 md:gap-16 relative z-10 px-4 md:px-0">
       
       <!-- Cabecera -->
-      <div class="flex flex-col gap-6 md:gap-8 case-header opacity-0 translate-y-10">
+      <div class="flex flex-col gap-6 md:gap-8 case-header opacity-0">
         <a href="/portafolio" class="text-brand-blue dark:text-brand-cyan font-bold hover:underline underline-offset-4 decoration-2 text-sm md:text-base w-fit transition-colors">← Volver al portafolio</a>
         <h1 class="text-text-dark-titles dark:text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none md:leading-[0.95] transition-colors">{entry.data.title}</h1>
         <div class="flex flex-wrap gap-3 md:gap-4">
@@ -69,11 +69,10 @@ const { Content } = await render(entry);
   function initCaseStudy() {
     const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
 
-    tl.to('.case-header', { y: 0, opacity: 1, duration: 1 })
+    tl.fromTo('.case-header', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 })
       .to('.case-stats', { opacity: 1, duration: 1 }, '-=0.6')
       .to('.case-content', { opacity: 1, duration: 1 }, '-=0.6');
   }
 
-  window.addEventListener('load', initCaseStudy);
   document.addEventListener('astro:page-load', initCaseStudy);
 </script>

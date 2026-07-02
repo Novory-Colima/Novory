@@ -44,7 +44,7 @@ const values = [
       </div>
     </div>
 
-    <div class="lg:col-span-5 flex flex-col gap-8 md:gap-10 about-visual opacity-0 translate-y-10">
+    <div class="lg:col-span-5 flex flex-col gap-8 md:gap-10 about-visual opacity-0">
       <Card class="p-0! border-light-border/50 dark:border-white/10 overflow-hidden group/founder shadow-xl dark:shadow-2xl">
          <div class="aspect-4/3 bg-light-surface dark:bg-dark-surface flex items-center justify-center text-brand-blue/20 dark:text-brand-cyan/10 relative overflow-hidden transition-colors">
             <Users class="w-24 h-24 md:w-32 md:h-32 group-hover/founder:scale-110 transition-transform duration-1000" stroke-width="0.3" />
@@ -82,16 +82,19 @@ const values = [
   gsap.registerPlugin(ScrollTrigger);
 
   function initAbout() {
-    gsap.to('.about-visual', {
-      scrollTrigger: {
-        trigger: '#nosotros',
-        start: 'top 85%', // Ajustado ligeramente para móviles
-      },
-      opacity: 1,
-      y: 0,
-      duration: 1.5,
-      ease: 'power4.out',
-    });
+    gsap.fromTo('.about-visual', 
+      { y: 40, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#nosotros',
+          start: 'top 85%', // Ajustado ligeramente para móviles
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: 'power4.out',
+      }
+    );
 
     gsap.from('.about-content > *', {
       scrollTrigger: {
@@ -106,6 +109,5 @@ const values = [
     });
   }
 
-  window.addEventListener('load', initAbout);
   document.addEventListener('astro:page-load', initAbout);
 </script>

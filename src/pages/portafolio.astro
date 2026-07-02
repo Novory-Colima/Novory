@@ -59,19 +59,21 @@ const projects = await getCollection('case-studies');
     });
 
     gsap.utils.toArray('.portfolio-reveal').forEach((project: any) => {
-      gsap.to(project, {
-        scrollTrigger: {
-          trigger: project,
-          start: 'top 85%',
-        },
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: 'power4.out',
-      });
+      gsap.fromTo(project, 
+        { y: 64, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: project,
+            start: 'top 85%',
+          },
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power4.out',
+        }
+      );
     });
   }
 
-  window.addEventListener('load', initPortfolioPage);
   document.addEventListener('astro:page-load', initPortfolioPage);
 </script>

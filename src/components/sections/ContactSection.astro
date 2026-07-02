@@ -115,27 +115,31 @@ const trustItems = [
 </Section>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement;
+  function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
 
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    
-    // Create Structured WhatsApp Message as per requirement
-    const text = `🚀 SOLICITUD DE ASESORÍA NOVORY\n\n` +
-                 `👤 Nombre: ${data.name}\n` +
-                 `🏢 Negocio: ${data.business}\n` +
-                 `📍 Giro: ${data.industry}\n` +
-                 `📧 Email: ${data.email}\n` +
-                 `📞 Teléfono: ${data.phone}\n\n` +
-                 `💬 Mensaje: ${data.message}`;
-                 
-    const encodedText = encodeURIComponent(text);
-    const whatsappUrl = `https://wa.me/34600000000?text=${encodedText}`;
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Create Structured WhatsApp Message as per requirement
+      const text = `🚀 SOLICITUD DE ASESORÍA NOVORY\n\n` +
+                   `👤 Nombre: ${data.name}\n` +
+                   `🏢 Negocio: ${data.business}\n` +
+                   `📍 Giro: ${data.industry}\n` +
+                   `📧 Email: ${data.email}\n` +
+                   `📞 Teléfono: ${data.phone}\n\n` +
+                   `💬 Mensaje: ${data.message}`;
+                   
+      const encodedText = encodeURIComponent(text);
+      const whatsappUrl = `https://wa.me/34600000000?text=${encodedText}`;
 
-    // Simple feedback logic could go here
-    window.open(whatsappUrl, '_blank');
-  });
+      // Simple feedback logic could go here
+      window.open(whatsappUrl, '_blank');
+    });
+  }
+
+  document.addEventListener('astro:page-load', initContactForm);
 </script>

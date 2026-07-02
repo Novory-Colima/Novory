@@ -62,19 +62,21 @@ const projects = [
 
   function initPortfolio() {
     gsap.utils.toArray('.portfolio-reveal').forEach((project: any) => {
-      gsap.to(project, {
-        scrollTrigger: {
-          trigger: project,
-          start: 'top 85%',
-        },
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: 'power3.out',
-      });
+      gsap.fromTo(project, 
+        { y: 64, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: project,
+            start: 'top 85%',
+          },
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power3.out',
+        }
+      );
     });
   }
 
-  window.addEventListener('load', initPortfolio);
   document.addEventListener('astro:page-load', initPortfolio);
 </script>
