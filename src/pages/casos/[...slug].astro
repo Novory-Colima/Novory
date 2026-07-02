@@ -14,40 +14,66 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={entry.data.title}>
-  <article class="pt-40 pb-32 container-novory relative overflow-hidden">
+<BaseLayout title={`${entry.data.title} | Caso de Éxito Novory`}>
+  <article class="pt-32 md:pt-40 pb-20 md:pb-32 container-novory relative overflow-hidden bg-light-base dark:bg-dark-base transition-colors duration-500">
+    
     <!-- Background glow -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-accent/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-100 md:w-150 h-100 md:h-150 bg-brand-cyan/20 dark:bg-brand-blue/10 blur-[150px] md:blur-[200px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors duration-700"></div>
 
-    <div class="max-w-4xl mx-auto flex flex-col gap-16 relative z-10">
-      <div class="flex flex-col gap-8">
-        <a href="/portafolio" class="text-accent font-bold hover:underline underline-offset-4 decoration-2">← Volver al portafolio</a>
-        <h1 class="text-white text-5xl md:text-8xl font-bold tracking-tighter leading-[0.95]">{entry.data.title}</h1>
-        <div class="flex flex-wrap gap-4">
-          {entry.data.technologies.map((tech) => (
-            <span class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-black uppercase tracking-[0.2em]">{tech}</span>
+    <div class="max-w-4xl mx-auto flex flex-col gap-12 md:gap-16 relative z-10 px-4 md:px-0">
+      
+      <!-- Cabecera -->
+      <div class="flex flex-col gap-6 md:gap-8 case-header opacity-0 translate-y-10">
+        <a href="/portafolio" class="text-brand-blue dark:text-brand-cyan font-bold hover:underline underline-offset-4 decoration-2 text-sm md:text-base w-fit transition-colors">← Volver al portafolio</a>
+        <h1 class="text-text-dark-titles dark:text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none md:leading-[0.95] transition-colors">{entry.data.title}</h1>
+        <div class="flex flex-wrap gap-3 md:gap-4">
+          {entry.data.technologies.map((tech: string) => (
+            <span class="px-4 py-2 md:px-5 md:py-2 rounded-full bg-light-surface dark:bg-white/5 border border-light-border/60 dark:border-white/10 text-text-dark-titles dark:text-white/80 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] transition-colors">{tech}</span>
           ))}
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 py-12 border-y border-white/5">
+      <!-- Cuadrícula de Datos Clave -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 py-8 md:py-12 border-y border-light-border/40 dark:border-white/5 transition-colors case-stats opacity-0">
         <div class="flex flex-col gap-2">
-           <span class="text-[10px] text-text-secondary uppercase font-black tracking-[0.3em]">Negocio</span>
-           <p class="text-2xl text-white font-bold tracking-tight">{entry.data.businessName}</p>
+           <span class="text-[10px] text-text-dark dark:text-text-secondary uppercase font-black tracking-[0.2em] md:tracking-[0.3em] transition-colors">Negocio</span>
+           <p class="text-xl md:text-2xl text-text-dark-titles dark:text-white font-bold tracking-tight transition-colors">{entry.data.businessName}</p>
         </div>
         <div class="flex flex-col gap-2">
-           <span class="text-[10px] text-text-secondary uppercase font-black tracking-[0.3em]">Resultado Clave</span>
-           <p class="text-2xl text-accent font-bold tracking-tight">{entry.data.result}</p>
+           <span class="text-[10px] text-text-dark dark:text-text-secondary uppercase font-black tracking-[0.2em] md:tracking-[0.3em] transition-colors">Resultado Clave</span>
+           <p class="text-xl md:text-2xl text-transparent bg-clip-text bg-linear-to-r from-brand-cyan to-brand-blue font-bold tracking-tight">{entry.data.result}</p>
         </div>
         <div class="flex flex-col gap-2">
-           <span class="text-[10px] text-text-secondary uppercase font-black tracking-[0.3em]">Proyecto</span>
-           <p class="text-2xl text-white font-bold tracking-tight">Digitalización 360°</p>
+           <span class="text-[10px] text-text-dark dark:text-text-secondary uppercase font-black tracking-[0.2em] md:tracking-[0.3em] transition-colors">Proyecto</span>
+           <p class="text-xl md:text-2xl text-text-dark-titles dark:text-white font-bold tracking-tight transition-colors">Digitalización 360°</p>
         </div>
       </div>
 
-      <div class="prose prose-invert prose-xl max-w-none prose-headings:text-white prose-p:text-text-secondary prose-strong:text-white prose-p:leading-relaxed">
+      <!-- Contenido Markdown (Adaptativo Claro/Oscuro mediante Tailwind Typography) -->
+      <div class="prose prose-lg md:prose-xl max-w-none 
+                  prose-headings:text-text-dark-titles dark:prose-headings:text-white 
+                  prose-p:text-text-dark dark:prose-p:text-text-light 
+                  prose-strong:text-text-dark-titles dark:prose-strong:text-white 
+                  prose-a:text-brand-blue dark:prose-a:text-brand-cyan 
+                  prose-li:text-text-dark dark:prose-li:text-text-light
+                  prose-p:leading-relaxed transition-colors case-content opacity-0">
         <Content />
       </div>
     </div>
   </article>
 </BaseLayout>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initCaseStudy() {
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+
+    tl.to('.case-header', { y: 0, opacity: 1, duration: 1 })
+      .to('.case-stats', { opacity: 1, duration: 1 }, '-=0.6')
+      .to('.case-content', { opacity: 1, duration: 1 }, '-=0.6');
+  }
+
+  window.addEventListener('load', initCaseStudy);
+  document.addEventListener('astro:page-load', initCaseStudy);
+</script>

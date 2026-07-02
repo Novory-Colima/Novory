@@ -15,10 +15,10 @@ const {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Novory</title>
@@ -29,12 +29,16 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Novory" />
-    <meta name="theme-color" content="#050816" />
+    <meta name="theme-color" content="#4466ff" />
   </head>
-  <body class="bg-bg-primary text-text-primary selection:bg-accent/30 selection:text-white">
-    <div class="fixed inset-0 bg-noise pointer-events-none z-50"></div>
+  <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white transition-colors duration-500 min-h-screen flex flex-col antialiased">
+    
+    <!-- Ruido de fondo adaptativo -->
+    <div class="fixed inset-0 bg-noise opacity-30 dark:opacity-100 pointer-events-none z-50 mix-blend-overlay"></div>
+    
     <Navbar />
-    <main>
+    
+    <main class="grow">
       <slot />
     </main>
     <Footer />

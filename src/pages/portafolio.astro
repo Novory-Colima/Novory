@@ -7,20 +7,27 @@ import Section from '../components/layout/Section.astro';
 const projects = await getCollection('case-studies');
 ---
 
-<BaseLayout title="Portafolio de Transformación Digital">
-  <Section class="pt-40">
-    <div class="flex flex-col gap-8 mb-24 section-header">
+<BaseLayout title="Portafolio de Transformación Digital | Novory">
+  <Section class="pt-32 md:pt-40 pb-20 bg-light-base dark:bg-dark-base transition-colors duration-500 overflow-hidden relative">
+    
+    <!-- Resplandor de fondo premium -->
+    <div class="absolute top-0 right-0 w-100 md:w-150 h-100 md:h-150 bg-brand-cyan/15 dark:bg-brand-blue/10 blur-[150px] md:blur-[200px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors duration-700"></div>
+
+    <div class="flex flex-col gap-6 md:gap-8 mb-20 md:mb-24 section-header relative z-10 px-4 md:px-0">
        <div class="flex items-center gap-3">
-         <div class="w-10 h-[2px] bg-accent"></div>
-         <span class="text-accent font-black text-xs md:text-sm tracking-[0.4em] uppercase">Nuestro Trabajo</span>
+         <div class="w-8 md:w-10 h-0.5 bg-brand-blue dark:bg-brand-cyan transition-colors"></div>
+         <span class="text-brand-blue dark:text-brand-cyan font-black text-xs md:text-sm tracking-[0.3em] md:tracking-[0.4em] uppercase transition-colors">Nuestro Trabajo</span>
       </div>
-      <h1 class="text-white text-6xl md:text-9xl font-bold tracking-tighter leading-[0.9] max-w-4xl">Transformaciones <br /> Reales.</h1>
-      <p class="text-text-secondary text-xl md:text-2xl max-w-3xl leading-relaxed font-light">
+      <h1 class="text-text-dark-titles dark:text-white text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter leading-none md:leading-[0.9] max-w-4xl transition-colors">
+        Transformaciones <br /> 
+        <span class="bg-clip-text text-transparent bg-linear-to-r from-brand-cyan via-brand-blue to-brand-purple">Reales.</span>
+      </h1>
+      <p class="text-text-dark dark:text-text-secondary text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed font-medium md:font-light transition-colors mt-4">
         No coleccionamos sitios web, coleccionamos historias de éxito. Cada proyecto es una prueba de nuestro compromiso con el crecimiento real de nuestros clientes.
       </p>
     </div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-12 md:gap-0">
       {projects.map((project, index) => (
         <PortfolioProject 
           title={project.data.title}
@@ -47,7 +54,7 @@ const projects = await getCollection('case-studies');
        opacity: 0,
        y: 40,
        stagger: 0.15,
-       duration: 1,
+       duration: 1.2,
        ease: 'power4.out'
     });
 
