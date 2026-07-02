@@ -37,42 +37,44 @@ const benefits = [
 ];
 ---
 
-<Section id="beneficios" class="bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
-  <div class="absolute inset-0 pointer-events-none opacity-20 dark:opacity-[0.03] transition-opacity">
-    <svg class="w-full h-full" viewBox="0 0 1200 800" fill="none">
-      <path d="M100,100 Q400,50 600,400 T1100,700" class="stroke-brand-blue" stroke-width="2" stroke-dasharray="8 8" />
-      <path d="M1100,100 Q800,300 600,100 T100,700" class="stroke-brand-cyan" stroke-width="2" stroke-dasharray="8 8" />
-      <circle cx="200" cy="200" r="4" class="fill-brand-blue" />
-      <circle cx="600" cy="400" r="6" class="fill-brand-cyan" />
-      <circle cx="1000" cy="600" r="4" class="fill-brand-purple" />
-    </svg>
-  </div>
+<benefits-section class="block">
+  <Section id="beneficios" class="bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
+    <div class="absolute inset-0 pointer-events-none opacity-20 dark:opacity-[0.03] transition-opacity">
+      <svg class="w-full h-full" viewBox="0 0 1200 800" fill="none">
+        <path d="M100,100 Q400,50 600,400 T1100,700" class="stroke-brand-blue" stroke-width="2" stroke-dasharray="8 8" />
+        <path d="M1100,100 Q800,300 600,100 T100,700" class="stroke-brand-cyan" stroke-width="2" stroke-dasharray="8 8" />
+        <circle cx="200" cy="200" r="4" class="fill-brand-blue" />
+        <circle cx="600" cy="400" r="6" class="fill-brand-cyan" />
+        <circle cx="1000" cy="600" r="4" class="fill-brand-purple" />
+      </svg>
+    </div>
 
-  <div class="absolute bottom-0 right-0 w-150 md:w-200 h-150 md:h-200 bg-brand-cyan/10 dark:bg-brand-blue/5 blur-[150px] md:blur-[200px] rounded-full translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors duration-700"></div>
+    <div class="absolute bottom-0 right-0 w-150 md:w-200 h-150 md:h-200 bg-brand-cyan/10 dark:bg-brand-blue/5 blur-[150px] md:blur-[200px] rounded-full translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors duration-700"></div>
 
-  <div class="max-w-4xl mx-auto text-center mb-16 md:mb-24 flex flex-col gap-4 md:gap-6 section-header relative z-10">
-    <h2 class="text-text-dark-titles dark:text-text-light-titles text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors">Mucho más que un sitio web.</h2>
-    <p class="text-text-dark dark:text-text-light text-base md:text-lg lg:text-xl leading-relaxed transition-colors px-4">
-      Creamos un ecosistema digital diseñado para ayudarte a vender más, <br class="hidden md:block" /> ahorrar tiempo y ofrecer una experiencia superior a tus clientes.
-    </p>
-  </div>
+    <div class="max-w-4xl mx-auto text-center mb-16 md:mb-24 flex flex-col gap-4 md:gap-6 section-header relative z-10">
+      <h2 class="text-text-dark-titles dark:text-text-light-titles text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors">Mucho más que un sitio web.</h2>
+      <p class="text-text-dark dark:text-text-light text-base md:text-lg lg:text-xl leading-relaxed transition-colors px-4">
+        Creamos un ecosistema digital diseñado para ayudarte a vender más, <br class="hidden md:block" /> ahorrar tiempo y ofrecer una experiencia superior a tus clientes.
+      </p>
+    </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 benefits-grid relative z-10">
-    {benefits.map((benefit) => (
-      <Card class="p-8 md:p-12 flex flex-col gap-6 md:gap-8 bg-light-surface/40 dark:bg-white/1 border-light-border/50 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-cyan/40 group overflow-visible transition-all">
-        <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white group-hover:shadow-[0_0_20px_rgba(68,102,255,0.4)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
-          <benefit.icon class="w-7 h-7 md:w-8 md:h-8" />
-        </div>
-        <div class="flex flex-col gap-3 md:gap-4">
-          <h3 class="text-xl md:text-2xl lg:text-3xl font-bold text-text-dark-titles dark:text-white tracking-tight leading-tight transition-colors">{benefit.title}</h3>
-          <p class="text-text-dark dark:text-text-light text-sm md:text-base lg:text-lg leading-relaxed transition-colors">
-            {benefit.description}
-          </p>
-        </div>
-      </Card>
-    ))}
-  </div>
-</Section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 benefits-grid relative z-10">
+      {benefits.map((benefit) => (
+        <Card class="p-8 md:p-12 flex flex-col gap-6 md:gap-8 bg-light-surface/40 dark:bg-white/1 border-light-border/50 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-cyan/40 group overflow-visible transition-all">
+          <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white group-hover:shadow-[0_0_20px_rgba(68,102,255,0.4)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
+            <benefit.icon class="w-7 h-7 md:w-8 md:h-8" />
+          </div>
+          <div class="flex flex-col gap-3 md:gap-4">
+            <h3 class="text-xl md:text-2xl lg:text-3xl font-bold text-text-dark-titles dark:text-white tracking-tight leading-tight transition-colors">{benefit.title}</h3>
+            <p class="text-text-dark dark:text-text-light text-sm md:text-base lg:text-lg leading-relaxed transition-colors">
+              {benefit.description}
+            </p>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Section>
+</benefits-section>
 
 <script>
   import { gsap } from 'gsap';
@@ -80,19 +82,34 @@ const benefits = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  function initBenefits() {
-    gsap.from('.benefits-grid > div', {
-      scrollTrigger: {
-        trigger: '.benefits-grid',
-        start: 'top 85%',
-      },
-      y: 60,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.12,
-      ease: 'power4.out',
-    });
+  class BenefitsSection extends HTMLElement {
+    ctx: gsap.Context | null = null;
+
+    connectedCallback() {
+      this.ctx = gsap.context(() => {
+        gsap.from('.benefits-grid > div', {
+          scrollTrigger: {
+            trigger: '.benefits-grid',
+            start: 'top 85%',
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.12,
+          ease: 'power4.out',
+        });
+      }, this);
+    }
+
+    disconnectedCallback() {
+      if (this.ctx) {
+        this.ctx.revert();
+        this.ctx = null;
+      }
+    }
   }
 
-  document.addEventListener('astro:page-load', initBenefits);
+  if (!customElements.get('benefits-section')) {
+    customElements.define('benefits-section', BenefitsSection);
+  }
 </script>

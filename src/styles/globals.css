@@ -165,28 +165,31 @@
   }
 }
 
-@layer components {
+/* Common component styles from Fase 4.2 */
+.glass-panel {
+  background: var(--color-glass-alpha);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-alpha);
+  border-radius: var(--radius-xl);
+}
 
-  /* Common component styles from Fase 4.2 */
-  .glass-panel {
-    background: var(--color-glass-alpha);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--color-border-alpha);
-    border-radius: var(--radius-xl);
-  }
+.nav-link-underline {
+  position: relative;
+}
 
-  .nav-link-underline {
-    @apply relative;
-  }
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-accent);
+  transition: all 200ms var(--ease-standard);
+}
 
-  .nav-link-underline::after {
-    content: '';
-    @apply absolute w-0 h-px -bottom-0.5 left-0 bg-accent transition-all duration-200 ease-standard;
-  }
-
-  .nav-link-underline:hover::after {
-    @apply w-full;
-  }
+.nav-link-underline:hover::after {
+  width: 100%;
 }
 
 @utility container-novory {
@@ -222,20 +225,28 @@
   opacity: 0.05;
 }
 
-@layer utilities {
-
-  /* Hover gradiente para fondos (botones, bloques) */
-  .hover-brand-gradient {
-    @apply hover:bg-linear-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple;
+/* Hover gradiente para fondos (botones, bloques) */
+@utility hover-brand-gradient {
+  &:hover {
+    background-image: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-blue), var(--color-brand-purple));
   }
+}
 
-  /* Hover gradiente para texto (links, iconos, títulos) */
-  .hover-brand-gradient-text {
-    @apply hover:bg-linear-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple hover:bg-clip-text hover:text-transparent;
+/* Hover gradiente para texto (links, iconos, títulos) */
+@utility hover-brand-gradient-text {
+  &:hover {
+    background-image: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-blue), var(--color-brand-purple));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
+}
 
-  /* Hover gradiente para borde (cards) */
-  .hover-brand-gradient-border {
-    @apply hover:border-transparent hover:bg-linear-to-r hover:from-brand-cyan hover:via-brand-blue hover:to-brand-purple hover:bg-clip-border;
+/* Hover gradiente para borde (cards) */
+@utility hover-brand-gradient-border {
+  &:hover {
+    border-color: transparent;
+    background-image: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-blue), var(--color-brand-purple));
+    background-clip: border-box;
   }
 }

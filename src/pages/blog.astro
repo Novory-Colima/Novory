@@ -17,7 +17,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('es-ES', {
 ---
 
 <BaseLayout title="Blog de Tecnología y Negocios Locales | Novory">
-  <Section class="pt-32 md:pt-40 pb-20 md:pb-32 bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
+  <Section class="blog-page-container pt-32 md:pt-40 pb-20 md:pb-32 bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
     
     <!-- Background glow -->
     <div class="absolute top-0 right-0 w-75 md:w-125 h-75 md:h-125 bg-brand-cyan/20 dark:bg-brand-blue/10 blur-[120px] md:blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors duration-700"></div>
@@ -76,27 +76,40 @@ const formatDate = (date: Date) => date.toLocaleDateString('es-ES', {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  function initBlog() {
-    gsap.from('.section-header > *', {
-       opacity: 0,
-       y: 40,
-       stagger: 0.15,
-       duration: 1,
-       ease: 'power4.out'
-    });
+  let ctx: gsap.Context | null = null;
 
-    gsap.from('.blog-grid > a', {
-      scrollTrigger: {
-        trigger: '.blog-grid',
-        start: 'top 85%',
-      },
-      opacity: 0,
-      y: 40,
-      stagger: 0.1,
-      duration: 1,
-      ease: 'power4.out',
-    });
+  function initBlog() {
+    const container = document.querySelector('.blog-page-container');
+    if (!container) return;
+
+    ctx = gsap.context(() => {
+      gsap.from('.section-header > *', {
+         opacity: 0,
+         y: 40,
+         stagger: 0.15,
+         duration: 1,
+         ease: 'power4.out'
+      });
+
+      gsap.from('.blog-grid > a', {
+        scrollTrigger: {
+          trigger: '.blog-grid',
+          start: 'top 85%',
+        },
+        opacity: 0,
+        y: 40,
+        stagger: 0.1,
+        duration: 1,
+        ease: 'power4.out',
+      });
+    }, container);
   }
 
   document.addEventListener('astro:page-load', initBlog);
+  document.addEventListener('astro:before-swap', () => {
+    if (ctx) {
+      ctx.revert();
+      ctx = null;
+    }
+  });
 </script>

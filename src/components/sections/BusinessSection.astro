@@ -37,33 +37,35 @@ const businessTypes = [
 ];
 ---
 
-<Section id="empresas" class="bg-light-surface/30 dark:bg-dark-elevated/40 relative transition-colors duration-500">
-  <div class="absolute top-0 right-0 w-72 h-72 md:w-96 md:h-96 bg-brand-cyan/15 dark:bg-brand-cyan/5 blur-[100px] md:blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
+<business-section class="block">
+  <Section id="empresas" class="bg-light-surface/30 dark:bg-dark-elevated/40 relative transition-colors duration-500">
+    <div class="absolute top-0 right-0 w-72 h-72 md:w-96 md:h-96 bg-brand-cyan/15 dark:bg-brand-cyan/5 blur-[100px] md:blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
 
-  <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 flex flex-col gap-4 md:gap-6 section-header px-4">
-    <h2 class="text-text-dark-titles dark:text-text-light-titles text-3xl md:text-5xl font-bold tracking-tight transition-colors">Ayudamos a negocios que quieren crecer.</h2>
-    <p class="text-text-dark dark:text-text-light text-base md:text-lg leading-relaxed transition-colors">
-      No importa si apenas estás comenzando o ya tienes años operando. <br class="hidden md:block" /> 
-      Creamos soluciones digitales adaptadas a cada negocio.
-    </p>
-  </div>
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 flex flex-col gap-4 md:gap-6 section-header px-4">
+      <h2 class="text-text-dark-titles dark:text-text-light-titles text-3xl md:text-5xl font-bold tracking-tight transition-colors">Ayudamos a negocios que quieren crecer.</h2>
+      <p class="text-text-dark dark:text-text-light text-base md:text-lg leading-relaxed transition-colors">
+        No importa si apenas estás comenzando o ya tienes años operando. <br class="hidden md:block" /> 
+        Creamos soluciones digitales adaptadas a cada negocio.
+      </p>
+    </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 business-grid relative z-10">
-    {businessTypes.map((item) => (
-      <Card class="flex flex-col gap-5 md:gap-6 p-6 md:p-8 border-light-border/40 dark:border-white/5 hover:border-brand-blue/30 dark:hover:border-brand-cyan/30 group bg-light-base/50 dark:bg-white/1 transition-all">
-        <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-blue/10 dark:bg-brand-cyan/10 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white group-hover:shadow-[0_0_15px_rgba(68,102,255,0.3)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
-          <item.icon class="w-6 h-6 md:w-7 md:h-7" />
-        </div>
-        <div class="flex flex-col gap-2 md:gap-3">
-          <h3 class="text-xl md:text-2xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">{item.name}</h3>
-          <p class="text-text-dark dark:text-text-light text-sm md:text-base leading-relaxed transition-colors">
-            {item.description}
-          </p>
-        </div>
-      </Card>
-    ))}
-  </div>
-</Section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 business-grid relative z-10">
+      {businessTypes.map((item) => (
+        <Card class="flex flex-col gap-5 md:gap-6 p-6 md:p-8 border-light-border/40 dark:border-white/5 hover:border-brand-blue/30 dark:hover:border-brand-cyan/30 group bg-light-base/50 dark:bg-white/1 transition-all">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-blue/10 dark:bg-brand-cyan/10 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white group-hover:shadow-[0_0_15px_rgba(68,102,255,0.3)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
+            <item.icon class="w-6 h-6 md:w-7 md:h-7" />
+          </div>
+          <div class="flex flex-col gap-2 md:gap-3">
+            <h3 class="text-xl md:text-2xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">{item.name}</h3>
+            <p class="text-text-dark dark:text-text-light text-sm md:text-base leading-relaxed transition-colors">
+              {item.description}
+            </p>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Section>
+</business-section>
 
 <script>
   import { gsap } from 'gsap';
@@ -71,30 +73,45 @@ const businessTypes = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  function initAnimations() {
-    gsap.from('.section-header', {
-      scrollTrigger: {
-        trigger: '.section-header',
-        start: 'top 85%',
-      },
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-    });
+  class BusinessSection extends HTMLElement {
+    ctx: gsap.Context | null = null;
 
-    gsap.from('.business-grid > div', {
-      scrollTrigger: {
-        trigger: '.business-grid',
-        start: 'top 80%',
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: 'power3.out',
-    });
+    connectedCallback() {
+      this.ctx = gsap.context(() => {
+        gsap.from('.section-header', {
+          scrollTrigger: {
+            trigger: '.section-header',
+            start: 'top 85%',
+          },
+          y: 30,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+        });
+
+        gsap.from('.business-grid > div', {
+          scrollTrigger: {
+            trigger: '.business-grid',
+            start: 'top 80%',
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: 'power3.out',
+        });
+      }, this);
+    }
+
+    disconnectedCallback() {
+      if (this.ctx) {
+        this.ctx.revert();
+        this.ctx = null;
+      }
+    }
   }
 
-  document.addEventListener('astro:page-load', initAnimations);
+  if (!customElements.get('business-section')) {
+    customElements.define('business-section', BusinessSection);
+  }
 </script>

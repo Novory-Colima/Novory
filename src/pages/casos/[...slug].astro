@@ -15,7 +15,7 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout title={`${entry.data.title} | Caso de Éxito Novory`}>
-  <article class="pt-32 md:pt-40 pb-20 md:pb-32 container-novory relative overflow-hidden bg-light-base dark:bg-dark-base transition-colors duration-500">
+  <article class="case-study-page-container pt-32 md:pt-40 pb-20 md:pb-32 container-novory relative overflow-hidden bg-light-base dark:bg-dark-base transition-colors duration-500">
     
     <!-- Background glow -->
     <div class="absolute top-0 right-0 w-100 md:w-150 h-100 md:h-150 bg-brand-cyan/20 dark:bg-brand-blue/10 blur-[150px] md:blur-[200px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors duration-700"></div>
@@ -66,13 +66,26 @@ const { Content } = await render(entry);
 <script>
   import { gsap } from 'gsap';
 
-  function initCaseStudy() {
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+  let ctx: gsap.Context | null = null;
 
-    tl.fromTo('.case-header', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 })
-      .to('.case-stats', { opacity: 1, duration: 1 }, '-=0.6')
-      .to('.case-content', { opacity: 1, duration: 1 }, '-=0.6');
+  function initCaseStudy() {
+    const container = document.querySelector('.case-study-page-container');
+    if (!container) return;
+
+    ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+
+      tl.fromTo('.case-header', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 })
+        .to('.case-stats', { opacity: 1, duration: 1 }, '-=0.6')
+        .to('.case-content', { opacity: 1, duration: 1 }, '-=0.6');
+    }, container);
   }
 
   document.addEventListener('astro:page-load', initCaseStudy);
+  document.addEventListener('astro:before-swap', () => {
+    if (ctx) {
+      ctx.revert();
+      ctx = null;
+    }
+  });
 </script>
