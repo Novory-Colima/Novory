@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Font imports */
 @import "@fontsource/space-grotesk/index.css";
 @import "@fontsource/inter/index.css";

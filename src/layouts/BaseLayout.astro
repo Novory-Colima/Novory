@@ -30,6 +30,29 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Novory" />
     <meta name="theme-color" content="#4466ff" />
+
+    <!-- Theme initialization -->
+    <script is:inline>
+      const getInitialTheme = () => {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      };
+
+      const currentTheme = getInitialTheme();
+      if (currentTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("theme", currentTheme);
+      }
+    </script>
   </head>
   <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white transition-colors duration-500 min-h-screen flex flex-col antialiased">
     

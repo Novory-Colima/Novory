@@ -2,29 +2,6 @@
 import { Sun, Moon } from "@lucide/astro";
 ---
 
-<script is:inline>
-  const getInitialTheme = () => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-    return "light";
-  };
-
-  const currentTheme = getInitialTheme();
-  if (currentTheme === "dark") {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-  // Guardamos para que siempre haya un valor base
-  if (typeof localStorage !== "undefined") {
-    localStorage.setItem("theme", currentTheme);
-  }
-</script>
-
 <theme-toggle class="block">
   <button
     class="relative flex h-8 w-16 cursor-pointer items-center rounded-full border-2 border-light-border bg-white transition-all duration-300 focus:outline-none hover:border-brand-blue/50 hover:shadow-[0_0_15px_rgba(68,102,255,0.2)] dark:border-dark-border dark:bg-dark-elevated dark:hover:border-brand-cyan/50 dark:hover:shadow-[0_0_15px_rgba(119,187,255,0.2)]"
@@ -43,29 +20,33 @@ import { Sun, Moon } from "@lucide/astro";
 </theme-toggle>
 
 <script>
-  // Definimos cómo se comporta nuestra etiqueta <theme-toggle>
   class ThemeToggle extends HTMLElement {
     constructor() {
       super();
-      
-      // Buscamos el botón dentro de nuestro componente
-      const button = this.querySelector("button");
+      this.handleToggle = this.handleToggle.bind(this);
+    }
 
+    connectedCallback() {
+      const button = this.querySelector("button");
       if (button) {
-        // Le agregamos el evento de clic de manera segura
-        button.addEventListener("click", () => {
-          // Cambiamos la clase en el HTML
-          const isDark = document.documentElement.classList.toggle("dark");
-          
-          // Guardamos la preferencia
-          localStorage.setItem("theme", isDark ? "dark" : "light");
-        });
+        button.removeEventListener("click", this.handleToggle);
+        button.addEventListener("click", this.handleToggle);
       }
+    }
+
+    disconnectedCallback() {
+      const button = this.querySelector("button");
+      if (button) {
+        button.removeEventListener("click", this.handleToggle);
+      }
+    }
+
+    handleToggle() {
+      const isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
     }
   }
 
-  // Le decimos al navegador que registre nuestra etiqueta personalizada
-  // El if previene errores si Astro intenta registrarlo dos veces
   if (!customElements.get("theme-toggle")) {
     customElements.define("theme-toggle", ThemeToggle);
   }
