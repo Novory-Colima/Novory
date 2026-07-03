@@ -250,3 +250,20 @@
     background-clip: border-box;
   }
 }
+
+/* Reglas de diseño y seguridad de altura para los Custom Elements */
+problems-section,
+business-section,
+hero-section,
+about-section,
+benefits-section,
+process-section,
+services-section,
+portfolio-section,
+faq-section,
+contact-section {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: min-content !important;
+}
