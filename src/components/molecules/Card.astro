@@ -6,12 +6,16 @@ interface Props {
 }
 
 const { class: className, hoverable = true, ...rest } = Astro.props;
+
+// Determinar si la clase ya define un tipo de posicionamiento para evitar duplicados/conflictos
+const hasPositionClass = className && /(?:\s|^)(?:absolute|fixed|relative|static|sticky)(?:\s|$)/.test(className);
 ---
 
 <div
   class:list={[
     // Base & Responsividad (Padding adaptativo)
-    "p-6 md:p-8 rounded-(--radius-xl) relative overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]",
+    "p-6 md:p-8 rounded-(--radius-xl) overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]",
+    !hasPositionClass && "relative",
     
     // Glassmorphism adaptativo (Claro/Oscuro)
     "bg-light-surface/40 dark:bg-white/5 backdrop-blur-xl border border-light-border/50 dark:border-white/10",
