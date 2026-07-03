@@ -37,13 +37,13 @@ const benefits = [
 ];
 ---
 
-<benefits-section class="block">
-  <Section id="beneficios" class="bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
-    <div class="absolute inset-0 pointer-events-none opacity-20 dark:opacity-[0.03] transition-opacity">
-      <svg class="w-full h-full" viewBox="0 0 1200 800" fill="none">
-        <path d="M100,100 Q400,50 600,400 T1100,700" class="stroke-brand-blue" stroke-width="2" stroke-dasharray="8 8" />
-        <path d="M1100,100 Q800,300 600,100 T100,700" class="stroke-brand-cyan" stroke-width="2" stroke-dasharray="8 8" />
-        <circle cx="200" cy="200" r="4" class="fill-brand-blue" />
+<benefits-section class="block w-full h-auto">
+  <Section id="beneficios" class="w-full h-auto bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
+    <!-- SVG Vector lines (premium detail) -->
+    <div class="absolute inset-0 pointer-events-none opacity-30 dark:opacity-20 transition-opacity">
+      <svg class="w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-100,200 C300,100 500,600 900,400 C1300,200 1500,700 1600,600" class="stroke-brand-blue/30 dark:stroke-brand-blue/15" stroke-width="1.5" stroke-dasharray="8 8" />
+        <path d="M-50,600 C400,500 800,200 1100,500 C1400,800 1500,400 1600,300" class="stroke-brand-cyan/20 dark:stroke-brand-cyan/10" stroke-width="1.5" stroke-dasharray="12 6" />
         <circle cx="600" cy="400" r="6" class="fill-brand-cyan" />
         <circle cx="1000" cy="600" r="4" class="fill-brand-purple" />
       </svg>
@@ -58,9 +58,9 @@ const benefits = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 benefits-grid relative z-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 benefits-grid relative z-10 w-full h-auto">
       {benefits.map((benefit) => (
-        <Card class="p-8 md:p-12 flex flex-col gap-6 md:gap-8 bg-light-surface/40 dark:bg-white/1 border-light-border/50 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-cyan/40 group overflow-visible transition-all">
+        <Card class="p-8 md:p-12 flex flex-col gap-6 md:gap-8 bg-light-surface/30 hover:bg-light-surface/80 dark:bg-white/5 dark:hover:bg-white/10 border-light-border/60 dark:border-white/10 hover:border-brand-blue/60 dark:hover:border-brand-cyan/60 transition-all duration-500 w-full h-auto">
           <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white group-hover:shadow-[0_0_20px_rgba(68,102,255,0.4)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
             <benefit.icon class="w-7 h-7 md:w-8 md:h-8" />
           </div>
@@ -78,30 +78,45 @@ const benefits = [
 
 <script>
   import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
 
   class BenefitsSection extends HTMLElement {
     ctx: gsap.Context | null = null;
+    observer: IntersectionObserver | null = null;
 
     connectedCallback() {
+      const grid = this.querySelector('.benefits-grid');
+      if (!grid) return;
+
       this.ctx = gsap.context(() => {
-        gsap.from('.benefits-grid > div', {
-          scrollTrigger: {
-            trigger: '.benefits-grid',
-            start: 'top 85%',
-          },
-          y: 60,
-          opacity: 0,
-          duration: 1.2,
-          stagger: 0.12,
-          ease: 'power4.out',
-        });
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              gsap.fromTo('.benefits-grid > div', 
+                { y: 30, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.6,
+                  stagger: 0.08,
+                  ease: 'power2.out',
+                }
+              );
+              if (this.observer) {
+                this.observer.unobserve(grid);
+              }
+            }
+          });
+        }, { rootMargin: '0px 0px 100px 0px' });
+
+        this.observer.observe(grid);
       }, this);
     }
 
     disconnectedCallback() {
+      if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
+      }
       if (this.ctx) {
         this.ctx.revert();
         this.ctx = null;
