@@ -1,75 +1,142 @@
 ---
-import Section from '../layout/Section.astro';
-import Card from '../molecules/Card.astro';
-import { Heart, Target, Lightbulb, Zap, Shield, Users } from '@lucide/astro';
+import Section from "../layout/Section.astro";
+import Card from "../molecules/Card.astro";
+import { Heart, Target, Lightbulb, Zap, Shield, Users } from "@lucide/astro";
 
 const values = [
-  { icon: Target, title: 'Resultados reales' },
-  { icon: Lightbulb, title: 'Innovación' },
-  { icon: Heart, title: 'Compromiso' },
-  { icon: Shield, title: 'Transparencia' },
-  { icon: Zap, title: 'Calidad extrema' },
-  { icon: Users, title: 'Cercanía' }
+  { icon: Target, title: "Resultados reales" },
+  { icon: Lightbulb, title: "Innovación" },
+  { icon: Heart, title: "Compromiso" },
+  { icon: Shield, title: "Transparencia" },
+  { icon: Zap, title: "Calidad extrema" },
+  { icon: Users, title: "Cercanía" },
 ];
 ---
 
 <about-section class="block">
-  <Section id="nosotros" class="bg-light-base dark:bg-dark-base relative overflow-visible">
-    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-blue/5 dark:bg-brand-blue/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none transition-colors duration-700"></div>
+  <Section
+    id="nosotros"
+    class="bg-light-base dark:bg-dark-base relative overflow-visible"
+  >
+    <div
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-blue/5 dark:bg-brand-blue/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none transition-colors duration-700"
+    >
+    </div>
 
-    <!-- Simplificar: 2 columnas en lg para evitar complejidad de 12 cols -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-stretch relative z-10">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-stretch relative z-10"
+    >
       <!-- Left -->
-      <div class="flex flex-col gap-8 md:gap-10 about-content min-w-0 min-h-0 shrink">
+      <div
+        class="flex flex-col gap-8 md:gap-10 about-content min-w-0 min-h-0 shrink"
+      >
         <div class="flex items-center gap-3">
-           <div class="w-10 h-0.5 bg-brand-blue dark:bg-brand-cyan"></div>
-           <span class="text-brand-blue dark:text-brand-cyan font-black text-xs md:text-sm tracking-[0.3em] uppercase">Nuestra Misión</span>
-        </div>
-        
-        <h2 class="text-text-dark-titles dark:text-text-light-titles text-4xl md:text-6xl lg:text-6xl font-bold tracking-tighter leading-[1.1] transition-colors">¿Por qué existe Novory?</h2>
-        
-        <div class="flex flex-col gap-6 md:gap-8 text-text-dark dark:text-text-light text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl transition-colors">
-          <p>Durante años vimos cómo muchos negocios locales tenían productos y servicios de excelencia, pero su presencia digital no reflejaba esa misma calidad.</p>
-          <p>Muchos dependían exclusivamente de redes sociales volátiles, otros perdían clientes por procesos manuales lentos, y la mayoría simplemente no sabía por dónde empezar.</p>
-          <p><span class="text-brand-blue dark:text-brand-cyan font-bold">Novory nació para cerrar esa brecha.</span> Creemos que la tecnología de alto nivel no debe ser un privilegio de grandes corporaciones, sino una herramienta para que los negocios locales prosperen.</p>
+          <div class="w-10 h-0.5 bg-brand-blue dark:bg-brand-cyan"></div>
+          <span
+            class="text-brand-blue dark:text-brand-cyan font-black text-xs md:text-sm tracking-[0.3em] uppercase"
+            >Nuestra Misión</span
+          >
         </div>
 
-        <div class="inline-flex flex-col gap-2 p-6 border-l-4 border-brand-blue dark:border-brand-cyan bg-brand-blue/5 dark:bg-brand-blue/10 rounded-r-2xl transition-colors">
-          <p class="text-text-dark-titles dark:text-white font-medium italic text-lg md:text-xl leading-relaxed transition-colors">
-            "Diseñamos herramientas que ayudan a las personas a trabajar mejor, ahorrar tiempo y hacer crecer sus sueños."
+        <h2
+          class="text-text-dark-titles dark:text-text-light-titles text-4xl md:text-6xl lg:text-6xl font-bold tracking-tighter leading-[1.1] transition-colors"
+        >
+          ¿Por qué existe Novory?
+        </h2>
+
+        <div
+          class="flex flex-col gap-6 md:gap-8 text-text-dark dark:text-text-light text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl transition-colors"
+        >
+          <p>
+            Durante años vimos cómo muchos negocios locales tenían productos y
+            servicios de excelencia, pero su presencia digital no reflejaba esa
+            misma calidad.
+          </p>
+          <p>
+            Muchos dependían exclusivamente de redes sociales volátiles, otros
+            perdían clientes por procesos manuales lentos, y la mayoría
+            simplemente no sabía por dónde empezar.
+          </p>
+          <p>
+            <span class="text-brand-blue dark:text-brand-cyan font-bold"
+              >Novory nació para cerrar esa brecha.</span
+            > Creemos que la tecnología de alto nivel no debe ser un privilegio de
+            grandes corporaciones, sino una herramienta para que los negocios locales
+            prosperen.
+          </p>
+        </div>
+
+        <div
+          class="inline-flex flex-col gap-2 p-6 border-l-4 border-brand-blue dark:border-brand-cyan bg-brand-blue/5 dark:bg-brand-blue/10 rounded-r-2xl transition-colors"
+        >
+          <p
+            class="text-text-dark-titles dark:text-white font-medium italic text-lg md:text-xl leading-relaxed transition-colors"
+          >
+            "Diseñamos herramientas que ayudan a las personas a trabajar mejor,
+            ahorrar tiempo y hacer crecer sus sueños."
           </p>
         </div>
       </div>
 
       <!-- Right -->
-      <div class="flex flex-col gap-8 md:gap-10 about-visual min-w-0 min-h-0 shrink">
+      <div
+        class="flex flex-col gap-8 md:gap-10 about-visual min-w-0 min-h-0 shrink"
+      >
         <!-- Card: controlar overflow interno y usar aspect ratio compatible -->
-        <Card class="p-0 border-light-border/50 dark:border-white/10 group/founder shadow-xl dark:shadow-2xl">
-           <!-- OPTION A: si tienes plugin @tailwindcss/aspect-ratio (Tailwind 4) -->
-           <div class="aspect-w-4 aspect-h-3 bg-light-surface dark:bg-dark-surface flex items-center justify-center text-brand-blue/20 dark:text-brand-cyan/10 relative overflow-visible transition-colors min-h-0 min-w-0">
-              <Users class="w-24 h-24 md:w-32 md:h-32 group-hover/founder:scale-110 transition-transform duration-1000" stroke-width="0.3" />
-              <div class="absolute inset-0 bg-linear-to-t from-light-base via-transparent to-transparent dark:from-dark-base opacity-90 transition-colors pointer-events-none"></div>
-              <div class="absolute bottom-6 right-6 px-4 py-2 bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur-md border border-light-border/50 dark:border-brand-cyan/20 rounded-full transition-colors">
-                 <span class="text-[10px] text-brand-blue dark:text-brand-cyan font-black tracking-widest uppercase">Est. 2026</span>
-              </div>
-           </div>
+        <Card
+          class="p-0 border-light-border/50 dark:border-white/10 group/founder shadow-xl dark:shadow-2xl"
+        >
+          <div
+            class="aspect-w-4 aspect-h-3 bg-light-surface dark:bg-dark-surface flex items-center justify-center text-brand-blue/20 dark:text-brand-cyan/10 relative overflow-visible transition-colors min-h-0 min-w-0"
+          >
+            <Users
+              class="w-24 h-24 md:w-32 md:h-32 group-hover/founder:scale-110 transition-transform duration-1000"
+              stroke-width="0.3"
+            />
+            <div
+              class="absolute inset-0 bg-linear-to-t from-light-base via-transparent to-transparent dark:from-dark-base opacity-90 transition-colors pointer-events-none"
+            >
+            </div>
+            <div
+              class="absolute bottom-6 right-6 px-4 py-2 bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur-md border border-light-border/50 dark:border-brand-cyan/20 rounded-full transition-colors"
+            >
+              <span
+                class="text-[10px] text-brand-blue dark:text-brand-cyan font-black tracking-widest uppercase"
+                >Est. 2026</span
+              >
+            </div>
+          </div>
 
-           <!-- Card body: permitir scroll interno si el contenido excede -->
-           <div class="p-8 md:p-10 flex flex-col gap-3 bg-light-base dark:bg-transparent transition-colors min-h-0 overflow-auto">
-              <h3 class="text-2xl md:text-3xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">Cercanía y Capacidad</h3>
-              <p class="text-text-dark dark:text-text-light text-sm md:text-base leading-relaxed transition-colors">No somos una corporación distante. Somos un equipo apasionado obsesionado con la excelencia técnica y humana.</p>
-           </div>
+          <div
+            class="p-8 md:p-10 flex flex-col gap-3 bg-light-base dark:bg-transparent transition-colors min-h-0 overflow-auto"
+          >
+            <h3
+              class="text-2xl md:text-3xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors"
+            >
+              Cercanía y Capacidad
+            </h3>
+            <p
+              class="text-text-dark dark:text-text-light text-sm md:text-base leading-relaxed transition-colors"
+            >
+              No somos una corporación distante. Somos un equipo apasionado
+              obsesionado con la excelencia técnica y humana.
+            </p>
+          </div>
         </Card>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-          {values.map((value) => (
-            <div class="flex items-center gap-4 p-4 md:p-5 rounded-lg bg-light-surface/30 dark:bg-white/1 border border-light-border/40 dark:border-white/5 hover:bg-light-surface dark:hover:bg-white/3 hover:border-brand-blue/30 dark:hover:border-brand-cyan/30 transition-all duration-300 group/value min-w-0">
-              <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/5 dark:bg-white/5 flex items-center justify-center text-brand-blue/60 dark:text-white/40 group-hover/value:text-brand-blue dark:group-hover/value:text-brand-cyan group-hover/value:bg-brand-blue/10 dark:group-hover/value:bg-brand-cyan/10 transition-colors">
+          {
+            values.map((value) => (
+              <div class="flex items-center gap-4 p-4 md:p-5 rounded-lg bg-light-surface/30 dark:bg-white/1 border border-light-border/40 dark:border-white/5 hover:bg-light-surface dark:hover:bg-white/3 hover:border-brand-blue/30 dark:hover:border-brand-cyan/30 transition-all duration-300 group/value min-w-0">
+                <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/5 dark:bg-white/5 flex items-center justify-center text-brand-blue/60 dark:text-white/40 group-hover/value:text-brand-blue dark:group-hover/value:text-brand-cyan group-hover/value:bg-brand-blue/10 dark:group-hover/value:bg-brand-cyan/10 transition-colors">
                   <value.icon class="w-5 h-5" />
+                </div>
+                <span class="text-sm md:text-base font-bold text-text-dark-titles dark:text-white/80 group-hover/value:text-brand-blue dark:group-hover/value:text-white transition-colors">
+                  {value.title}
+                </span>
               </div>
-              <span class="text-sm md:text-base font-bold text-text-dark-titles dark:text-white/80 group-hover/value:text-brand-blue dark:group-hover/value:text-white transition-colors">{value.title}</span>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </div>
@@ -77,8 +144,8 @@ const values = [
 </about-section>
 
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -87,30 +154,31 @@ const values = [
 
     connectedCallback() {
       this.ctx = gsap.context(() => {
-        gsap.fromTo('.about-visual', 
+        gsap.fromTo(
+          ".about-visual",
           { y: 40, opacity: 0 },
           {
             scrollTrigger: {
-              trigger: '#nosotros',
-              start: 'top 85%',
+              trigger: "#nosotros",
+              start: "top 85%",
             },
             opacity: 1,
             y: 0,
             duration: 1.5,
-            ease: 'power4.out',
-          }
+            ease: "power4.out",
+          },
         );
 
-        gsap.from('.about-content > *', {
+        gsap.from(".about-content > *", {
           scrollTrigger: {
-            trigger: '#nosotros',
-            start: 'top 85%',
+            trigger: "#nosotros",
+            start: "top 85%",
           },
           opacity: 0,
           y: 40,
           stagger: 0.15,
           duration: 1.2,
-          ease: 'power3.out',
+          ease: "power3.out",
         });
       }, this);
     }
@@ -123,7 +191,7 @@ const values = [
     }
   }
 
-  if (!customElements.get('about-section')) {
-    customElements.define('about-section', AboutSection);
+  if (!customElements.get("about-section")) {
+    customElements.define("about-section", AboutSection);
   }
 </script>
