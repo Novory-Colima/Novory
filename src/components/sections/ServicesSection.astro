@@ -67,7 +67,7 @@ const services = [
     </div>
 
     <div
-      class="max-w-4xl mx-auto text-center mb-16 md:mb-20 flex flex-col gap-4 md:gap-6 section-header px-4"
+      class="max-w-4xl mx-auto text-center mb-16 md:mb-20 flex flex-col gap-4 md:gap-6 section-header services-header px-4"
     >
       <h2
         class="text-text-dark-titles dark:text-white text-3xl md:text-5xl font-bold tracking-tight transition-colors"
@@ -308,21 +308,34 @@ const services = [
 
     connectedCallback() {
       this.ctx = gsap.context(() => {
-        gsap.utils.toArray(".service-block-reveal").forEach((block: any) => {
-          gsap.fromTo(
-            block,
-            { y: 40, opacity: 0 },
+        // Header reveal
+        gsap.fromTo('.services-header', { y: 30, opacity: 0 }, {
+          scrollTrigger: { trigger: '.services-header', start: 'top 85%' },
+          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+        });
+
+        // Each block enters from alternating x direction
+        gsap.utils.toArray(".service-block-reveal").forEach((block: any, index: number) => {
+          const xDir = index % 2 === 0 ? -80 : 80;
+          gsap.fromTo(block,
+            { x: xDir, opacity: 0 },
             {
-              scrollTrigger: {
-                trigger: block,
-                start: "top 85%",
-              },
-              y: 0,
-              opacity: 1,
-              duration: 1.2,
-              ease: "power4.out",
+              scrollTrigger: { trigger: block, start: "top 82%" },
+              x: 0, opacity: 1, duration: 1.2, ease: "power4.out",
             },
           );
+
+          // Stagger benefit list items inside each block
+          const listItems = block.querySelectorAll('li');
+          if (listItems.length) {
+            gsap.fromTo(listItems,
+              { x: -15, opacity: 0 },
+              {
+                scrollTrigger: { trigger: block, start: "top 70%" },
+                x: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power2.out',
+              }
+            );
+          }
         });
       }, this);
     }

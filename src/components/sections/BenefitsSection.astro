@@ -41,7 +41,7 @@ const benefits = [
   <Section id="beneficios" class="w-full h-auto bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500">
     <!-- SVG Vector lines (premium detail) -->
     <div class="absolute inset-0 pointer-events-none opacity-30 dark:opacity-20 transition-opacity">
-      <svg class="w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="benefits-svg" class="w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M-100,200 C300,100 500,600 900,400 C1300,200 1500,700 1600,600" class="stroke-brand-blue/30 dark:stroke-brand-blue/15" stroke-width="1.5" stroke-dasharray="8 8" />
         <path d="M-50,600 C400,500 800,200 1100,500 C1400,800 1500,400 1600,300" class="stroke-brand-cyan/20 dark:stroke-brand-cyan/10" stroke-width="1.5" stroke-dasharray="12 6" />
         <circle cx="600" cy="400" r="6" class="fill-brand-cyan" />
@@ -51,7 +51,7 @@ const benefits = [
 
     <div class="absolute bottom-0 right-0 w-150 md:w-200 h-150 md:h-200 bg-brand-cyan/10 dark:bg-brand-blue/5 blur-[150px] md:blur-[200px] rounded-full translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors duration-700"></div>
 
-    <div class="max-w-4xl mx-auto text-center mb-16 md:mb-24 flex flex-col gap-4 md:gap-6 section-header relative z-10">
+    <div class="max-w-4xl mx-auto text-center mb-16 md:mb-24 flex flex-col gap-4 md:gap-6 section-header benefits-header relative z-10">
       <h2 class="text-text-dark-titles dark:text-text-light-titles text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors">Mucho más que un sitio web.</h2>
       <p class="text-text-dark dark:text-text-light text-base md:text-lg lg:text-xl leading-relaxed transition-colors px-4">
         Creamos un ecosistema digital diseñado para ayudarte a vender más, <br class="hidden md:block" /> ahorrar tiempo y ofrecer una experiencia superior a tus clientes.
@@ -60,9 +60,11 @@ const benefits = [
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 benefits-grid relative z-10 w-full h-auto">
       {benefits.map((benefit) => (
-        <Card class="p-8 md:p-12 flex flex-col gap-6 md:gap-8 bg-light-surface/30 hover:bg-light-surface/80 dark:bg-white/5 dark:hover:bg-white/10 border-light-border/60 dark:border-white/10 hover:border-brand-blue/60 dark:hover:border-brand-cyan/60 transition-all duration-500 w-full h-auto">
-          <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white group-hover:shadow-[0_0_20px_rgba(68,102,255,0.4)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
-            <benefit.icon class="w-7 h-7 md:w-8 md:h-8" />
+        <div class="benefit-card p-8 md:p-12 flex flex-col gap-6 md:gap-8 bg-light-surface/30 hover:bg-light-surface/80 dark:bg-white/5 dark:hover:bg-white/10 border border-light-border/60 dark:border-white/10 hover:border-brand-blue/60 dark:hover:border-brand-cyan/60 transition-all duration-500 w-full h-auto rounded-(--radius-xl) overflow-hidden">
+          <div class="benefit-icon-wrapper">
+            <div class="benefit-icon w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center text-brand-blue dark:text-brand-cyan transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
+              <benefit.icon class="w-7 h-7 md:w-8 md:h-8" />
+            </div>
           </div>
           <div class="flex flex-col gap-3 md:gap-4">
             <h3 class="text-xl md:text-2xl lg:text-3xl font-bold text-text-dark-titles dark:text-white tracking-tight leading-tight transition-colors">{benefit.title}</h3>
@@ -70,7 +72,7 @@ const benefits = [
               {benefit.description}
             </p>
           </div>
-        </Card>
+        </div>
       ))}
     </div>
   </Section>
@@ -78,45 +80,52 @@ const benefits = [
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
 
   class BenefitsSection extends HTMLElement {
     ctx: gsap.Context | null = null;
-    observer: IntersectionObserver | null = null;
 
     connectedCallback() {
-      const grid = this.querySelector('.benefits-grid');
-      if (!grid) return;
-
       this.ctx = gsap.context(() => {
-        this.observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              gsap.fromTo('.benefits-grid > div', 
-                { y: 30, opacity: 0 },
-                {
-                  y: 0,
-                  opacity: 1,
-                  duration: 0.6,
-                  stagger: 0.08,
-                  ease: 'power2.out',
-                }
-              );
-              if (this.observer) {
-                this.observer.unobserve(grid);
-              }
-            }
-          });
-        }, { rootMargin: '0px 0px 100px 0px' });
+        // Header reveal
+        gsap.fromTo('.benefits-header', { y: 30, opacity: 0 }, {
+          scrollTrigger: { trigger: '.benefits-header', start: 'top 85%' },
+          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+        });
 
-        this.observer.observe(grid);
+        // Cards stagger por filas (grid auto)
+        gsap.fromTo('.benefit-card',
+          { y: 40, opacity: 0 },
+          {
+            scrollTrigger: { trigger: '.benefits-grid', start: 'top 80%' },
+            y: 0, opacity: 1,
+            stagger: { each: 0.1, from: 'start', grid: 'auto' },
+            duration: 0.7, ease: 'power3.out',
+          }
+        );
+
+        // SVG draw-on-scroll using dashoffset
+        const paths = document.querySelectorAll('#benefits-svg path');
+        paths.forEach((path: any) => {
+          const len = path.getTotalLength();
+          gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+          gsap.to(path, {
+            scrollTrigger: {
+              trigger: '#beneficios',
+              start: 'top 70%',
+              end: 'bottom 60%',
+              scrub: 1.5,
+            },
+            strokeDashoffset: 0,
+            ease: 'none',
+          });
+        });
       }, this);
     }
 
     disconnectedCallback() {
-      if (this.observer) {
-        this.observer.disconnect();
-        this.observer = null;
-      }
       if (this.ctx) {
         this.ctx.revert();
         this.ctx = null;
@@ -128,3 +137,22 @@ const benefits = [
     customElements.define('benefits-section', BenefitsSection);
   }
 </script>
+
+<style>
+  .benefit-icon-wrapper {
+    perspective: 600px;
+  }
+  .benefit-icon {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .benefit-card:hover .benefit-icon {
+    transform: rotateY(15deg) scale(1.1);
+    background-color: rgb(68 102 255 / 0.2);
+    box-shadow: 0 0 20px rgba(68, 102, 255, 0.35);
+  }
+  :global(.dark) .benefit-card:hover .benefit-icon {
+    background-color: rgb(68 162 255 / 0.25);
+    box-shadow: 0 0 20px rgba(68, 162, 255, 0.4);
+  }
+</style>

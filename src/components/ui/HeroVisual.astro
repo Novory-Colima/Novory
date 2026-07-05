@@ -127,19 +127,19 @@ import Card from '../molecules/Card.astro';
   }
 
   @keyframes pulse-slow {
-    0%, 100% { opacity: 0.15; transform: scale(0.85); }
-    50% { opacity: 0.35; transform: scale(1.05); }
+    0%, 100% { opacity: 0.2; transform: scale(0.85); }
+    50% { opacity: 0.5; transform: scale(1.08); }
   }
 
   .animate-float-slow {
-    animation: float 8s ease-in-out infinite;
+    animation: float 5s ease-in-out infinite;
   }
 
   .animate-float-slow-delayed {
-    animation: float-delayed 10s ease-in-out infinite 1s;
+    animation: float-delayed 7s ease-in-out infinite 1s;
   }
 
   .animate-pulse-slow {
-    animation: pulse-slow 12s ease-in-out infinite;
+    animation: pulse-slow 8s ease-in-out infinite;
   }
 </style>

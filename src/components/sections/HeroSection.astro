@@ -14,27 +14,34 @@ const trustIndicators = [
 
 <hero-section class="block">
   <Section class="bg-light-base dark:bg-bg-primary min-h-screen flex items-center pt-28 md:pt-32 pb-16 md:pb-20 transition-colors duration-500 overflow-visible relative">
-    
-    <!-- Resplandor de fondo adaptativo -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-75 md:w-150 h-75 md:h-150 bg-brand-blue/10 dark:bg-brand-blue/5 blur-[100px] md:blur-[150px] rounded-full pointer-events-none transition-colors duration-700"></div>
+
+    <!-- Fondo multi-capa: glow azul principal -->
+    <div class="absolute -top-20 -left-20 w-[480px] h-[480px] bg-brand-blue/15 dark:bg-brand-blue/8 blur-[130px] rounded-full pointer-events-none transition-colors duration-700"></div>
+    <!-- Glow cian secundario abajo-derecha -->
+    <div class="absolute bottom-0 right-0 translate-x-1/4 w-[380px] h-[380px] bg-brand-cyan/10 dark:bg-brand-cyan/5 blur-[110px] rounded-full pointer-events-none transition-colors duration-700"></div>
+    <!-- Grid texture sutil -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.025] dark:opacity-[0.04]" style="background-image: linear-gradient(rgba(68,102,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(68,102,255,1) 1px, transparent 1px); background-size: 64px 64px;"></div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
       <!-- Left Column: Content -->
       <div class="lg:col-span-7 flex flex-col gap-6 md:gap-8 hero-content">
         <h1 class="text-text-dark-titles dark:text-white text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter transition-colors">
-          Transformamos negocios locales <br />
-          <span class="bg-clip-text text-transparent bg-linear-to-r from-brand-cyan via-brand-blue to-brand-purple">en negocios digitales.</span>
+          <span class="hero-word inline-block">Transformamos</span>{' '}
+          <span class="hero-word inline-block">negocios</span>{' '}
+          <span class="hero-word inline-block">locales</span>
+          <br />
+          <span class="hero-word inline-block bg-clip-text text-transparent bg-linear-to-r from-brand-cyan via-brand-blue to-brand-purple">en negocios digitales.</span>
         </h1>
-        
+
         <p class="text-text-dark dark:text-text-secondary text-lg md:text-xl lg:text-2xl max-w-2xl leading-relaxed font-medium md:font-light transition-colors">
           Creamos sitios web modernos, optimizados para Google y automatizados para ayudarte a conseguir más clientes mientras ahorras tiempo en tu operación diaria.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center gap-4 md:gap-6 mt-2 md:mt-4">
-          <Button variant="primary" size="hero" href="/contacto" class="w-full sm:w-auto">
+        <div class="hero-buttons flex flex-col sm:flex-row items-center gap-4 md:gap-6 mt-2 md:mt-4">
+          <Button variant="primary" size="hero" href="#contacto" class="w-full sm:w-auto btn-shimmer">
             Agenda una asesoría
           </Button>
-          <Button variant="secondary" size="hero" href="/portafolio" class="w-full sm:w-auto">
+          <Button variant="secondary" size="hero" href="#portafolio" class="w-full sm:w-auto">
             Ver proyectos
           </Button>
         </div>
@@ -42,7 +49,7 @@ const trustIndicators = [
         <!-- Trust Indicators -->
         <div class="flex flex-wrap items-center justify-center sm:justify-start gap-x-6 md:gap-x-10 gap-y-4 md:gap-y-5 mt-6 md:mt-8 border-t border-light-border/50 dark:border-white/5 pt-6 md:pt-8 transition-colors">
           {trustIndicators.map((item) => (
-            <div class="flex items-center gap-2 md:gap-3 text-xs md:text-sm font-bold text-text-dark dark:text-white/60 tracking-wider uppercase transition-colors">
+            <div class="hero-trust-item flex items-center gap-2 md:gap-3 text-xs md:text-sm font-bold text-text-dark dark:text-white/60 tracking-wider uppercase transition-colors">
               <div class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-brand-cyan/20 dark:bg-brand-blue/20 flex items-center justify-center text-brand-blue dark:text-brand-cyan transition-colors">
                  <Check class="w-3 h-3 md:w-3.5 md:h-3.5" />
               </div>
@@ -65,17 +72,44 @@ const trustIndicators = [
 
   class HeroSection extends HTMLElement {
     ctx: gsap.Context | null = null;
+    mouseMoveHandler: ((e: MouseEvent) => void) | null = null;
+    mouseLeaveHandler: (() => void) | null = null;
 
     connectedCallback() {
       this.ctx = gsap.context(() => {
-        const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-        tl.from('.hero-content h1', { y: 40, opacity: 0, delay: 0.3 })
-          .from('.hero-content p', { y: 30, opacity: 0 }, '-=0.9')
-          .from('.hero-content .flex', { y: 20, opacity: 0 }, '-=0.9')
-          .from('.hero-content .flex-wrap', { opacity: 0 }, '-=0.8')
+        // Title: word-by-word entrance
+        tl.from('.hero-word', {
+            y: 60,
+            opacity: 0,
+            rotationX: 12,
+            transformOrigin: '50% 100%',
+            stagger: 0.07,
+            duration: 1,
+            delay: 0.2,
+          })
+          .from('.hero-content p', { y: 30, opacity: 0, duration: 0.9 }, '-=0.7')
+          .from('.hero-buttons', { y: 20, opacity: 0, duration: 0.8 }, '-=0.7')
+          .from('.hero-trust-item', { x: -20, opacity: 0, stagger: 0.1, duration: 0.6 }, '-=0.6')
           .to('.hero-visual', { scale: 1, opacity: 1, duration: 1.8, ease: 'expo.out' }, '-=1.2');
       }, this);
+
+      // Parallax on mouse move (desktop only)
+      const visualEl = this.querySelector('.hero-visual') as HTMLElement | null;
+      if (visualEl && window.innerWidth >= 1024) {
+        this.mouseMoveHandler = (e: MouseEvent) => {
+          const rect = this.getBoundingClientRect();
+          const xRatio = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+          const yRatio = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+          gsap.to(visualEl, { x: xRatio * 14, y: yRatio * 9, duration: 0.9, ease: 'power2.out' });
+        };
+        this.mouseLeaveHandler = () => {
+          gsap.to(visualEl, { x: 0, y: 0, duration: 1.2, ease: 'power2.out' });
+        };
+        this.addEventListener('mousemove', this.mouseMoveHandler);
+        this.addEventListener('mouseleave', this.mouseLeaveHandler);
+      }
     }
 
     disconnectedCallback() {
@@ -83,6 +117,8 @@ const trustIndicators = [
         this.ctx.revert();
         this.ctx = null;
       }
+      if (this.mouseMoveHandler) this.removeEventListener('mousemove', this.mouseMoveHandler);
+      if (this.mouseLeaveHandler) this.removeEventListener('mouseleave', this.mouseLeaveHandler);
     }
   }
 

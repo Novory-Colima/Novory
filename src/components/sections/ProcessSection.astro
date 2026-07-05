@@ -69,9 +69,12 @@ const steps = [
               <p class="text-text-dark dark:text-text-secondary text-sm md:text-base lg:text-lg leading-relaxed transition-colors">{step.description}</p>
             </div>
 
-            <!-- Icon/Node -->
-            <div class="absolute left-10 md:left-1/2 -translate-x-1/2 w-9 h-9 md:w-16 md:h-16 rounded-2xl bg-light-base dark:bg-dark-base border border-light-border dark:border-brand-blue/30 z-10 flex items-center justify-center text-brand-blue dark:text-brand-cyan shadow-sm dark:shadow-glow group hover:scale-110 hover:border-brand-blue dark:hover:border-brand-cyan hover:bg-brand-blue hover:text-white transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
-               <step.icon class="w-5 h-5 md:w-7 md:h-7" />
+            <!-- Icon/Node with ping ring -->
+            <div class="absolute left-10 md:left-1/2 -translate-x-1/2 z-10 flex items-center justify-center">
+              <div class="ping-ring absolute w-9 h-9 md:w-16 md:h-16 rounded-2xl bg-brand-blue/30 dark:bg-brand-cyan/30 opacity-0 pointer-events-none"></div>
+              <div class="w-9 h-9 md:w-16 md:h-16 rounded-2xl bg-light-base dark:bg-dark-base border border-light-border dark:border-brand-blue/30 flex items-center justify-center text-brand-blue dark:text-brand-cyan shadow-sm dark:shadow-glow hover:scale-110 hover:border-brand-blue dark:hover:border-brand-cyan hover:bg-brand-blue hover:text-white transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
+                <step.icon class="w-5 h-5 md:w-7 md:h-7" />
+              </div>
             </div>
 
             <!-- Spacer for md layout -->
@@ -106,19 +109,23 @@ const steps = [
           ease: 'none',
         });
 
-        // Items reveal using fromTo to avoid Tailwind conflicts
-        gsap.utils.toArray('.timeline-item').forEach((item: any) => {
-          gsap.fromTo(item, 
-            { y: 40, opacity: 0 },
+        // Items reveal with alternating x direction + ping on node
+        gsap.utils.toArray('.timeline-item').forEach((item: any, index: number) => {
+          const xDir = index % 2 === 0 ? -60 : 60;
+          gsap.fromTo(item,
+            { x: xDir, opacity: 0 },
             {
-              scrollTrigger: {
-                trigger: item,
-                start: 'top 85%',
-              },
-              y: 0,
-              opacity: 1,
-              duration: 1,
-              ease: 'power3.out',
+              scrollTrigger: { trigger: item, start: 'top 85%' },
+              x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+              onComplete: () => {
+                const ring = item.querySelector('.ping-ring');
+                if (ring) {
+                  gsap.fromTo(ring,
+                    { scale: 1, opacity: 0.5 },
+                    { scale: 2.2, opacity: 0, duration: 1, ease: 'power2.out', repeat: 2, repeatDelay: 0.4 }
+                  );
+                }
+              }
             }
           );
         });

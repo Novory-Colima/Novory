@@ -33,6 +33,23 @@ const {
     <meta name="theme-color" content="#4466ff" />
     
     <ClientRouter />
+    <style>
+      /* Faster, cleaner page transitions */
+      ::view-transition-old(root) {
+        animation: 120ms ease-out both fade-out;
+      }
+      ::view-transition-new(root) {
+        animation: 160ms ease-in both fade-in;
+      }
+      @keyframes fade-out {
+        from { opacity: 1; }
+        to   { opacity: 0; }
+      }
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+    </style>
 
     <!-- Theme initialization -->
     <script is:inline>
@@ -62,7 +79,7 @@ const {
       document.addEventListener("astro:after-swap", applyTheme);
     </script>
   </head>
-  <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white transition-colors duration-500 min-h-screen flex flex-col antialiased">
+  <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white min-h-screen flex flex-col antialiased">
     
     <!-- Ruido de fondo adaptativo -->
     <div class="fixed inset-0 bg-noise opacity-30 dark:opacity-100 pointer-events-none z-50 mix-blend-overlay"></div>
@@ -92,7 +109,7 @@ const {
 
         if (!lenis) {
           lenis = new Lenis({
-            duration: 1.2,
+            duration: 0.9,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             syncTouch: false,
           });
@@ -107,6 +124,19 @@ const {
           gsap.ticker.lagSmoothing(0);
         }
       }
+
+      // Anchor click handler registered once — capture: true beats ClientRouter
+      document.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null;
+        if (!target) return;
+        const id = target.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        lenis?.scrollTo(el as HTMLElement, { offset: -80, duration: 0.9 });
+      }, { capture: true });
 
       // Hook orchestrator to view transitions events
       document.addEventListener('astro:page-load', () => {
