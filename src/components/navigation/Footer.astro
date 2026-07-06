@@ -2,6 +2,10 @@
 
 const currentYear = new Date().getFullYear();
 
+const contactEmail = "novory.col@gmail.com";
+const contactPhoneDisplay = "+52 312 199 2198";
+const contactPhoneRaw = "523121992198";
+
 const navSections = [
   {
     title: "Navegación",
@@ -15,28 +19,21 @@ const navSections = [
   {
     title: "Servicios",
     links: [
-      { name: "Desarrollo Web", href: "/servicios#web" },
-      { name: "SEO Local", href: "/servicios#seo" },
-      { name: "Automatizaciones", href: "/servicios#auto" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { name: "Privacidad", href: "/legal/privacidad" },
-      { name: "Términos", href: "/legal/terminos" },
+      { name: "Desarrollo Web", href: "/#servicios" },
+      { name: "SEO Local", href: "/#servicios" },
+      { name: "Automatizaciones", href: "/#servicios" },
     ],
   },
 ];
 ---
 
 <footer class="bg-light-surface/30 dark:bg-dark-surface pt-20 md:pt-24 pb-8 md:pb-12 border-t border-light-border/40 dark:border-white/5 relative overflow-hidden transition-colors duration-500">
-  
+
   <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-64 md:h-96 bg-brand-blue/10 dark:bg-brand-blue/15 blur-[100px] md:blur-[120px] rounded-full pointer-events-none transition-colors"></div>
 
   <div class="container-novory relative z-10">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 md:mb-20">
-      
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16 md:mb-20">
+
       <div class="flex flex-col gap-6 lg:col-span-1">
         <a href="/" class="group inline-block w-fit">
           <img
@@ -53,27 +50,30 @@ const navSections = [
         <p class="text-text-dark dark:text-text-light text-sm max-w-xs leading-relaxed transition-colors">
           Ayudamos a negocios locales a crecer utilizando tecnología moderna. Creamos herramientas digitales que generan resultados reales.
         </p>
-        
+
         <div class="flex items-center gap-4 md:gap-5 mt-2">
-          <a href="https://github.com/Novory-Colima" aria-label="GitHub" class="text-text-dark dark:text-text-light hover:text-github transition-colors transform hover:-translate-y-1">
+          <!-- GitHub -->
+          <a href="https://github.com/Novory-Colima" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon group relative text-text-dark dark:text-text-light hover:text-github transition-colors transform hover:-translate-y-1">
             <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path>
             </svg>
+            <span class="social-tooltip">Novory-Colima</span>
           </a>
-          <a href="/" aria-label="Gmail" class="text-text-dark dark:text-text-light hover:text-gmail transition-colors transform hover:-translate-y-1">
+
+          <!-- Gmail -->
+          <a href={`mailto:${contactEmail}`} aria-label={`Enviar correo a ${contactEmail}`} class="social-icon group relative text-text-dark dark:text-text-light hover:text-gmail transition-colors transform hover:-translate-y-1">
             <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 50 50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M 5.5 7 C 3.019531 7 1 9.019531 1 11.5 L 1 11.925781 L 25 29 L 49 11.925781 L 49 11.5 C 49 9.019531 46.980469 7 44.5 7 Z M 6.351563 9 L 43.644531 9 L 25 22 Z M 1 14.027344 L 1 38.5 C 1 40.980469 3.019531 43 5.5 43 L 44.5 43 C 46.980469 43 49 40.980469 49 38.5 L 49 14.027344 L 43 18.296875 L 43 41 L 7 41 L 7 18.296875 Z"></path>
             </svg>
+            <span class="social-tooltip">{contactEmail}</span>
           </a>
-          <a href="/" aria-label="LinkedIn" class="text-text-dark dark:text-text-light hover:text-linkedin transition-colors transform hover:-translate-y-1">
-             <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 50 50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
-             </svg>
-          </a>
-          <a href="/" aria-label="WhatsApp" class="text-text-dark dark:text-text-light hover:text-whatsapp transition-colors transform hover:-translate-y-1">
+
+          <!-- WhatsApp -->
+          <a href={`https://api.whatsapp.com/send?phone=${contactPhoneRaw}`} target="_blank" rel="noopener noreferrer" aria-label={`Escribir por WhatsApp al ${contactPhoneDisplay}`} class="social-icon group relative text-text-dark dark:text-text-light hover:text-whatsapp transition-colors transform hover:-translate-y-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="currentColor" class="w-6 h-6 md:w-7 md:h-7">
               <path d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z"></path>
             </svg>
+            <span class="social-tooltip">{contactPhoneDisplay}</span>
           </a>
         </div>
       </div>
@@ -112,3 +112,74 @@ const navSections = [
     </div>
   </div>
 </footer>
+
+<style>
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .social-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    color: rgb(15, 23, 42);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.18);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 30;
+  }
+
+  :global(.dark) .social-tooltip {
+    background: rgba(15, 23, 42, 0.92);
+    color: rgb(241, 245, 249);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5);
+  }
+
+  .social-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    background: inherit;
+    border-right: 1px solid rgba(15, 23, 42, 0.08);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    margin-top: -4px;
+  }
+
+  :global(.dark) .social-tooltip::after {
+    border-right-color: rgba(255, 255, 255, 0.12);
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .social-icon:hover .social-tooltip,
+  .social-icon:focus-visible .social-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (min-width: 768px) {
+    .social-tooltip {
+      font-size: 13px;
+      padding: 7px 14px;
+    }
+  }
+</style>
