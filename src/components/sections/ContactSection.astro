@@ -60,7 +60,7 @@ const trustItems = [
             </div>
           </a>
 
-          <a href="https://wa.me/34600000000" target="_blank" rel="noopener noreferrer"
+          <a href="https://api.whatsapp.com/send?phone=523121992198" target="_blank" rel="noopener noreferrer"
              class="contact-card flex items-center gap-4 p-4 rounded-[14px] bg-light-surface/40 dark:bg-white/3 border border-light-border/40 dark:border-white/6 hover:bg-light-surface dark:hover:bg-white/6 transition-colors min-w-0 w-full">
             <div class="w-12 h-12 rounded-2xl bg-brand-cyan/20 dark:bg-brand-blue/12 flex items-center justify-center text-brand-blue dark:text-brand-cyan shrink-0">
               <Phone class="w-5 h-5 md:w-6 md:h-6" />
@@ -181,7 +181,7 @@ const trustItems = [
                      `💬 Problemática: ${data.message}`;
                      
         const encodedText = encodeURIComponent(text);
-        const whatsappUrl = `https://wa.me/523121992198?text=${encodedText}`;//<-- Replace with your WhatsApp number
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=523121992198&text=${encodedText}`;
 
         window.open(whatsappUrl, '_blank');
       };
