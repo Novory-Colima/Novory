@@ -56,7 +56,7 @@ const trustItems = [
             </div>
             <div class="flex flex-col min-w-0">
               <span class="text-[10px] md:text-[11px] uppercase tracking-[0.18em] font-black text-text-dark dark:text-text-light">Email directo</span>
-              <span class="text-base md:text-lg font-bold text-text-dark-titles dark:text-white truncate">hola@novory.com</span>
+              <span class="text-base md:text-lg font-bold text-text-dark-titles dark:text-white truncate">novory.col@gmail.com</span>
             </div>
           </a>
 
@@ -67,7 +67,7 @@ const trustItems = [
             </div>
             <div class="flex flex-col min-w-0">
               <span class="text-[10px] md:text-[11px] uppercase tracking-[0.18em] font-black text-text-dark dark:text-text-light">WhatsApp Business</span>
-              <span class="text-base md:text-lg font-bold text-text-dark-titles dark:text-white truncate">+34 600 000 000</span>
+              <span class="text-base md:text-lg font-bold text-text-dark-titles dark:text-white truncate">+52 312 199 2198</span>
             </div>
           </a>
         </div>
@@ -117,7 +117,7 @@ const trustItems = [
             </div>
 
             <div class="min-w-0">
-              <label for="message" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Cuéntanos sobre tus objetivos</label>
+              <label for="message" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Cuéntanos sobre tu problemática</label>
               <textarea id="message" name="message" rows="4" placeholder="Hola, me gustaría digitalizar mis pedidos..."
                 class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all resize-none placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0"></textarea>
             </div>
@@ -171,17 +171,17 @@ const trustItems = [
         const formData = new FormData(this.form);
         const data = Object.fromEntries(formData.entries());
         
-        // Create Structured WhatsApp Message as per requirement
-        const text = `🚀 SOLICITUD DE ASESORÍA NOVORY\n\n` +
+        // Create Structured WhatsApp Message as per requirement✅👤🏪💼📧📞💬
+        const text = `✅ SOLICITUD DE ASESORÍA NOVORY\n\n` +
                      `👤 Nombre: ${data.name}\n` +
-                     `🏢 Negocio: ${data.business}\n` +
-                     `📍 Giro: ${data.industry}\n` +
+                     `🏪 Negocio: ${data.business}\n` +
+                     `💼 Giro: ${data.industry}\n` +
                      `📧 Email: ${data.email}\n` +
                      `📞 Teléfono: ${data.phone}\n\n` +
-                     `💬 Mensaje: ${data.message}`;
+                     `💬 Problemática: ${data.message}`;
                      
         const encodedText = encodeURIComponent(text);
-        const whatsappUrl = `https://wa.me/34600000000?text=${encodedText}`;
+        const whatsappUrl = `https://wa.me/523121992198?text=${encodedText}`;//<-- Replace with your WhatsApp number
 
         window.open(whatsappUrl, '_blank');
       };
