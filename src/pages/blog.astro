@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/layout/Section.astro";
 import Card from "../components/molecules/Card.astro";
 import { Calendar, User } from "@lucide/astro";
+import { withBase } from "../utils/navigation";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -63,7 +64,7 @@ const formatDate = (date: Date) =>
     >
       {
         posts.map((post) => (
-          <a href={`${import.meta.env.BASE_URL}blog/${post.slug}`} class="group h-full outline-none">
+          <a href={withBase(`/blog/${post.slug}`)} class="group h-full outline-none">
             <Card class="h-full flex flex-col gap-8 md:gap-10 p-8 md:p-10 bg-light-surface/40 dark:bg-white/2 border-light-border/50 dark:border-white/5 group-hover:border-brand-blue/40 dark:group-hover:border-brand-cyan/40 group-hover:bg-light-surface dark:group-hover:bg-white/5 transition-all duration-500 rounded-4xl">
               <div class="flex flex-col gap-4 md:gap-5">
                 <div class="flex flex-wrap items-center gap-3 md:gap-4 text-[10px] md:text-[11px] text-text-dark dark:text-text-secondary font-black uppercase tracking-[0.2em] transition-colors">

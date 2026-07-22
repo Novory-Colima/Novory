@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/atoms/Button.astro';
+import { withBase } from '../../utils/navigation';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -28,7 +29,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('es-ES', {
 
     <div class="max-w-3xl mx-auto flex flex-col gap-12 md:gap-16 relative z-10">
       <div class="flex flex-col gap-8 md:gap-10">
-        <a href={`${import.meta.env.BASE_URL}blog`} class="text-brand-blue dark:text-brand-cyan font-black hover:underline underline-offset-8 decoration-2 text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase transition-all duration-300 w-fit">← Volver al blog</a>
+        <a href={withBase('/blog')} class="text-brand-blue dark:text-brand-cyan font-black hover:underline underline-offset-8 decoration-2 text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase transition-all duration-300 w-fit">← Volver al blog</a>
         
         <div class="flex flex-col gap-4 md:gap-6">
           <div class="flex flex-wrap items-center gap-2 md:gap-4 text-[9px] md:text-[10px] text-text-dark dark:text-text-secondary font-black uppercase tracking-[0.2em] md:tracking-[0.25em] transition-colors">
@@ -64,7 +65,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('es-ES', {
             <h3 class="text-xl md:text-2xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">¿Quieres aplicar esto en tu negocio?</h3>
             <p class="text-text-dark dark:text-text-secondary text-sm md:text-base transition-colors">Agenda una asesoría gratuita y analizamos tu situación juntos.</p>
          </div>
-         <Button variant="primary" size="md" href={`${import.meta.env.BASE_URL}#contacto`} class="w-full md:w-auto uppercase tracking-widest text-xs font-black">
+         <Button variant="primary" size="md" href={withBase('#contacto')} class="w-full md:w-auto uppercase tracking-widest text-xs font-black">
             Agendar asesoría
          </Button>
       </div>

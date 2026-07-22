@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../utils/navigation";
 
 const currentYear = new Date().getFullYear();
 
@@ -10,18 +11,18 @@ const navSections = [
   {
     title: "Navegación",
     links: [
-      { name: "Inicio", href: import.meta.env.BASE_URL },
-      { name: "Nosotros", href: `${import.meta.env.BASE_URL}#nosotros` },
-      { name: "Blog", href: `${import.meta.env.BASE_URL}blog` },
-      { name: "Contacto", href: `${import.meta.env.BASE_URL}#contacto` },
+      { name: "Inicio", href: withBase('/') },
+      { name: "Nosotros", href: withBase('#nosotros') },
+      { name: "Blog", href: withBase('/blog') },
+      { name: "Contacto", href: withBase('#contacto') },
     ],
   },
   {
     title: "Servicios",
     links: [
-      { name: "Desarrollo Web", href: `${import.meta.env.BASE_URL}#servicios` },
-      { name: "SEO Local", href: `${import.meta.env.BASE_URL}#servicios` },
-      { name: "Automatizaciones", href: `${import.meta.env.BASE_URL}#servicios` },
+      { name: "Desarrollo Web", href: withBase('#servicios') },
+      { name: "SEO Local", href: withBase('#servicios') },
+      { name: "Automatizaciones", href: withBase('#servicios') },
     ],
   },
 ];
@@ -35,14 +36,14 @@ const navSections = [
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16 md:mb-20">
 
       <div class="flex flex-col gap-6 lg:col-span-1">
-        <a href={import.meta.env.BASE_URL} class="group inline-block w-fit">
+        <a href={withBase('/')} class="group inline-block w-fit">
           <img
-            src={`${import.meta.env.BASE_URL}assets/novory-logotipo-horizontal-color-clear-svg.svg`}
+            src={withBase('/assets/novory-logotipo-horizontal-color-clear-svg.svg')}
             alt="Logo Novory"
             class="w-24 md:w-28 lg:w-32 transition-transform duration-300 group-hover:scale-105 dark:hidden"
           />
           <img
-            src={`${import.meta.env.BASE_URL}assets/novory-logotipo-horizontal-color-dark-svg.svg`}
+            src={withBase('/assets/novory-logotipo-horizontal-color-dark-svg.svg')}
             alt="Logo Novory"
             class="w-24 md:w-28 lg:w-32 transition-transform duration-300 group-hover:scale-105 hidden dark:block"
           />
