@@ -37,67 +37,92 @@ const businessTypes = [
 ];
 ---
 
-<Section id="empresas" class="bg-bg-primary/50 relative">
-  <!-- Decorative background elements -->
-  <div class="absolute top-0 right-0 w-96 h-96 bg-accent/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<business-section class="block w-full h-auto">
+  <Section id="empresas" class="w-full h-auto bg-light-surface/30 dark:bg-dark-elevated/40 relative transition-colors duration-500">
+    <div class="absolute top-0 right-0 w-72 h-72 md:w-96 md:h-96 bg-brand-cyan/15 dark:bg-brand-cyan/5 blur-[100px] md:blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
 
-  <div class="text-center max-w-3xl mx-auto mb-20 flex flex-col gap-6 section-header">
-    <h2 class="text-white">Ayudamos a negocios que quieren crecer.</h2>
-    <p class="text-text-secondary text-lg leading-relaxed">
-      No importa si apenas estás comenzando o ya tienes años operando. <br class="hidden md:block" /> 
-      Creamos soluciones digitales adaptadas a cada negocio.
-    </p>
-  </div>
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 flex flex-col gap-4 md:gap-6 section-header px-4">
+      <h2 class="text-text-dark-titles dark:text-text-light-titles text-3xl md:text-5xl font-bold tracking-tight transition-colors">Ayudamos a negocios que quieren crecer.</h2>
+      <p class="text-text-dark dark:text-text-light text-base md:text-lg leading-relaxed transition-colors">
+        No importa si apenas estás comenzando o ya tienes años operando. <br class="hidden md:block" /> 
+        Creamos soluciones digitales adaptadas a cada negocio.
+      </p>
+    </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 business-grid">
-    {businessTypes.map((item) => (
-      <Card class="flex flex-col gap-6 p-8 border-white/5 hover:border-accent/30 group bg-white/[0.01]">
-        <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white group-hover:shadow-glow transition-all duration-500 ease-standard">
-          <item.icon class="w-7 h-7" />
-        </div>
-        <div class="flex flex-col gap-3">
-          <h3 class="text-2xl font-bold text-white tracking-tight">{item.name}</h3>
-          <p class="text-text-secondary text-base leading-relaxed">
-            {item.description}
-          </p>
-        </div>
-      </Card>
-    ))}
-  </div>
-</Section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 business-grid relative z-10 w-full h-auto">
+      {businessTypes.map((item) => (
+        <Card class="flex flex-col gap-5 md:gap-6 p-6 md:p-8 bg-light-surface/30 hover:bg-light-surface/80 dark:bg-white/5 dark:hover:bg-white/10 border-light-border/60 dark:border-white/10 hover:border-brand-blue/60 dark:hover:border-brand-cyan/60 transition-all duration-500 w-full h-auto">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-blue/10 dark:bg-brand-cyan/10 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:bg-brand-blue group-hover:text-white group-hover:shadow-[0_0_15px_rgba(68,102,255,0.3)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
+            <item.icon class="w-6 h-6 md:w-7 md:h-7" />
+          </div>
+          <div class="flex flex-col gap-2 md:gap-3">
+            <h3 class="text-xl md:text-2xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">{item.name}</h3>
+            <p class="text-text-dark dark:text-text-light text-sm md:text-base leading-relaxed transition-colors">
+              {item.description}
+            </p>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Section>
+</business-section>
 
 <script>
   import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  gsap.registerPlugin(ScrollTrigger);
+  class BusinessSection extends HTMLElement {
+    ctx: gsap.Context | null = null;
+    observer: IntersectionObserver | null = null;
 
-  function initAnimations() {
-    gsap.from('.section-header', {
-      scrollTrigger: {
-        trigger: '.section-header',
-        start: 'top 85%',
-      },
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-    });
+    connectedCallback() {
+      const header = this.querySelector('.section-header');
+      const grid = this.querySelector('.business-grid');
 
-    gsap.from('.business-grid > div', {
-      scrollTrigger: {
-        trigger: '.business-grid',
-        start: 'top 80%',
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: 'power3.out',
-    });
+      this.ctx = gsap.context(() => {
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              if (entry.target === header) {
+                gsap.fromTo(header, 
+                  { y: 30, opacity: 0 },
+                  { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }
+                );
+                this.observer?.unobserve(header);
+              } else if (entry.target === grid) {
+                gsap.fromTo('.business-grid > div', 
+                  { y: 30, opacity: 0 },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    stagger: 0.08,
+                    ease: 'power2.out',
+                  }
+                );
+                this.observer?.unobserve(grid);
+              }
+            }
+          });
+        }, { rootMargin: '0px 0px 100px 0px' }); // Activar 100px antes de entrar en pantalla para fluidez total
+
+        if (header) this.observer.observe(header);
+        if (grid) this.observer.observe(grid);
+      }, this);
+    }
+
+    disconnectedCallback() {
+      if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
+      }
+      if (this.ctx) {
+        this.ctx.revert();
+        this.ctx = null;
+      }
+    }
   }
 
-  window.addEventListener('load', initAnimations);
-  // Re-init for Astro view transitions if used
-  document.addEventListener('astro:page-load', initAnimations);
+  if (!customElements.get('business-section')) {
+    customElements.define('business-section', BusinessSection);
+  }
 </script>

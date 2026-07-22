@@ -1,45 +1,51 @@
 ---
 interface Props {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'outline';
-  size?: 'sm' | 'md' | 'lg' | 'hero';
+  variant?: "primary" | "secondary" | "ghost" | "outline";
+  size?: "sm" | "md" | "lg" | "hero";
   class?: string;
   href?: string;
   [key: string]: any;
 }
 
-const { 
-  variant = 'primary', 
-  size = 'md', 
+const {
+  variant = "primary",
+  size = "md",
   class: className,
   href,
-  ...rest 
+  ...rest
 } = Astro.props;
 
+const baseClasses =
+  "inline-flex items-center justify-center rounded-lg transition-all duration-300 ease-[cubic-bezier(0.4,0.0,0.2,1)] cursor-pointer select-none font-medium focus:outline-none focus:ring-2 focus:ring-brand-blue/50 focus:ring-offset-2 dark:focus:ring-offset-dark-base";
+
 const variants = {
-  primary: 'bg-accent text-white shadow-glow hover:shadow-glow-strong hover:scale-105 active:scale-95',
-  secondary: 'glass-panel text-white hover:bg-white/10 active:scale-95 border-white/10',
-  ghost: 'text-white hover:text-accent bg-transparent',
-  outline: 'border border-white/10 text-white hover:border-accent hover:text-accent'
+  // Primary: Siempre destaca: Color de acento y gradiente en hover.
+  primary: `bg-brand-blue text-white shadow-[0_0_15px_rgba(68,102,255,0.2)] hover:shadow-[0_0_25px_rgba(68,102,255,0.4)] hover:-translate-y-1 active:translate-y-0 hover-brand-gradient border border-transparent`,
+  
+  // Secondary: Efecto Glassmorphism adaptativo.
+  secondary: `bg-light-surface/50 dark:bg-white/5 backdrop-blur-md text-text-dark-titles dark:text-white border border-light-border/50 dark:border-white/10 hover:bg-light-elevated dark:hover:bg-white/10 hover:-translate-y-1 active:translate-y-0`,
+  
+  // Ghost: Transparente, se ilumina el fondo al pasar el cursor.
+  ghost: `text-text-dark dark:text-text-light bg-transparent hover:bg-light-surface dark:hover:bg-white/5 hover:text-brand-blue dark:hover:text-white active:scale-95`,
+  
+  // Outline: Borde visible que se pinta con el color de marca al hacer hover.
+  outline: `border border-light-border dark:border-dark-border text-text-dark dark:text-text-light hover:border-brand-blue dark:hover:border-brand-cyan hover:text-brand-blue dark:hover:text-brand-cyan hover:-translate-y-1 active:translate-y-0 hover:bg-brand-blue/5 dark:hover:bg-brand-cyan/5`,
 };
 
+// Tamaños Responsivos
 const sizes = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-7 py-4 text-base', /* Match 16x28 requirement */
-  lg: 'px-8 py-4.5 text-lg',
-  hero: 'px-10 py-5 text-xl font-bold'
+  sm: "px-3 py-1.5 text-xs md:px-4 md:py-2 md:text-sm",
+  md: "px-5 py-2.5 text-sm md:px-7 md:py-4 md:text-base", 
+  lg: "px-6 py-3 text-base md:px-8 md:py-4.5 md:text-lg",
+  hero: "px-7 py-3.5 text-lg md:px-10 md:py-5 md:text-xl font-bold",
 };
 
-const Element = href ? 'a' : 'button';
+const Element = href ? "a" : "button";
 ---
 
 <Element
   href={href}
-  class:list={[
-    'inline-flex items-center justify-center rounded-lg transition-all duration-300 ease-standard cursor-pointer select-none',
-    variants[variant],
-    sizes[size],
-    className
-  ]}
+  class:list={[baseClasses, variants[variant], sizes[size], className]}
   {...rest}
 >
   <slot />

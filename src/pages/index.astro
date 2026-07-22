@@ -5,7 +5,7 @@ import BusinessSection from '../components/sections/BusinessSection.astro';
 import ProblemsSection from '../components/sections/ProblemsSection.astro';
 import ServicesSection from '../components/sections/ServicesSection.astro';
 import ProcessSection from '../components/sections/ProcessSection.astro';
-import PortfolioSection from '../components/sections/PortfolioSection.astro';
+import DemosSection from '../components/sections/DemosSection.astro';
 import BenefitsSection from '../components/sections/BenefitsSection.astro';
 import AboutSection from '../components/sections/AboutSection.astro';
 import FAQSection from '../components/sections/FAQSection.astro';
@@ -13,14 +13,14 @@ import ContactSection from '../components/sections/ContactSection.astro';
 ---
 
 <BaseLayout title="Ecosistema Digital para Negocios Locales">
-  <HeroSection />
+  <div id="inicio"><HeroSection /></div>
   <BusinessSection />
   <ProblemsSection />
-  <ServicesSection />
+  <div id="servicios"><ServicesSection /></div>
+  <DemosSection />
   <ProcessSection />
-  <PortfolioSection />
   <BenefitsSection />
-  <AboutSection />
+  <div id="nosotros"><AboutSection /></div>
   <FAQSection />
-  <ContactSection />
+  <div id="contacto"><ContactSection /></div>
 </BaseLayout>

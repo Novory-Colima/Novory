@@ -43,63 +43,94 @@ const problems = [
 ];
 ---
 
-<Section id="problemas" class="bg-bg-primary">
-  <div class="max-w-4xl mx-auto text-center mb-24 flex flex-col gap-6 section-header">
-    <h2 class="text-white">¿Te identificas con alguno de estos desafíos?</h2>
-    <p class="text-text-secondary text-lg leading-relaxed">
-      Muchos negocios locales enfrentan los mismos retos todos los días. <br class="hidden md:block" />
-      La buena noticia es que la mayoría tienen solución mediante tecnología bien implementada.
-    </p>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 problems-grid">
-    {problems.map((problem) => (
-      <Card class="p-10 group hover:bg-white/[0.02] border-white/5 transition-all duration-500 bg-bg-secondary/30">
-        <div class="flex items-center justify-between mb-8">
-          <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-accent group-hover:text-white group-hover:bg-accent group-hover:shadow-glow transition-all duration-500">
-            <problem.icon class="w-7 h-7" />
-          </div>
-          <span class="text-3xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">{problem.emoji}</span>
-        </div>
-        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300 tracking-tight">
-          {problem.title}
-        </h3>
-        <p class="text-text-secondary text-base leading-relaxed">
-          {problem.description}
-        </p>
-      </Card>
-    ))}
-  </div>
-
-  <div class="mt-24 text-center">
-    <div class="inline-block p-px rounded-full bg-gradient-to-r from-transparent via-accent/30 to-transparent">
-      <p class="px-8 py-4 text-text-secondary italic text-lg bg-bg-primary rounded-full">
-        "La tecnología adecuada puede transformar cada uno de estos desafíos en oportunidades de crecimiento."
+<problems-section class="block w-full h-auto">
+  <Section id="problemas" class="w-full h-auto bg-light-base dark:bg-dark-base transition-colors duration-500">
+    <div class="max-w-4xl mx-auto text-center mb-16 md:mb-24 flex flex-col gap-4 md:gap-6 section-header px-4">
+      <h2 class="text-text-dark-titles dark:text-white text-3xl md:text-5xl font-bold tracking-tight transition-colors">¿Te identificas con alguno de estos desafíos?</h2>
+      <p class="text-text-dark dark:text-text-secondary text-base md:text-lg leading-relaxed transition-colors">
+        Muchos negocios locales enfrentan los mismos retos todos los días. <br class="hidden md:block" />
+        La buena noticia es que la mayoría tienen solución mediante tecnología bien implementada.
       </p>
     </div>
-  </div>
-</Section>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 problems-grid relative z-10 px-4 md:px-0 w-full h-auto">
+      {problems.map((problem) => (
+        <Card class="p-8 md:p-10 group bg-light-surface/30 hover:bg-light-surface/80 dark:bg-white/5 dark:hover:bg-white/10 border-light-border/60 dark:border-white/10 hover:border-brand-blue/60 dark:hover:border-brand-cyan/60 transition-all duration-500 w-full h-auto">
+          <div class="flex items-center justify-between mb-6 md:mb-8">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-brand-blue/10 dark:bg-brand-cyan/10 flex items-center justify-center text-brand-blue dark:text-brand-cyan group-hover:text-white group-hover:bg-brand-blue group-hover:shadow-[0_0_15px_rgba(68,102,255,0.4)] transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]">
+              <problem.icon class="w-6 h-6 md:w-7 md:h-7" />
+            </div>
+            <span class="text-2xl md:text-3xl opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">{problem.emoji}</span>
+          </div>
+          <h3 class="text-xl md:text-2xl font-bold text-text-dark-titles dark:text-white mb-3 md:mb-4 group-hover:text-brand-blue dark:group-hover:text-brand-cyan transition-colors duration-300 tracking-tight">
+            {problem.title}
+          </h3>
+          <p class="text-text-dark dark:text-text-secondary text-sm md:text-base leading-relaxed transition-colors">
+            {problem.description}
+          </p>
+        </Card>
+      ))}
+    </div>
+
+    <div class="mt-20 md:mt-24 text-center px-4">
+      <div class="inline-block p-px rounded-full bg-linear-to-r from-transparent via-brand-blue dark:via-brand-cyan/30 to-transparent">
+        <p class="px-6 py-4 md:px-8 md:py-4 text-text-dark-titles dark:text-text-secondary font-medium italic text-sm md:text-lg bg-light-base dark:bg-dark-base rounded-full transition-colors">
+          "La tecnología adecuada puede transformar cada uno de estos desafíos en oportunidades de crecimiento."
+        </p>
+      </div>
+    </div>
+  </Section>
+</problems-section>
 
 <script>
   import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  gsap.registerPlugin(ScrollTrigger);
+  class ProblemsSection extends HTMLElement {
+    ctx: gsap.Context | null = null;
+    observer: IntersectionObserver | null = null;
 
-  function initProblems() {
-    gsap.from('.problems-grid > div', {
-      scrollTrigger: {
-        trigger: '.problems-grid',
-        start: 'top 80%',
-      },
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.15,
-      ease: 'power3.out',
-    });
+    connectedCallback() {
+      const grid = this.querySelector('.problems-grid');
+      if (!grid) return;
+
+      this.ctx = gsap.context(() => {
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              gsap.fromTo('.problems-grid > div', 
+                { y: 30, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.6,
+                  stagger: 0.08,
+                  ease: 'power2.out',
+                }
+              );
+              if (this.observer) {
+                this.observer.unobserve(grid);
+              }
+            }
+          });
+        }, { rootMargin: '0px 0px 100px 0px' }); // Activar 100px antes de entrar en pantalla para fluidez total
+
+        this.observer.observe(grid);
+      }, this);
+    }
+
+    disconnectedCallback() {
+      if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
+      }
+      if (this.ctx) {
+        this.ctx.revert();
+        this.ctx = null;
+      }
+    }
   }
 
-  window.addEventListener('load', initProblems);
-  document.addEventListener('astro:page-load', initProblems);
+  if (!customElements.get('problems-section')) {
+    customElements.define('problems-section', ProblemsSection);
+  }
 </script>

@@ -1,201 +1,287 @@
 ---
-import Section from '../layout/Section.astro';
-import ServiceBlock from '../molecules/ServiceBlock.astro';
-import { Search, Globe, Zap, Map as MapIcon, Share2, MousePointer2, Layout, Smartphone } from '@lucide/astro';
+import Section from "../layout/Section.astro";
+import ServiceCard from "../molecules/ServiceCard.astro";
+import { Bot, MapPin, MessageCircle, Search, Zap } from "@lucide/astro";
 
 const services = [
   {
-    title: 'Desarrollo Web',
-    description: 'Un sitio web es mucho más que una tarjeta de presentación. Es tu herramienta de ventas 24/7 diseñada para convertir cada visita en un cliente potencial.',
+    title: "Desarrollo Web",
+    description:
+      "Sitios modernos y rápidos, listos para convertir cada visita en un cliente potencial 24/7.",
     benefits: [
-      'Mayor confianza y mejor imagen profesional.',
-      'Optimizado al 100% para dispositivos móviles.',
-      'Arquitectura preparada para SEO y carga ultra-rápida.',
+      "Mayor confianza y mejor imagen profesional.",
+      "Optimizado al 100% para dispositivos móviles.",
+      "Arquitectura preparada para SEO y carga ultra-rápida.",
     ],
-    ctaText: 'Conocer más',
-    ctaHref: '/servicios/desarrollo-web',
-    imageSide: 'right' as const,
+    ctaText: "Contáctanos",
+    ctaHref: "#contacto",
   },
   {
-    title: 'SEO Local',
-    description: 'Una página impecable no sirve de nada si nadie la encuentra. Te posicionamos donde tus clientes están buscando activamente tus servicios hoy mismo.',
+    title: "SEO Local",
+    description:
+      "Te posicionamos donde tus clientes están buscando activamente tus servicios hoy mismo.",
     benefits: [
-      'Más visibilidad local y aumento de llamadas reales.',
-      'Optimización estratégica de Google Business Profile.',
-      'Dominio en los resultados de búsqueda de mapas locales.',
+      "Más visibilidad local y aumento de llamadas reales.",
+      "Optimización estratégica de Google Business Profile.",
+      "Dominio en los resultados de búsqueda de mapas locales.",
     ],
-    ctaText: 'Descubrir SEO Local',
-    ctaHref: '/servicios/seo-local',
-    imageSide: 'left' as const,
+    ctaText: "Contáctanos",
+    ctaHref: "#contacto",
   },
   {
-    title: 'Automatizaciones',
-    description: 'La tecnología moderna puede ahorrarte horas de trabajo manual todos los días. Creamos sistemas que trabajan por ti mientras tú descansas.',
+    title: "Automatizaciones",
+    description:
+      "Sistemas que trabajan por ti mientras descansas: atención, captación y seguimiento sin fricción.",
     benefits: [
-      'Atención por WhatsApp automatizada e inteligente.',
-      'Formularios dinámicos que califican a tus prospectos.',
-      'Integraciones fluidas que eliminan tareas repetitivas.',
+      "Atención por WhatsApp automatizada e inteligente.",
+      "Formularios dinámicos que califican a tus prospectos.",
+      "Integraciones fluidas que eliminan tareas repetitivas.",
     ],
-    ctaText: 'Explorar automatizaciones',
-    ctaHref: '/servicios/automatizaciones',
-    imageSide: 'right' as const,
+    ctaText: "Contáctanos",
+    ctaHref: "#contacto",
   },
 ];
 ---
 
-<Section id="servicios" class="bg-bg-primary relative">
-  <!-- Section Background Decorative Glow -->
-  <div class="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 blur-[150px] rounded-full pointer-events-none"></div>
+<services-section class="block">
+  <Section
+    id="servicios"
+    class="bg-light-base dark:bg-dark-base relative transition-colors duration-500"
+  >
+    <!-- Section Background Decorative Glow -->
+    <div
+      class="absolute left-0 top-1/2 -translate-y-1/2 w-100 md:w-125 h-100 md:h-125 bg-brand-cyan/15 dark:bg-brand-blue/5 blur-[120px] md:blur-[150px] rounded-full pointer-events-none transition-colors"
+    >
+    </div>
 
-  <div class="max-w-4xl mx-auto text-center mb-20 flex flex-col gap-6 section-header">
-    <h2 class="text-white">Soluciones digitales diseñadas para hacer crecer tu negocio.</h2>
-    <p class="text-text-secondary text-xl leading-relaxed">
-      Creamos herramientas inteligentes que trabajan para ti <br class="hidden md:block" /> incluso cuando tu negocio está cerrado.
-    </p>
-  </div>
+    <div
+      class="max-w-4xl mx-auto text-center mb-16 md:mb-20 flex flex-col gap-4 md:gap-6 section-header services-header px-4"
+    >
+      <h2
+        class="text-text-dark-titles dark:text-white text-3xl md:text-5xl font-bold tracking-tight transition-colors"
+      >
+        Soluciones digitales diseñadas para <span
+          class="bg-clip-text text-transparent bg-linear-to-r from-brand-cyan via-brand-blue to-brand-purple"
+          >hacer crecer tu negocio.</span>
+      </h2>
+      <p
+        class="text-text-dark dark:text-text-secondary text-base md:text-xl leading-relaxed transition-colors"
+      >
+        Creamos herramientas inteligentes que trabajan para ti <br
+          class="hidden md:block"
+        /> incluso cuando tu negocio está cerrado.
+      </p>
+      <p
+        class="text-text-dark/60 dark:text-text-secondary/60 text-xs md:text-sm font-medium italic transition-colors"
+      >
+        Pasa el cursor (o toca en móvil) sobre cada tarjeta para ver sus beneficios.
+      </p>
+    </div>
 
-  <div class="flex flex-col gap-10 md:gap-20">
-    <!-- Service 1: Web -->
-    <ServiceBlock {...services[0]}>
-      <div slot="visual" class="w-full h-full relative flex items-center justify-center">
-        <!-- Main Browser -->
-        <div class="w-[85%] h-[80%] glass-panel border-white/10 shadow-2xl relative z-10 p-4 bg-white/[0.03] flex flex-col gap-3">
-          <div class="flex gap-2 pb-2 border-b border-white/5">
-            <div class="w-2.5 h-2.5 rounded-full bg-white/20"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-white/10"></div>
+    <div
+      class="services-grid grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative z-10"
+    >
+      <!-- Card 1: Desarrollo Web -->
+      <ServiceCard {...services[0]}>
+        <div slot="visual" class="visual-webdev absolute inset-0 p-3">
+          <!-- Barra del navegador -->
+          <div class="flex items-center gap-1 mb-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-red-400/70"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-yellow-400/70"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-green-400/70"></div>
+            <div class="ml-2 h-1 flex-1 rounded-full bg-black/10 dark:bg-white/15"></div>
           </div>
-          <div class="flex-1 grid grid-cols-12 gap-3">
-            <div class="col-span-4 bg-white/5 rounded-lg"></div>
-            <div class="col-span-8 flex flex-col gap-3">
-               <div class="h-4 bg-white/10 rounded-full w-3/4"></div>
-               <div class="h-20 bg-white/5 rounded-lg"></div>
-               <div class="mt-auto h-8 bg-accent/20 rounded-lg w-1/3"></div>
+          <!-- Contenido que se "construye" -->
+          <div class="flex flex-col gap-1.5">
+            <div class="webdev-line webdev-line-1 h-2.5 w-3/4 rounded bg-brand-blue/55 dark:bg-brand-cyan/55"></div>
+            <div class="webdev-line webdev-line-2 h-1.5 w-full rounded bg-brand-blue/25 dark:bg-brand-cyan/25"></div>
+            <div class="webdev-line webdev-line-3 h-1.5 w-5/6 rounded bg-brand-blue/25 dark:bg-brand-cyan/25"></div>
+            <div class="flex gap-1.5 mt-0.5">
+              <div class="webdev-line webdev-line-4 w-8 h-8 rounded bg-brand-blue/40 dark:bg-brand-cyan/40"></div>
+              <div class="flex-1 flex flex-col gap-1 justify-center">
+                <div class="webdev-line webdev-line-5 h-1.5 w-full rounded bg-brand-blue/25 dark:bg-brand-cyan/25"></div>
+                <div class="webdev-line webdev-line-6 h-1.5 w-2/3 rounded bg-brand-blue/20 dark:bg-brand-cyan/20"></div>
+              </div>
             </div>
           </div>
         </div>
-        <!-- Mobile Overlay -->
-        <div class="absolute -bottom-6 right-0 w-[28%] h-[65%] glass-panel border-white/20 shadow-2xl z-20 p-3 flex flex-col gap-2 bg-bg-primary/80 backdrop-blur-3xl">
-          <div class="w-8 h-1 bg-white/20 rounded-full mx-auto mb-3"></div>
-          <div class="h-1/4 bg-white/10 rounded-lg"></div>
-          <div class="h-1/2 bg-white/5 rounded-lg"></div>
-          <div class="h-6 bg-accent rounded-md mt-auto"></div>
-        </div>
-        <div class="absolute top-10 right-20 z-30 animate-bounce duration-1000">
-           <MousePointer2 class="w-8 h-8 text-accent shadow-glow" fill="currentColor" />
-        </div>
-      </div>
-    </ServiceBlock>
+      </ServiceCard>
 
-    <!-- Service 2: SEO -->
-    <ServiceBlock {...services[1]}>
-      <div slot="visual" class="w-full h-full relative flex items-center justify-center">
-        <div class="w-[90%] h-[90%] glass-panel border-white/10 p-8 flex flex-col gap-8 bg-white/[0.02]">
-          <div class="flex items-center gap-5 border-b border-white/5 pb-6">
-            <div class="w-12 h-12 rounded-2xl bg-accent/20 flex items-center justify-center text-accent shadow-glow">
-              <Search class="w-6 h-6" />
+      <!-- Card 2: SEO Local -->
+      <ServiceCard {...services[1]}>
+        <div slot="visual" class="visual-seo absolute inset-0 p-3 flex flex-col gap-1.5">
+          <!-- Barra de búsqueda -->
+          <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/8 dark:bg-white/10">
+            <Search class="w-2.5 h-2.5 text-black/40 dark:text-white/40" />
+            <div class="h-1 flex-1 rounded bg-black/15 dark:bg-white/15"></div>
+          </div>
+          <!-- Resultado principal (destacado con pin animado) -->
+          <div class="flex items-center gap-2 px-2 py-1.5 rounded border border-brand-blue/40 dark:border-brand-cyan/40 bg-brand-blue/8 dark:bg-brand-cyan/10 shadow-sm">
+            <div class="seo-pin relative w-5 h-5 flex items-center justify-center shrink-0">
+              <span class="seo-pin-ripple absolute inset-0 rounded-full bg-brand-blue/40 dark:bg-brand-cyan/50"></span>
+              <MapPin class="relative w-3 h-3 text-brand-blue dark:text-brand-cyan" fill="currentColor" />
             </div>
-            <div class="flex flex-col gap-2 flex-1">
-              <div class="w-2/3 h-3 bg-white/10 rounded-full"></div>
-              <div class="w-1/2 h-2 bg-white/5 rounded-full"></div>
+            <div class="flex flex-col gap-0.5 flex-1 min-w-0">
+              <div class="h-1.5 w-3/4 rounded bg-brand-blue/55 dark:bg-brand-cyan/60"></div>
+              <div class="h-1 w-1/2 rounded bg-brand-blue/25 dark:bg-brand-cyan/30"></div>
+            </div>
+            <span class="text-[9px] font-black text-brand-blue dark:text-brand-cyan">#1</span>
+          </div>
+          <!-- Resultados apagados -->
+          <div class="flex items-center gap-2 px-2 py-1 opacity-50">
+            <div class="w-3 h-3 rounded-full bg-black/10 dark:bg-white/12 shrink-0"></div>
+            <div class="flex flex-col gap-0.5 flex-1">
+              <div class="h-1.5 w-2/3 rounded bg-black/12 dark:bg-white/15"></div>
+              <div class="h-1 w-1/3 rounded bg-black/8 dark:bg-white/10"></div>
             </div>
           </div>
-          <div class="grid grid-cols-1 gap-4 flex-1">
-             <div class="bg-white/5 rounded-2xl border border-white/5 p-4 flex items-center gap-4 group/item hover:bg-white/10 transition-colors">
-                <div class="w-10 h-10 rounded-full bg-accent/30 flex items-center justify-center text-accent">
-                   <MapIcon class="w-5 h-5" />
-                </div>
-                <div class="flex flex-col gap-2 flex-1">
-                   <div class="w-1/3 h-3 bg-white/10 rounded-full"></div>
-                   <div class="w-full h-2 bg-white/5 rounded-full"></div>
-                </div>
-             </div>
-             <div class="bg-white/5 rounded-2xl border border-white/5 p-4 flex items-center gap-4 opacity-60">
-                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/30">
-                   <MapIcon class="w-5 h-5" />
-                </div>
-                <div class="flex flex-col gap-2 flex-1">
-                   <div class="w-1/4 h-3 bg-white/10 rounded-full"></div>
-                   <div class="w-2/3 h-2 bg-white/5 rounded-full"></div>
-                </div>
-             </div>
+          <div class="flex items-center gap-2 px-2 py-1 opacity-35">
+            <div class="w-3 h-3 rounded-full bg-black/10 dark:bg-white/12 shrink-0"></div>
+            <div class="flex flex-col gap-0.5 flex-1">
+              <div class="h-1.5 w-1/2 rounded bg-black/12 dark:bg-white/15"></div>
+            </div>
           </div>
         </div>
-      </div>
-    </ServiceBlock>
+      </ServiceCard>
 
-    <!-- Service 3: Automation -->
-    <ServiceBlock {...services[2]}>
-      <div slot="visual" class="w-full h-full relative flex items-center justify-center">
-        <!-- Central connection node -->
-        <div class="absolute inset-0 flex items-center justify-center">
-           <svg class="w-full h-full opacity-10" viewBox="0 0 200 200">
-              <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" />
-              <line x1="100" y1="100" x2="160" y2="40" stroke="currentColor" stroke-width="0.5" />
-              <line x1="100" y1="100" x2="160" y2="160" stroke="currentColor" stroke-width="0.5" />
-              <line x1="100" y1="100" x2="40" y2="100" stroke="currentColor" stroke-width="0.5" />
-           </svg>
+      <!-- Card 3: Automatizaciones -->
+      <ServiceCard {...services[2]}>
+        <div slot="visual" class="visual-auto absolute inset-0 flex items-center justify-center px-3">
+          <!-- Líneas de conexión -->
+          <div class="absolute top-1/2 left-[18%] right-[18%] border-t border-dashed border-brand-blue/40 dark:border-brand-cyan/40"></div>
+          <!-- Puntos viajeros -->
+          <div class="auto-dot auto-dot-1 absolute w-1 h-1 rounded-full bg-brand-blue dark:bg-brand-cyan"></div>
+          <div class="auto-dot auto-dot-2 absolute w-1 h-1 rounded-full bg-brand-blue dark:bg-brand-cyan"></div>
+          <!-- Nodos -->
+          <div class="relative z-10 flex items-center justify-between w-full">
+            <div class="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-light-surface dark:bg-white/12 border border-brand-blue/30 dark:border-brand-cyan/30 flex items-center justify-center text-brand-blue dark:text-brand-cyan shadow-sm">
+              <MessageCircle class="w-3.5 h-3.5 md:w-4 md:h-4" />
+            </div>
+            <div class="auto-hub w-10 h-10 md:w-11 md:h-11 rounded-lg bg-brand-blue dark:bg-brand-cyan border border-brand-blue/50 dark:border-brand-cyan/50 flex items-center justify-center text-white dark:text-dark-base shadow-md">
+              <Zap class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" />
+            </div>
+            <div class="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-light-surface dark:bg-white/12 border border-brand-cyan/30 dark:border-brand-blue/30 flex items-center justify-center text-brand-blue dark:text-brand-cyan shadow-sm">
+              <Bot class="w-3.5 h-3.5 md:w-4 md:h-4" />
+            </div>
+          </div>
         </div>
-        
-        <div class="relative z-10 grid grid-cols-2 gap-12">
-           <div class="w-20 h-20 rounded-3xl glass-panel flex items-center justify-center text-accent shadow-glow border-accent/20 animate-float-slow bg-white/[0.05]">
-              <Zap class="w-10 h-10" />
-           </div>
-           <div class="w-20 h-20 rounded-3xl glass-panel flex items-center justify-center text-white/40 border-white/5 -translate-y-12 animate-float-slow-delayed bg-white/[0.02]">
-              <Share2 class="w-10 h-10" />
-           </div>
-           <div class="w-20 h-20 rounded-3xl glass-panel flex items-center justify-center text-accent shadow-glow border-accent/20 translate-x-12 animate-float-slow bg-white/[0.05]">
-              <Smartphone class="w-10 h-10" />
-           </div>
-           <div class="w-20 h-20 rounded-3xl glass-panel flex items-center justify-center text-white/40 border-white/5 animate-float-slow-delayed bg-white/[0.02]">
-              <Globe class="w-10 h-10" />
-           </div>
-        </div>
-      </div>
-    </ServiceBlock>
-  </div>
-</Section>
+      </ServiceCard>
+    </div>
+  </Section>
+</services-section>
 
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  function initServices() {
-    gsap.utils.toArray('.service-block-reveal').forEach((block: any) => {
-      gsap.to(block, {
-        scrollTrigger: {
-          trigger: block,
-          start: 'top 85%',
-        },
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease: 'power4.out',
-      });
-    });
+  class ServicesSection extends HTMLElement {
+    ctx: gsap.Context | null = null;
+    clickHandler: ((e: Event) => void) | null = null;
+
+    connectedCallback() {
+      this.ctx = gsap.context(() => {
+        gsap.fromTo('.services-header', { y: 30, opacity: 0 }, {
+          scrollTrigger: { trigger: '.services-header', start: 'top 85%' },
+          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+        });
+
+        gsap.fromTo('.service-card', { y: 60, opacity: 0 }, {
+          scrollTrigger: { trigger: '.services-grid', start: 'top 82%' },
+          y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+          stagger: { each: 0.15, from: 'start' },
+        });
+      }, this);
+
+      this.clickHandler = (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('a')) return;
+        const card = target.closest('.service-card');
+        if (!card) return;
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          document.querySelectorAll('.service-card.is-flipped').forEach((el) => {
+            if (el !== card) el.classList.remove('is-flipped');
+          });
+          card.classList.toggle('is-flipped');
+        }
+      };
+
+      this.addEventListener('click', this.clickHandler);
+    }
+
+    disconnectedCallback() {
+      if (this.ctx) { this.ctx.revert(); this.ctx = null; }
+      if (this.clickHandler) this.removeEventListener('click', this.clickHandler);
+    }
   }
 
-  window.addEventListener('load', initServices);
-  document.addEventListener('astro:page-load', initServices);
+  if (!customElements.get("services-section")) {
+    customElements.define("services-section", ServicesSection);
+  }
 </script>
 
 <style>
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+  /* -------- Visual: Desarrollo Web (skeleton pulse) -------- */
+  .webdev-line {
+    animation: webdev-pulse 3.6s ease-in-out infinite;
   }
-  
-  @keyframes float-delayed {
-    0%, 100% { transform: translateY(-48px); }
-    50% { transform: translateY(-58px); }
+  .webdev-line-1 { animation-delay: 0s; }
+  .webdev-line-2 { animation-delay: 0.18s; }
+  .webdev-line-3 { animation-delay: 0.36s; }
+  .webdev-line-4 { animation-delay: 0.54s; }
+  .webdev-line-5 { animation-delay: 0.72s; }
+  .webdev-line-6 { animation-delay: 0.9s; }
+  @keyframes webdev-pulse {
+    0%, 100% { opacity: 0.35; }
+    50%      { opacity: 1;    }
   }
 
-  .animate-float-slow {
-    animation: float 5s ease-in-out infinite;
+  /* -------- Visual: SEO Local (pin ripple) -------- */
+  .seo-pin-ripple {
+    transform-origin: center;
+    animation: seo-ripple 2.2s ease-out infinite;
+  }
+  @keyframes seo-ripple {
+    0%   { transform: scale(0.6); opacity: 0.8; }
+    80%  { transform: scale(2.2); opacity: 0;   }
+    100% { transform: scale(2.2); opacity: 0;   }
   }
 
-  .animate-float-slow-delayed {
-    animation: float-delayed 6s ease-in-out infinite 0.5s;
+  /* -------- Visual: Automatizaciones (traveling dots + hub glow) -------- */
+  .auto-dot {
+    top: calc(50% - 2px);
+    opacity: 0;
+  }
+  .auto-dot-1 { animation: auto-travel-1 3.4s ease-in-out infinite; }
+  .auto-dot-2 { animation: auto-travel-2 3.4s ease-in-out infinite 1.7s; }
+  @keyframes auto-travel-1 {
+    0%       { left: 22%; opacity: 0; }
+    10%      { opacity: 1; }
+    90%      { opacity: 1; }
+    100%     { left: 50%; opacity: 0; }
+  }
+  @keyframes auto-travel-2 {
+    0%       { left: 50%; opacity: 0; }
+    10%      { opacity: 1; }
+    90%      { opacity: 1; }
+    100%     { left: 78%; opacity: 0; }
+  }
+  .auto-hub {
+    animation: auto-hub-pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes auto-hub-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(68, 102, 255, 0.55); }
+    50%      { box-shadow: 0 0 0 10px rgba(68, 102, 255, 0);  }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .webdev-line,
+    .seo-pin-ripple,
+    .auto-dot-1,
+    .auto-dot-2,
+    .auto-hub {
+      animation: none !important;
+    }
   }
 </style>

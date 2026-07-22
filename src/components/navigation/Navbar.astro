@@ -1,120 +1,188 @@
 ---
-import Button from '../atoms/Button.astro';
-import { Menu, X } from '@lucide/astro';
+import Button from "../atoms/Button.astro";
+import ToggleTheme from "../atoms/ToggleTheme.astro";
+
+const isHome = Astro.url.pathname === '/';
+const anchor = (id: string) => isHome ? `#${id}` : `/#${id}`;
 
 const navLinks = [
-  { name: 'Inicio', href: '/' },
-  { name: 'Servicios', href: '/servicios' },
-  { name: 'Portafolio', href: '/portafolio' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Nosotros', href: '/nosotros' },
-  { name: 'Contacto', href: '/contacto' },
+  { name: "Inicio", href: anchor('inicio') },
+  { name: "Servicios", href: anchor('servicios') },
+  { name: "Blog", href: "/blog" },
+  { name: "Nosotros", href: anchor('nosotros') },
+  { name: "Contacto", href: anchor('contacto') },
 ];
 ---
 
-<nav id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6">
+<nav
+  id="navbar"
+  class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6"
+>
   <div class="container-novory flex items-center justify-between">
-    <a href="/" class="group">
-      <!-- Logo claro -->
-      <img src="/assets/novory-logotipo-horizontal-color-clear-svg.svg"
-          alt="Logo Novory"
-          class="w-20 sm:w-24 md:w-28 lg:w-32 transition-transform group-hover:scale-105 dark:hidden" />
-      <!-- Logo oscuro -->
-      <img src="/assets/novory-logotipo-horizontal-color-dark-svg.svg"
-          alt="Logo Novory"
-          class="w-20 sm:w-24 md:w-28 lg:w-32 transition-transform group-hover:scale-105 hidden dark:block" />
+    <a href="/" class="group relative">
+      <img
+        src="/assets/novory-logotipo-horizontal-color-clear-svg.svg"
+        alt="Logo Novory"
+        class="w-24 sm:w-28 md:w-32 transition-transform duration-300 group-hover:scale-105 dark:hidden"
+      />
+      <img
+        src="/assets/novory-logotipo-horizontal-color-dark-svg.svg"
+        alt="Logo Novory"
+        class="w-24 sm:w-28 md:w-32 transition-transform duration-300 group-hover:scale-105 hidden dark:block"
+      />
     </a>
-    <!-- Desktop Links -->
+
     <div class="hidden md:flex items-center gap-8">
       {navLinks.map((link) => (
-        <a href={link.href} class="text-sm font-medium text-text-secondary hover:text-white transition-colors nav-link-underline">
+        <a
+          href={link.href}
+          class="text-sm font-medium text-text-dark dark:text-text-light hover:text-brand-blue dark:hover:text-white transition-colors relative group"
+        >
+          {link.name}
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-blue dark:bg-brand-cyan transition-all duration-300 group-hover:w-full rounded-full"></span>
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden md:flex items-center gap-4">
+      <ToggleTheme />
+      <Button variant="primary" size="sm" href={anchor('contacto')}>
+        Agenda una asesoría
+      </Button>
+    </div>
+
+    <button
+      id="menu-toggle"
+      class="md:hidden text-text-dark dark:text-white p-2 cursor-pointer transition-transform hover:scale-110 focus:outline-none"
+      aria-label="Abrir menú"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu — outside <nav> to avoid backdrop-filter containing-block issues -->
+<div
+  id="mobile-menu"
+  class="mobile-menu-panel fixed inset-0 z-50 translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)] md:hidden flex flex-col"
+  aria-hidden="true"
+>
+  <!-- Solid opaque background — light and dark -->
+  <div class="absolute inset-0 bg-white dark:bg-black"></div>
+
+  <div class="relative z-10 flex flex-col h-full">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 sm:p-8 border-b border-light-border/50 dark:border-dark-border/50">
+      <img
+        src="/assets/novory-logotipo-horizontal-color-clear-svg.svg"
+        alt="Logo Novory"
+        class="w-24 dark:hidden"
+      />
+      <img
+        src="/assets/novory-logotipo-horizontal-color-dark-svg.svg"
+        alt="Logo Novory"
+        class="w-24 hidden dark:block"
+      />
+
+      <button
+        id="menu-close"
+        class="text-text-dark dark:text-white p-2 cursor-pointer transition-transform hover:rotate-90 focus:outline-none"
+        aria-label="Cerrar menú"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Links -->
+    <div class="flex flex-col gap-2 p-6 sm:p-8 overflow-y-auto grow">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-nav-link text-3xl sm:text-4xl font-bold text-text-dark-titles dark:text-white hover:text-brand-blue dark:hover:text-brand-cyan transition-colors py-3 border-b border-light-border/30 dark:border-dark-border/30 last:border-0"
+        >
           {link.name}
         </a>
       ))}
     </div>
 
-    <!-- Desktop CTA -->
-    <div class="hidden lg:block">
-      <Button variant="primary" size="sm" href="/contacto">
+    <!-- Footer -->
+    <div class="p-6 sm:p-8 border-t border-light-border/50 dark:border-dark-border/50 flex flex-col gap-5 pb-10">
+      <div class="flex items-center justify-between">
+        <span class="text-sm font-medium text-text-dark dark:text-text-light">Apariencia</span>
+        <ToggleTheme />
+      </div>
+      <Button variant="primary" size="lg" class="w-full text-center flex justify-center" href={anchor('contacto')}>
         Agenda una asesoría
       </Button>
     </div>
-
-    <!-- Mobile Menu Button -->
-  <button id="menu-toggle" class="md:hidden text-white p-2 cursor-pointer" aria-label="Abrir menú">
-    <!-- Icono hamburguesa -->
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  </button>
-
-  <!-- Mobile Menu Content -->
-  <div id="mobile-menu" class="fixed inset-0 bg-bg-primary/98 backdrop-blur-2xl z-50 translate-x-full transition-transform duration-500 lg:hidden">
-    <div class="flex flex-col h-full p-8">
-      <div class="flex items-center justify-between mb-16">
-        <a href="/" class="group">
-          <!-- Logo claro -->
-          <img src="/assets/novory-logotipo-horizontal-color-clear-svg.svg"
-              alt="Logo Novory"
-              class="w-20 sm:w-24 md:w-28 lg:w-32 transition-transform group-hover:scale-105 dark:hidden" />
-          <!-- Logo oscuro -->
-          <img src="/assets/novory-logotipo-horizontal-color-dark-svg.svg"
-              alt="Logo Novory"
-              class="w-20 sm:w-24 md:w-28 lg:w-32 transition-transform group-hover:scale-105 hidden dark:block" />
-        </a>
-        <button id="menu-close" class="text-white p-2 cursor-pointer" aria-label="Cerrar menú">
-          <!-- Icono X -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-      </div>
-      
-      <div class="flex flex-col gap-10">
-        {navLinks.map((link) => (
-          <a href={link.href} class="text-4xl font-bold text-white hover:text-accent transition-colors">
-            {link.name}
-          </a>
-        ))}
-      </div>
-      
-      <div class="mt-auto">
-        <Button variant="primary" size="lg" class="w-full" href="/contacto">
-          Agenda una asesoría
-        </Button>
-      </div>
-    </div>
   </div>
-</nav>
+</div>
 
 <script>
-  const navbar = document.getElementById('navbar');
-  const menuToggle = document.getElementById('menu-toggle');
-  const menuClose = document.getElementById('menu-close');
-  const mobileMenu = document.getElementById('mobile-menu');
+  function initNavbar() {
+    const navbar = document.getElementById("navbar");
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuClose = document.getElementById("menu-close");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-  // Scroll effect from Fase 3.1
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      navbar?.classList.add('bg-bg-primary/70', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'py-4', 'shadow-sm');
-      navbar?.classList.remove('py-6');
-    } else {
-      navbar?.classList.remove('bg-bg-primary/70', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'py-4', 'shadow-sm');
-      navbar?.classList.add('py-6');
-    }
-  });
+    if (!mobileMenu) return;
 
-  // Mobile menu toggle
-  menuToggle?.addEventListener('click', () => {
-    mobileMenu?.classList.remove('translate-x-full');
-    mobileMenu?.classList.add('translate-x-0');
-    document.body.style.overflow = 'hidden';
-  });
+    let scrollTicking = false;
 
-  menuClose?.addEventListener('click', () => {
-    mobileMenu?.classList.remove('translate-x-0');
-    mobileMenu?.classList.add('translate-x-full');
-    document.body.style.overflow = '';
-  });
+    const updateNavbar = () => {
+      const scrolled = window.scrollY > 50;
+      if (scrolled) {
+        navbar?.classList.add("bg-light-base/70", "dark:bg-dark-base/70", "backdrop-blur-xl", "border-b", "border-light-border/50", "dark:border-dark-border/50", "py-4", "shadow-sm");
+        navbar?.classList.remove("py-6");
+      } else {
+        navbar?.classList.remove("bg-light-base/70", "dark:bg-dark-base/70", "backdrop-blur-xl", "border-b", "border-light-border/50", "dark:border-dark-border/50", "py-4", "shadow-sm");
+        navbar?.classList.add("py-6");
+      }
+      scrollTicking = false;
+    };
+
+    const handleScroll = () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(updateNavbar);
+        scrollTicking = true;
+      }
+    };
+
+    updateNavbar();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    const openMenu = () => {
+      mobileMenu.classList.remove("translate-x-full");
+      mobileMenu.classList.add("translate-x-0");
+      mobileMenu.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeMenu = () => {
+      mobileMenu.classList.remove("translate-x-0");
+      mobileMenu.classList.add("translate-x-full");
+      mobileMenu.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    menuToggle?.addEventListener("click", openMenu);
+    menuClose?.addEventListener("click", closeMenu);
+
+    // Close menu when any nav link is clicked
+    mobileMenu.querySelectorAll(".mobile-nav-link, a[href]").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("astro:before-swap", () => {
+      window.removeEventListener("scroll", handleScroll);
+      scrollTicking = false;
+      document.body.style.overflow = "";
+    }, { once: true });
+  }
+
+  document.addEventListener("astro:page-load", initNavbar);
 </script>

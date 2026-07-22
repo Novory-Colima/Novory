@@ -1,0 +1,422 @@
+---
+import Section from "../layout/Section.astro";
+import { ArrowRight } from "@lucide/astro";
+import { Image } from "astro:assets";
+
+// Import local images
+import imgMapache1 from "../../assets/demos/mapache-1.webp";
+import imgMapache2 from "../../assets/demos/mapache-2.webp";
+import imgMapache3 from "../../assets/demos/mapache-3.webp";
+
+import imgNebula1 from "../../assets/demos/nebula-1.webp";
+import imgNebula2 from "../../assets/demos/nebula-2.webp";
+import imgNebula3 from "../../assets/demos/nebula-3.webp";
+
+import imgWyw1 from "../../assets/demos/wyw-1.webp";
+import imgWyw2 from "../../assets/demos/wyw-2.webp";
+import imgWyw3 from "../../assets/demos/wyw-3.webp";
+
+const demos = [
+  {
+    id: "mapache",
+    title: "Mapache",
+    description:
+      "Marca de moda premium, contemporánea, elegante y sofisticada con un estilo minimalista.",
+    link: "#", // Reemplazar con /demo/mapache
+    images: [
+      { src: imgMapache1, position: "object-top" },
+      { src: imgMapache2, position: "object-center" },
+      { src: imgMapache3, position: "object-center" },
+    ],
+  },
+  {
+    id: "nebula",
+    title: "Nebula Glitch Social Club",
+    description:
+      "Cafetería de especialidad donde el café es el protagonista y la tecnología amplifica la experiencia.",
+    link: "#", // Reemplazar con /demo/nebula
+    images: [
+      { src: imgNebula1, position: "object-top" },
+      { src: imgNebula2, position: "object-center" },
+      { src: imgNebula3, position: "object-center" },
+    ],
+  },
+  {
+    id: "wander",
+    title: "Wander & Wonder",
+    description:
+      "Experiencia web cinematográfica e inmersiva para convertir visitantes en clientes de una agencia de viajes.",
+    link: "#", // Reemplazar con /demo/wander
+    images: [
+      { src: imgWyw1, position: "object-top" },
+      { src: imgWyw2, position: "object-center" },
+      { src: imgWyw3, position: "object-center" },
+    ],
+  },
+];
+---
+
+<demos-section class="block">
+  <section id="experiencias" class="demos-root relative bg-light-base dark:bg-dark-base transition-colors duration-500">
+
+    <!-- ═══════════════ LAYOUT DESKTOP (≥ 1024px) ═══════════════ -->
+    <div class="hidden lg:grid demos-desktop">
+
+      <!-- Columna Izquierda: Todo el contenido textual -->
+      <div class="demos-left relative z-10 flex flex-col justify-center py-32 xl:py-40">
+        <div class="max-w-lg xl:max-w-xl pl-12 xl:pl-24">
+
+          <!-- Encabezado -->
+          <h2 class="text-text-dark-titles dark:text-white text-4xl xl:text-5xl font-bold tracking-tight mb-5 font-heading leading-tight">
+            Descubre nuestro nivel de desarrollo
+          </h2>
+          <p class="text-text-dark dark:text-text-secondary text-base xl:text-lg leading-relaxed mb-16 xl:mb-20 max-w-md">
+            Sumérgete en algunos conceptos interactivos que muestran la calidad, creatividad y nivel técnico que podemos desarrollar para marcas que busquen destacar.
+          </p>
+
+          <!-- Lista de proyectos -->
+          <div role="tablist" aria-label="Experiencias web" class="flex flex-col gap-6 xl:gap-8 mb-12 xl:mb-16">
+            {
+              demos.map((demo, index) => (
+                <button
+                  class="demo-tab group flex items-center gap-5 text-left transition-all duration-500 outline-none cursor-pointer"
+                  data-target={demo.id}
+                  role="tab"
+                  aria-selected={index === 0 ? "true" : "false"}
+                  tabindex={index === 0 ? "0" : "-1"}
+                >
+                  <span class="demo-indicator w-0 h-[2px] bg-brand-cyan rounded-full transition-all duration-600 ease-out"></span>
+                  <span class="demo-title text-2xl xl:text-4xl font-heading font-semibold tracking-tight transition-all duration-500">
+                    {demo.title}
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
+          <!-- Descripción dinámica (fuera de la imagen) -->
+          <div class="demos-description-area relative min-h-[120px]">
+            {
+              demos.map((demo, index) => (
+                <div
+                  class="demo-desc absolute top-0 left-0 right-0 transition-all duration-600"
+                  data-desc={demo.id}
+                  data-active={index === 0 ? "true" : "false"}
+                >
+                  <p class="text-text-dark/80 dark:text-text-secondary text-base xl:text-lg leading-relaxed mb-8 max-w-sm">
+                    {demo.description}
+                  </p>
+                  <a
+                    href={demo.link}
+                    class="demo-btn btn-shimmer inline-flex items-center gap-3 px-7 py-3.5 rounded-full border transition-all duration-300 font-medium group
+                           bg-transparent border-dark-border/30 dark:border-white/15 text-text-dark-titles dark:text-white
+                           hover:bg-brand-blue hover:border-brand-blue hover:text-white hover:scale-[1.02] active:scale-[0.98]"
+                    tabindex={index === 0 ? "0" : "-1"}
+                  >
+                    Explorar experiencia
+                    <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Experiencia visual panorámica -->
+      <div class="demos-right relative overflow-hidden">
+        <!-- Borde suave izquierdo para fusionarse con el fondo -->
+        <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-light-base dark:from-dark-base to-transparent z-20 pointer-events-none transition-colors duration-500"></div>
+
+        {
+          demos.map((demo, index) => (
+            <div
+              id={`visual-${demo.id}`}
+              class="demo-visual absolute inset-0"
+              data-active={index === 0 ? "true" : "false"}
+              aria-hidden={index === 0 ? "false" : "true"}
+            >
+              <!-- Slideshow Images -->
+              <div class="absolute inset-0 bg-dark-base overflow-hidden">
+                {demo.images.map((img, imgIndex) => (
+                  <Image
+                    src={img.src}
+                    alt={`${demo.title} - Preview ${imgIndex + 1}`}
+                    class={`slideshow-img absolute inset-0 w-full h-full object-cover origin-center ${img.position}`}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    width={1600}
+                  />
+                ))}
+              </div>
+              <!-- Overlay: sutil, no aplastante -->
+              <div class="absolute inset-0 bg-gradient-to-r from-dark-base/50 via-dark-base/15 to-transparent z-10 pointer-events-none"></div>
+              <div class="absolute inset-0 bg-dark-base/10 z-10 pointer-events-none"></div>
+            </div>
+          ))
+        }
+      </div>
+
+    </div>
+
+    <!-- ═══════════════ LAYOUT MOBILE (< 1024px) ═══════════════ -->
+    <div class="lg:hidden py-20 md:py-28">
+      <div class="container-novory">
+
+        <!-- Encabezado móvil -->
+        <div class="max-w-xl mb-14 md:mb-16">
+          <h2 class="text-text-dark-titles dark:text-white text-3xl md:text-4xl font-bold tracking-tight mb-5 font-heading">
+            Descubre nuestro nivel de desarrollo
+          </h2>
+          <p class="text-text-dark dark:text-text-secondary text-base md:text-lg leading-relaxed">
+            Sumérgete en algunos conceptos interactivos que muestran la calidad, creatividad y nivel técnico que podemos desarrollar para marcas que busquen destacar.
+          </p>
+        </div>
+
+        <!-- Cards de móvil -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {
+            demos.map((demo) => (
+              <div class="flex flex-col rounded-3xl overflow-hidden glass-panel border-white/5 bg-dark-surface/30">
+                <div class="relative h-72 md:h-80 overflow-hidden">
+                  <Image
+                    src={demo.images[0].src}
+                    alt={demo.title}
+                    class={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 hover:scale-105 ${demo.images[0].position}`}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark-base/90 to-transparent"></div>
+                  <h3 class="absolute bottom-6 left-6 right-6 text-2xl md:text-3xl font-bold text-white font-heading">
+                    {demo.title}
+                  </h3>
+                </div>
+                <div class="p-6 md:p-8 flex flex-col flex-1">
+                  <p class="text-text-secondary text-base leading-relaxed mb-8 flex-1">
+                    {demo.description}
+                  </p>
+                  <a
+                    href={demo.link}
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue dark:text-brand-cyan hover:bg-brand-blue hover:text-white transition-all duration-300 font-medium w-full group"
+                  >
+                    Explorar experiencia
+                    <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+</demos-section>
+
+<style>
+  /* ════════════════════════════════════════════════
+     DESKTOP GRID — Immersive split layout
+     ════════════════════════════════════════════════ */
+  .demos-desktop {
+    grid-template-columns: minmax(420px, 5fr) 7fr;
+    min-height: 85vh;
+  }
+
+  .demos-right {
+    /* Tiny rounded corner on the left edge only — just enough to feel designed, not boxy */
+    border-radius: 24px 0 0 24px;
+  }
+
+  /* ════════════════════════════════════════════════
+     SLIDESHOW — Ken Burns crossfade (CSS only)
+     Total cycle: 9s (3s per image × 3 images)
+     ════════════════════════════════════════════════ */
+  .slideshow-img {
+    opacity: 0;
+    transform: scale(1.0);
+    will-change: transform, opacity;
+  }
+
+  .demo-visual[data-active="true"] .slideshow-img {
+    animation: ken-burns-slideshow 9s infinite ease-in-out;
+  }
+
+  .demo-visual[data-active="true"] .slideshow-img:nth-child(1) { animation-delay: 0s; }
+  .demo-visual[data-active="true"] .slideshow-img:nth-child(2) { animation-delay: 3s; }
+  .demo-visual[data-active="true"] .slideshow-img:nth-child(3) { animation-delay: 6s; }
+
+  @keyframes ken-burns-slideshow {
+    0%  { opacity: 0; transform: scale(1.0); }
+    10% { opacity: 1; }
+    33% { opacity: 1; }
+    43% { opacity: 0; transform: scale(1.05); }
+    100%{ opacity: 0; transform: scale(1.05); }
+  }
+
+  /* ════════════════════════════════════════════════
+     VISUAL PANEL — Visibility transitions
+     ════════════════════════════════════════════════ */
+  .demo-visual {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .demo-visual[data-active="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ════════════════════════════════════════════════
+     TAB STATES — Active indicator + text
+     ════════════════════════════════════════════════ */
+  .demo-tab .demo-title {
+    color: var(--color-text-dark);
+    opacity: 0.35;
+  }
+  :global(.dark) .demo-tab .demo-title {
+    color: white;
+    opacity: 0.35;
+  }
+
+  .demo-tab[aria-selected="true"] .demo-indicator {
+    width: 2.5rem;
+    background-color: var(--color-brand-blue);
+  }
+  .demo-tab[aria-selected="true"] .demo-title {
+    opacity: 1;
+  }
+
+  .demo-tab:hover .demo-title {
+    opacity: 0.65;
+  }
+  .demo-tab[aria-selected="true"]:hover .demo-title {
+    opacity: 1;
+  }
+
+  .demo-tab:focus-visible .demo-indicator {
+    width: 2.5rem;
+    background-color: var(--color-brand-blue);
+  }
+  .demo-tab:focus-visible .demo-title {
+    opacity: 1;
+  }
+
+  /* ════════════════════════════════════════════════
+     DESCRIPTION — Fade + slide between projects
+     ════════════════════════════════════════════════ */
+  .demo-desc {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition:
+      opacity 600ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .demo-desc[data-active="true"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 100ms;
+  }
+
+  /* ════════════════════════════════════════════════
+     REDUCED MOTION
+     ════════════════════════════════════════════════ */
+  @media (prefers-reduced-motion: reduce) {
+    .slideshow-img,
+    .demo-visual,
+    .demo-desc {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  class DemosSection extends HTMLElement {
+    tabs: NodeListOf<HTMLElement>;
+    visuals: NodeListOf<HTMLElement>;
+    descs: NodeListOf<HTMLElement>;
+    preloadedTargets: Set<string> = new Set();
+
+    connectedCallback() {
+      this.tabs = this.querySelectorAll(".demo-tab");
+      this.visuals = this.querySelectorAll(".demo-visual");
+      this.descs = this.querySelectorAll(".demo-desc");
+
+      if (this.tabs.length === 0) return;
+
+      // Preload first project images immediately
+      this.preloadImages(this.tabs[0].dataset.target!);
+
+      this.tabs.forEach((tab, index) => {
+        tab.addEventListener("mouseenter", () => this.activateTab(tab));
+        tab.addEventListener("focus", () => this.activateTab(tab));
+
+        // Silently preload the second project after 1s
+        if (index === 0 && this.tabs[1]) {
+          setTimeout(() => this.preloadImages(this.tabs[1].dataset.target!), 1000);
+        }
+      });
+    }
+
+    activateTab(selectedTab: HTMLElement) {
+      const targetId = selectedTab.dataset.target;
+      if (!targetId || selectedTab.getAttribute("aria-selected") === "true") return;
+
+      // 1. Sync tab states
+      this.tabs.forEach((tab) => {
+        const isActive = tab === selectedTab;
+        tab.setAttribute("aria-selected", isActive.toString());
+        tab.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+
+      // 2. Sync visual panels
+      this.visuals.forEach((visual) => {
+        const isActive = visual.id === `visual-${targetId}`;
+        visual.dataset.active = isActive.toString();
+        visual.setAttribute("aria-hidden", (!isActive).toString());
+      });
+
+      // 3. Sync descriptions (simultaneously with visuals)
+      this.descs.forEach((desc) => {
+        const isActive = desc.dataset.desc === targetId;
+        desc.dataset.active = isActive.toString();
+
+        const btn = desc.querySelector("a");
+        if (btn) btn.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+
+      // 4. Preload images
+      this.preloadImages(targetId);
+
+      const currentIndex = Array.from(this.tabs).indexOf(selectedTab);
+      const nextTab = this.tabs[currentIndex + 1];
+      if (nextTab) {
+        this.preloadImages(nextTab.dataset.target!);
+      }
+    }
+
+    preloadImages(targetId: string) {
+      if (this.preloadedTargets.has(targetId)) return;
+
+      const visual = this.querySelector(`#visual-${targetId}`);
+      if (visual) {
+        const images = visual.querySelectorAll<HTMLImageElement>("img[loading='lazy']");
+        images.forEach((img) => {
+          img.setAttribute("loading", "eager");
+          const temp = new Image();
+          temp.src = img.src;
+        });
+        this.preloadedTargets.add(targetId);
+      }
+    }
+  }
+
+  if (!customElements.get("demos-section")) {
+    customElements.define("demos-section", DemosSection);
+  }
+</script>

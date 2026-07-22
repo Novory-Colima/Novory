@@ -7,11 +7,18 @@ interface Props {
 }
 
 const { id, class: className, container = true, ...rest } = Astro.props;
+
+// Evitar duplicados de overflow-hidden si la clase ya incluye una regla de overflow específica
+const hasOverflowClass = className && /(?:\s|^)overflow-(?:visible|hidden|clip|auto|scroll|x-visible|x-hidden|x-clip|y-visible|y-hidden|y-clip)(?:\s|$)/.test(className);
 ---
 
 <section 
   id={id} 
-  class:list={['py-20 md:py-32 relative overflow-hidden', className]}
+  class:list={[
+    'py-16 md:py-24 lg:py-32 relative transition-colors duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)]', 
+    !hasOverflowClass && 'overflow-hidden',
+    className
+  ]}
   {...rest}
 >
   {container ? (

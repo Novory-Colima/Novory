@@ -2,6 +2,7 @@
 import '../styles/globals.css';
 import Navbar from '../components/navigation/Navbar.astro';
 import Footer from '../components/navigation/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -18,8 +19,8 @@ const {
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/assets/novory-isotipo-color-dark-svg.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Novory</title>
     <meta name="description" content={description} />
@@ -29,14 +30,130 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Novory" />
-    <meta name="theme-color" content="#050816" />
+    <meta name="theme-color" content="#4466ff" />
+    
+    <ClientRouter />
+    <style>
+      /* Faster, cleaner page transitions */
+      ::view-transition-old(root) {
+        animation: 120ms ease-out both fade-out;
+      }
+      ::view-transition-new(root) {
+        animation: 160ms ease-in both fade-in;
+      }
+      @keyframes fade-out {
+        from { opacity: 1; }
+        to   { opacity: 0; }
+      }
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+    </style>
+
+    <!-- Theme initialization -->
+    <script is:inline>
+      const applyTheme = () => {
+        const getInitialTheme = () => {
+          if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+            return localStorage.getItem("theme");
+          }
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+          }
+          return "light";
+        };
+
+        const currentTheme = getInitialTheme();
+        if (currentTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        if (typeof localStorage !== "undefined") {
+          localStorage.setItem("theme", currentTheme);
+        }
+      };
+
+      applyTheme();
+      document.addEventListener("astro:after-swap", applyTheme);
+    </script>
   </head>
-  <body class="bg-bg-primary text-text-primary selection:bg-accent/30 selection:text-white">
-    <div class="fixed inset-0 bg-noise pointer-events-none z-50"></div>
+  <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white min-h-screen flex flex-col antialiased">
+    
+    <!-- Ruido de fondo adaptativo -->
+    <div class="fixed inset-0 bg-noise opacity-30 dark:opacity-100 pointer-events-none z-50 mix-blend-overlay"></div>
+    
     <Navbar />
-    <main>
+    
+    <main class="grow">
       <slot />
     </main>
     <Footer />
+
+    <script>
+      import Lenis from 'lenis';
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      let lenis: Lenis | null = null;
+
+      function initMotionSystem() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          document.documentElement.classList.add('reduced-motion');
+          return;
+        }
+
+        if (!lenis) {
+          lenis = new Lenis({
+            duration: 0.9,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            syncTouch: false,
+          });
+
+          // Link Lenis to GSAP ScrollTrigger
+          lenis.on('scroll', ScrollTrigger.update);
+
+          gsap.ticker.add((time) => {
+            lenis?.raf(time * 1000);
+          });
+
+          gsap.ticker.lagSmoothing(0);
+        }
+      }
+
+      // Anchor click handler registered once — capture: true beats ClientRouter
+      document.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null;
+        if (!target) return;
+        const id = target.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        lenis?.scrollTo(el as HTMLElement, { offset: -80, duration: 0.9 });
+      }, { capture: true });
+
+      // Hook orchestrator to view transitions events
+      document.addEventListener('astro:page-load', () => {
+        initMotionSystem();
+        ScrollTrigger.refresh();
+      });
+
+      document.addEventListener('astro:before-swap', () => {
+        // Kill ScrollTriggers to prevent duplication / memory leaks
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        
+        // Clean up Lenis smooth scroll
+        if (lenis) {
+          lenis.destroy();
+          lenis = null;
+        }
+      });
+    </script>
   </body>
 </html>

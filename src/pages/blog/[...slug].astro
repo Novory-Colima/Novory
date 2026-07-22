@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/atoms/Button.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -20,49 +21,52 @@ const formatDate = (date: Date) => date.toLocaleDateString('es-ES', {
 });
 ---
 
-<BaseLayout title={entry.data.title}>
-  <article class="pt-40 pb-32 container-novory relative overflow-hidden">
+<BaseLayout title={entry.data.title} description={entry.data.description || "Artículo del blog de Novory."}>
+  <article class="pt-32 md:pt-40 pb-20 md:pb-32 container-novory relative overflow-hidden transition-colors duration-500">
     <!-- Background Glow -->
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/[0.04] blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-100 md:w-150 h-100 md:h-150 bg-brand-cyan/20 dark:bg-brand-blue/4 blur-[120px] md:blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
 
-    <div class="max-w-3xl mx-auto flex flex-col gap-16 relative z-10">
-      <div class="flex flex-col gap-10">
-        <a href="/blog" class="text-accent font-black hover:underline underline-offset-8 decoration-2 text-xs tracking-[0.3em] uppercase transition-all duration-300">← Volver al blog</a>
+    <div class="max-w-3xl mx-auto flex flex-col gap-12 md:gap-16 relative z-10">
+      <div class="flex flex-col gap-8 md:gap-10">
+        <a href="/blog" class="text-brand-blue dark:text-brand-cyan font-black hover:underline underline-offset-8 decoration-2 text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase transition-all duration-300 w-fit">← Volver al blog</a>
         
-        <div class="flex flex-col gap-6">
-          <div class="flex items-center gap-4 text-[10px] text-text-secondary font-black uppercase tracking-[0.25em]">
-            <span class="text-accent">{formatDate(entry.data.pubDate)}</span>
-            <span class="opacity-20">|</span>
+        <div class="flex flex-col gap-4 md:gap-6">
+          <div class="flex flex-wrap items-center gap-2 md:gap-4 text-[9px] md:text-[10px] text-text-dark dark:text-text-secondary font-black uppercase tracking-[0.2em] md:tracking-[0.25em] transition-colors">
+            <span class="text-brand-blue dark:text-brand-cyan">{formatDate(entry.data.pubDate)}</span>
+            <span class="opacity-30 dark:opacity-20 hidden md:block">|</span>
             <span>Escrito por {entry.data.author}</span>
           </div>
-          <h1 class="text-white text-5xl md:text-8xl font-bold tracking-tighter leading-[0.95]">{entry.data.title}</h1>
+          <h1 class="text-text-dark-titles dark:text-white text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter leading-[1.05] md:leading-[0.95] transition-colors">{entry.data.title}</h1>
         </div>
 
-        <div class="flex flex-wrap gap-2.5">
+        <div class="flex flex-wrap gap-2 md:gap-2.5">
           {entry.data.tags.map((tag) => (
-            <span class="px-5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] font-black uppercase tracking-widest">{tag}</span>
+            <span class="px-4 py-1 md:px-5 md:py-1.5 rounded-full bg-light-surface dark:bg-white/5 border border-light-border/40 dark:border-white/10 text-text-dark dark:text-white/60 text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-colors">{tag}</span>
           ))}
         </div>
       </div>
 
-      <!-- Article content styling -->
-      <div class="prose prose-invert prose-xl max-w-none 
-        prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight 
-        prose-p:text-text-secondary prose-p:leading-[1.8] prose-p:font-light
-        prose-strong:text-white prose-strong:font-bold
-        prose-li:text-text-secondary prose-li:marker:text-accent
-        prose-blockquote:border-accent prose-blockquote:bg-accent/5 prose-blockquote:py-2 prose-blockquote:rounded-r-2xl
-        border-t border-white/5 pt-16">
+      <!-- Article content styling (Tailwind Typography plugin adaptation) -->
+      <div class="prose dark:prose-invert prose-lg md:prose-xl max-w-none 
+        prose-headings:text-text-dark-titles dark:prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight 
+        prose-p:text-text-dark dark:prose-p:text-text-secondary prose-p:leading-[1.8] prose-p:font-light
+        prose-strong:text-text-dark-titles dark:prose-strong:text-white prose-strong:font-bold
+        prose-li:text-text-dark dark:prose-li:text-text-secondary prose-li:marker:text-brand-blue dark:prose-li:marker:text-brand-cyan
+        prose-blockquote:border-brand-blue dark:prose-blockquote:border-brand-cyan prose-blockquote:bg-brand-blue/5 dark:prose-blockquote:bg-brand-blue/10 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-2xl
+        prose-a:text-brand-blue dark:prose-a:text-brand-cyan hover:prose-a:text-brand-purple transition-colors
+        border-t border-light-border/40 dark:border-white/5 pt-12 md:pt-16">
         <Content />
       </div>
 
       <!-- Bottom simple CTA -->
-      <div class="mt-20 p-12 glass-panel border-accent/20 bg-accent/[0.02] rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-8">
-         <div class="flex flex-col gap-2">
-            <h3 class="text-2xl font-bold text-white tracking-tight">¿Te gustó este artículo?</h3>
-            <p class="text-text-secondary">Suscríbete a nuestro newsletter para recibir más ideas.</p>
+      <div class="mt-16 md:mt-20 p-8 md:p-12 bg-light-surface/60 dark:bg-white/2 backdrop-blur-md border border-light-border/50 dark:border-brand-blue/20 rounded-[24px] md:rounded-[40px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 transition-colors shadow-sm dark:shadow-none">
+         <div class="flex flex-col gap-2 text-center md:text-left">
+            <h3 class="text-xl md:text-2xl font-bold text-text-dark-titles dark:text-white tracking-tight transition-colors">¿Quieres aplicar esto en tu negocio?</h3>
+            <p class="text-text-dark dark:text-text-secondary text-sm md:text-base transition-colors">Agenda una asesoría gratuita y analizamos tu situación juntos.</p>
          </div>
-         <button class="px-8 py-4 bg-accent text-white font-black uppercase tracking-widest text-xs rounded-full shadow-glow hover:scale-105 active:scale-95 transition-all duration-300">Suscribirme</button>
+         <Button variant="primary" size="md" href="/#contacto" class="w-full md:w-auto uppercase tracking-widest text-xs font-black">
+            Agendar asesoría
+         </Button>
       </div>
     </div>
   </article>

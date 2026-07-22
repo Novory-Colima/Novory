@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Font imports */
 @import "@fontsource/space-grotesk/index.css";
 @import "@fontsource/inter/index.css";
@@ -16,7 +18,8 @@
   --color-accent-glow: #66BBFF;
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #B8C0D9;
-  --color-text-muted: #8a94b0; /* Added for labels */
+  --color-text-muted: #8a94b0;
+  /* Added for labels */
   --color-border-alpha: rgba(255, 255, 255, 0.08);
   --color-glass-alpha: rgba(255, 255, 255, 0.04);
 
@@ -28,12 +31,76 @@
   /* Shadows/Glows */
   --shadow-glow: 0 0 20px rgba(79, 125, 255, 0.15);
   --shadow-glow-strong: 0 0 30px rgba(79, 125, 255, 0.3);
-  
+
   /* Motion tokens from Fase 6.4 */
   --duration-fast: 200ms;
   --duration-normal: 300ms;
   --duration-slow: 700ms;
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+
+  /* COLORES REDES SOCIALES */
+  --color-github: #443399;
+  /* Morado GitHub */
+  --color-gmail: #EA4335;
+  /* Rojo Gmail */
+  --color-linkedin: #0A66C2;
+  /* Azul LinkedIn */
+  --color-whatsapp: #25D366;
+  /* Verde WhatsApp */
+
+  /* COLORES DE MARCA (LOGOTIPO Y DEGRADADOS) */
+
+  /* Cian claro: Punto superior del degradado de la 'N' */
+  --color-brand-cyan: #44a2ff;
+
+  /* Azul vibrante: Color central del degradado del logo */
+  --color-brand-blue: #4466ff;
+
+  /* Morado profundo: Punto inferior del degradado de la 'N' */
+  --color-brand-purple: #563fbf;
+
+  /* MODO OSCURO (FONDOS Y SUPERFICIES) */
+
+  /* Fondo principal de la página */
+  --color-dark-base: #000000;
+
+  /* Fondo para tarjetas, navbars o secciones */
+  --color-dark-surface: #000022;
+
+  /* Fondo para elementos sobrepuestos (hover, modales) */
+  --color-dark-elevated: #000033;
+
+  /* Color para líneas divisorias y bordes */
+  --color-dark-border: #333333;
+
+  /* MODO CLARO (FONDOS Y SUPERFICIES) */
+
+  /* Fondo principal de la página (blanco puro) */
+  --color-light-base: #ffffff;
+
+  /* Fondo para tarjetas con un toque muy ligero de azul */
+  --color-light-surface: #eeeeff;
+
+  /* Fondo gris muy claro para contraste sutil */
+  --color-light-elevated: #eeeeee;
+
+  /* Color para líneas divisorias y bordes */
+  --color-light-border: #cccccc;
+
+  /* TEXTOS Y NEUTRALES */
+
+  /* Títulos y texto principal en modo oscuro */
+  --color-text-light-titles: #ffffff;
+
+  /* Párrafos y subtítulos en modo oscuro (gris claro) */
+  --color-text-light: #aaaaaa;
+
+  /* Títulos y texto principal en modo claro (gris muy oscuro) */
+  --color-text-dark-titles: #222222;
+
+  /* Párrafos y subtítulos en modo claro (gris medio) */
+  --color-text-dark: #444444;
 }
 
 @layer base {
@@ -57,7 +124,10 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.1;
@@ -65,10 +135,26 @@
   }
 
   /* Typographic scale from Fase 4.1 */
-  h1 { font-size: clamp(3rem, 10vw, 4.5rem); } /* 72px approx */
-  h2 { font-size: clamp(2.5rem, 8vw, 3.5rem); } /* 56px approx */
-  h3 { font-size: clamp(2rem, 6vw, 2.5rem); }   /* 40px approx */
-  h4 { font-size: 1.5rem; }                    /* 24px approx */
+  h1 {
+    font-size: clamp(3rem, 10vw, 4.5rem);
+  }
+
+  /* 72px approx */
+  h2 {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  /* 56px approx */
+  h3 {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+  }
+
+  /* 40px approx */
+  h4 {
+    font-size: 1.5rem;
+  }
+
+  /* 24px approx */
 
   p {
     color: var(--color-text-secondary);
@@ -79,43 +165,50 @@
   }
 }
 
-@layer components {
-  /* Common component styles from Fase 4.2 */
-  .glass-panel {
-    background: var(--color-glass-alpha);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--color-border-alpha);
-    border-radius: var(--radius-xl);
-  }
+/* Common component styles from Fase 4.2 */
+.glass-panel {
+  background: var(--color-glass-alpha);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-alpha);
+  border-radius: var(--radius-xl);
+}
 
-  .nav-link-underline {
-    @apply relative;
-  }
-  
-  .nav-link-underline::after {
-    content: '';
-    @apply absolute w-0 h-[1px] bottom-[-2px] left-0 bg-accent transition-all duration-200 ease-standard;
-  }
-  
-  .nav-link-underline:hover::after {
-    @apply w-full;
-  }
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-accent);
+  transition: all 200ms var(--ease-standard);
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
 }
 
 @utility container-novory {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;   /* 24px Mobile */
+  padding-left: 1.5rem;
+  /* 24px Mobile */
   padding-right: 1.5rem;
-  
+
   @media (min-width: 768px) {
-    padding-left: 3rem;   /* 48px Tablet */
+    padding-left: 3rem;
+    /* 48px Tablet */
     padding-right: 3rem;
   }
-  
+
   @media (min-width: 1024px) {
-    padding-left: 6rem;   /* 96px Desktop */
+    padding-left: 6rem;
+    /* 96px Desktop */
     padding-right: 6rem;
   }
 }
@@ -130,4 +223,66 @@
 @utility bg-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/feTurbulence%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   opacity: 0.05;
+}
+
+/* Shimmer effect for primary CTA buttons */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: btn-shimmer 3.5s ease-in-out infinite 1.5s;
+  pointer-events: none;
+}
+@keyframes btn-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(160%); }
+}
+
+/* Hover gradiente para fondos (botones, bloques) */
+@utility hover-brand-gradient {
+  &:hover {
+    background-image: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-blue), var(--color-brand-purple));
+  }
+}
+
+/* Hover gradiente para texto (links, iconos, títulos) */
+@utility hover-brand-gradient-text {
+  &:hover {
+    background-image: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-blue), var(--color-brand-purple));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Hover gradiente para borde (cards) */
+@utility hover-brand-gradient-border {
+  &:hover {
+    border-color: transparent;
+    background-image: linear-gradient(to right, var(--color-brand-cyan), var(--color-brand-blue), var(--color-brand-purple));
+    background-clip: border-box;
+  }
+}
+
+/* Reglas de diseño y seguridad de altura para los Custom Elements */
+problems-section,
+business-section,
+hero-section,
+about-section,
+benefits-section,
+process-section,
+services-section,
+demos-section,
+faq-section,
+contact-section {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: min-content !important;
 }
