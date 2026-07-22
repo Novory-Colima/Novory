@@ -2,13 +2,13 @@
 import Button from "../atoms/Button.astro";
 import ToggleTheme from "../atoms/ToggleTheme.astro";
 
-const isHome = Astro.url.pathname === '/';
-const anchor = (id: string) => isHome ? `#${id}` : `/#${id}`;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === import.meta.env.BASE_URL || Astro.url.pathname === import.meta.env.BASE_URL.slice(0, -1);
+const anchor = (id: string) => isHome ? `#${id}` : `${import.meta.env.BASE_URL}#${id}`;
 
 const navLinks = [
   { name: "Inicio", href: anchor('inicio') },
   { name: "Servicios", href: anchor('servicios') },
-  { name: "Blog", href: "/blog" },
+  { name: "Blog", href: `${import.meta.env.BASE_URL}blog` },
   { name: "Nosotros", href: anchor('nosotros') },
   { name: "Contacto", href: anchor('contacto') },
 ];
@@ -19,14 +19,14 @@ const navLinks = [
   class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6"
 >
   <div class="container-novory flex items-center justify-between">
-    <a href="/" class="group relative">
+    <a href={import.meta.env.BASE_URL} class="group relative">
       <img
-        src="/assets/novory-logotipo-horizontal-color-clear-svg.svg"
+        src={`${import.meta.env.BASE_URL}assets/novory-logotipo-horizontal-color-clear-svg.svg`}
         alt="Logo Novory"
         class="w-24 sm:w-28 md:w-32 transition-transform duration-300 group-hover:scale-105 dark:hidden"
       />
       <img
-        src="/assets/novory-logotipo-horizontal-color-dark-svg.svg"
+        src={`${import.meta.env.BASE_URL}assets/novory-logotipo-horizontal-color-dark-svg.svg`}
         alt="Logo Novory"
         class="w-24 sm:w-28 md:w-32 transition-transform duration-300 group-hover:scale-105 hidden dark:block"
       />
@@ -76,12 +76,12 @@ const navLinks = [
     <!-- Header -->
     <div class="flex items-center justify-between p-6 sm:p-8 border-b border-light-border/50 dark:border-dark-border/50">
       <img
-        src="/assets/novory-logotipo-horizontal-color-clear-svg.svg"
+        src={`${import.meta.env.BASE_URL}assets/novory-logotipo-horizontal-color-clear-svg.svg`}
         alt="Logo Novory"
         class="w-24 dark:hidden"
       />
       <img
-        src="/assets/novory-logotipo-horizontal-color-dark-svg.svg"
+        src={`${import.meta.env.BASE_URL}assets/novory-logotipo-horizontal-color-dark-svg.svg`}
         alt="Logo Novory"
         class="w-24 hidden dark:block"
       />
