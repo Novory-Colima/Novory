@@ -4,6 +4,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://novory-colima.github.io",
+  base: "/Novory",
+
   vite: {
     plugins: [tailwindcss()],
   },
