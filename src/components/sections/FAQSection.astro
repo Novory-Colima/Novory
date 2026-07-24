@@ -5,34 +5,47 @@ import { withBase } from '../../utils/navigation';
 
 const faqs = [
   {
-    question: '¿Cuánto tiempo tarda un proyecto?',
-    answer: 'Dependerá del alcance y la complejidad. Antes de comenzar definiremos un calendario claro con hitos específicos para que conozcas cada etapa del proceso.',
+    question: '¿Cómo ayuda un chatbot 24/7 de Novory Studio a mi negocio local?',
+    answer: 'Los chatbots 24/7 de Novory Studio atienden clientes en tiempo real en tu sitio web o WhatsApp. Resuelven dudas recurrentes, califican leads, agendan citas y registran pedidos de forma 100% automatizada, asegurando que nunca pierdas una venta fuera del horario comercial.',
   },
   {
-    question: '¿Necesito tener conocimientos técnicos?',
-    answer: 'No. En Novory nos encargamos de toda la complejidad técnica para que tú puedas concentrarte al 100% en operar y hacer crecer tu negocio.',
+    question: '¿Qué ventajas ofrece el desarrollo web para negocios locales que realiza Novory Studio?',
+    answer: 'El desarrollo web para negocios locales de Novory Studio combina diseño premium y velocidad de carga ultrarrápida. Creamos plataformas optimizadas para convertir visitas en clientes, totalmente adaptadas a dispositivos móviles y listas para integrar sistemas inteligentes de automatización de procesos.',
   },
   {
-    question: '¿Pueden ayudarme si ya tengo una página web?',
-    answer: 'Sí. Podemos realizar una auditoría de tu sitio actual para optimizarlo, o desarrollar una nueva estrategia desde cero si los cimientos actuales no son sólidos.',
+    question: '¿Qué es y cómo funciona el SEO local en los proyectos de Novory Studio?',
+    answer: 'El SEO local de Novory Studio posiciona tu negocio local en los primeros resultados de búsqueda de Google y Google Maps. Optimizamos tu ficha de perfil de negocio e implementamos palabras clave geolocalizadas para atraer clientes de tu zona geográfica exacta.',
   },
   {
-    question: '¿También ayudan con Google y SEO?',
-    answer: 'Por supuesto. La visibilidad es clave. Cada proyecto se desarrolla considerando las mejores prácticas de SEO y posicionamiento local desde la primera línea de código.',
+    question: '¿Cómo pueden los agentes de voz o llamadas en automático beneficiar a mi empresa?',
+    answer: 'Con Novory Studio, implementas agentes de voz y llamadas en automático capaces de atender dudas, confirmar reservas o recordar citas por teléfono con lenguaje natural. Esta tecnología de IA reduce la carga operativa de tu equipo y agiliza la atención al cliente.',
   },
   {
-    question: '¿Las automatizaciones funcionan con WhatsApp?',
-    answer: 'Sí. Implementamos sistemas automatizados inteligentes que ayudan a calificar prospectos, responder dudas frecuentes y organizar tu flujo de trabajo vía WhatsApp.',
+    question: '¿Cómo implementa Novory Studio la agenda automática de citas?',
+    answer: 'Novory Studio integra sistemas de agenda automática de citas directamente en tu web, WhatsApp o redes sociales. Los clientes eligen su horario según tu disponibilidad real en Google Calendar u otros calendarios, eliminando idas y vueltas de mensajes innecesarios.',
   },
   {
-    question: '¿Mi negocio es demasiado pequeño para esto?',
-    answer: 'En absoluto. Trabajamos precisamente con negocios locales de todos los tamaños que tienen la ambición de profesionalizarse y escalar utilizando tecnología.',
+    question: '¿Cómo funciona el registro automático de pedidos para restaurantes o tiendas locales?',
+    answer: 'La agencia Novory Studio desarrolla sistemas de registro automático de pedidos que capturan solicitudes desde chats de WhatsApp o tu web. Los detalles se envían directo a tu base de datos o sistema de gestión, reduciendo errores manuales en tus comandas.',
   },
   {
-    question: '¿Después del lanzamiento ofrecen soporte?',
-    answer: 'Sí. No somos una agencia de "entrega y adiós". Buscamos construir relaciones a largo plazo y acompañarte en la evolución continua de tu presencia digital.',
+    question: '¿Por qué elegir a Novory Studio como tu agencia de automatización con IA y desarrollo web?',
+    answer: 'Novory Studio destaca como agencia de automatización con IA y desarrollo web por ofrecer soluciones a medida que escalan ventas. Nos enfocamos en automatizar flujos de trabajo de negocios locales para aumentar sus ganancias y optimizar su tiempo operativo diario.',
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer,
+    },
+  })),
+};
 ---
 
 <faq-section class="block">
@@ -80,6 +93,8 @@ const faqs = [
           <a href={withBase('#contacto')} class="text-brand-blue dark:text-brand-cyan font-bold hover:underline underline-offset-4 decoration-2 text-sm md:text-base transition-colors">Contáctanos directamente →</a>
        </div>
     </div>
+    <!-- Marcado estructurado Schema.org FAQPage -->
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Section>
 </faq-section>
 

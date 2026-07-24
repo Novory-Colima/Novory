@@ -8,12 +8,24 @@ import { withBase } from '../utils/navigation';
 interface Props {
   title: string;
   description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  ogUrl?: string;
+  hideSuffix?: boolean;
 }
 
 const { 
   title, 
-  description = "Novory ayuda a negocios locales a crecer utilizando tecnología moderna. Creamos sitios web optimizados, SEO Local y automatizaciones." 
+  description = "Transformamos negocios locales con IA y desarrollo web. Implementamos chatbots 24/7, agentes de voz, agendamiento automático y SEO local para escalar tus ventas. ¡Agenda tu asesoría!",
+  canonical,
+  ogImage = "https://novorystudio.com/assets/novory-identidad-horizontal-color-dark-svg.svg",
+  ogType = "website",
+  ogUrl,
+  hideSuffix = false
 } = Astro.props;
+
+const displayTitle = hideSuffix ? title : `${title} | Novory`;
 ---
 
 <!doctype html>
@@ -24,15 +36,24 @@ const {
     <link rel="icon" type="image/svg+xml" href={withBase('/assets/novory-isotipo-color-dark-svg.svg')} />
     <link rel="shortcut icon" href={withBase('/favicon.svg')} />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | Novory</title>
+    <title>{displayTitle}</title>
     <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
     
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Novory" />
+    {ogUrl && <meta property="og:url" content={ogUrl} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Novory Studio" />
     <meta name="theme-color" content="#4466ff" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     
     <ClientRouter />
     <style>
