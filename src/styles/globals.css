@@ -193,23 +193,26 @@
 }
 
 @utility container-novory {
+  width: 100%;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  /* 24px Mobile */
-  padding-right: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (min-width: 640px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 
   @media (min-width: 768px) {
     padding-left: 3rem;
-    /* 48px Tablet */
     padding-right: 3rem;
   }
 
   @media (min-width: 1024px) {
-    padding-left: 6rem;
-    /* 96px Desktop */
-    padding-right: 6rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 

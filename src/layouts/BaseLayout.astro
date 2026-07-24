@@ -17,7 +17,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="overflow-x-hidden max-w-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,14 +81,14 @@ const {
       document.addEventListener("astro:after-swap", applyTheme);
     </script>
   </head>
-  <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white min-h-screen flex flex-col antialiased">
+  <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white min-h-screen flex flex-col antialiased relative w-full max-w-full overflow-x-hidden">
     
     <!-- Ruido de fondo adaptativo -->
     <div class="fixed inset-0 bg-noise opacity-30 dark:opacity-100 pointer-events-none z-50 mix-blend-overlay"></div>
     
     <Navbar />
     
-    <main class="grow">
+    <main class="grow w-full max-w-full overflow-x-hidden">
       <slot />
     </main>
     <Footer />

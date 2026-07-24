@@ -67,7 +67,7 @@ const navLinks = [
 <!-- Mobile menu — outside <nav> to avoid backdrop-filter containing-block issues -->
 <div
   id="mobile-menu"
-  class="mobile-menu-panel fixed inset-0 z-50 translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)] md:hidden flex flex-col"
+  class="mobile-menu-panel fixed inset-0 z-50 translate-x-full invisible pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.4,0.0,0.2,1)] md:hidden flex flex-col max-w-full overflow-hidden"
   aria-hidden="true"
 >
   <!-- Solid opaque background — light and dark -->
@@ -157,7 +157,7 @@ const navLinks = [
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     const openMenu = () => {
-      mobileMenu.classList.remove("translate-x-full");
+      mobileMenu.classList.remove("translate-x-full", "invisible", "pointer-events-none");
       mobileMenu.classList.add("translate-x-0");
       mobileMenu.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -165,7 +165,7 @@ const navLinks = [
 
     const closeMenu = () => {
       mobileMenu.classList.remove("translate-x-0");
-      mobileMenu.classList.add("translate-x-full");
+      mobileMenu.classList.add("translate-x-full", "invisible", "pointer-events-none");
       mobileMenu.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
     };
