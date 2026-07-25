@@ -11,20 +11,7 @@
   --font-heading: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
 
-  /* Colors from Fase 4.1 */
-  --color-bg-primary: #050816;
-  --color-bg-secondary: #0B1020;
-  /* Adjusted for WCAG AA contrast (4.5:1) with white text */
-  --color-accent: #3d68ff;
-  --color-accent-glow: #66BBFF;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B8C0D9;
-  --color-text-muted: #8a94b0;
-  /* Added for labels */
-  --color-border-alpha: rgba(255, 255, 255, 0.08);
-  --color-glass-alpha: rgba(255, 255, 255, 0.04);
-
-  /* Radius from Fase 4.1 */
+  /* Radius tokens */
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
@@ -33,78 +20,41 @@
   --shadow-glow: 0 0 20px rgba(79, 125, 255, 0.15);
   --shadow-glow-strong: 0 0 30px rgba(79, 125, 255, 0.3);
 
-  /* Motion tokens from Fase 6.4 */
+  /* Motion tokens */
   --duration-fast: 200ms;
   --duration-normal: 300ms;
   --duration-slow: 700ms;
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 
-
   /* COLORES REDES SOCIALES */
   --color-github: #443399;
-  /* Morado GitHub */
   --color-gmail: #EA4335;
-  /* Rojo Gmail */
   --color-linkedin: #0A66C2;
-  /* Azul LinkedIn */
   --color-whatsapp: #25D366;
-  /* Verde WhatsApp */
   --color-instagram: #E1306C;
-  /* Rosa Instagram */
   --color-tiktok: #25F4EE;
-  /* Rojo/Cian TikTok */
 
   /* COLORES DE MARCA (LOGOTIPO Y DEGRADADOS) */
-
-  /* Cian claro: Punto superior del degradado de la 'N' */
   --color-brand-cyan: #44a2ff;
-
-  /* Azul vibrante: Color central del degradado del logo */
   --color-brand-blue: #4466ff;
-
-  /* Morado profundo: Punto inferior del degradado de la 'N' */
   --color-brand-purple: #563fbf;
 
   /* MODO OSCURO (FONDOS Y SUPERFICIES) */
-
-  /* Fondo principal de la página */
   --color-dark-base: #000000;
-
-  /* Fondo para tarjetas, navbars o secciones */
   --color-dark-surface: #000022;
-
-  /* Fondo para elementos sobrepuestos (hover, modales) */
   --color-dark-elevated: #000033;
-
-  /* Color para líneas divisorias y bordes */
   --color-dark-border: #333333;
 
   /* MODO CLARO (FONDOS Y SUPERFICIES) */
-
-  /* Fondo principal de la página (blanco puro) */
   --color-light-base: #ffffff;
-
-  /* Fondo para tarjetas con un toque muy ligero de azul */
   --color-light-surface: #eeeeff;
-
-  /* Fondo gris muy claro para contraste sutil */
   --color-light-elevated: #eeeeee;
-
-  /* Color para líneas divisorias y bordes */
   --color-light-border: #cccccc;
 
   /* TEXTOS Y NEUTRALES */
-
-  /* Títulos y texto principal en modo oscuro */
   --color-text-light-titles: #ffffff;
-
-  /* Párrafos y subtítulos en modo oscuro (gris claro) */
   --color-text-light: #aaaaaa;
-
-  /* Títulos y texto principal en modo claro (gris muy oscuro) */
   --color-text-dark-titles: #222222;
-
-  /* Párrafos y subtítulos en modo claro (gris medio) */
   --color-text-dark: #444444;
 }
 
@@ -124,8 +74,6 @@
   }
 
   body {
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-primary);
     font-family: var(--font-body);
     font-size: 18px;
     line-height: 1.6;

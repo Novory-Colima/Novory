@@ -4,6 +4,7 @@ import Navbar from '../components/navigation/Navbar.astro';
 import Footer from '../components/navigation/Footer.astro';
 import { ClientRouter } from 'astro:transitions';
 import { withBase } from '../utils/navigation';
+import { CONTACT_INFO } from '../utils/contact';
 
 interface Props {
   title: string;
@@ -26,6 +27,25 @@ const {
 } = Astro.props;
 
 const displayTitle = hideSuffix ? title : `${title} | Novory`;
+
+const currentUrl = new URL(Astro.url.pathname, Astro.site || CONTACT_INFO.siteUrl).href;
+const effectiveCanonical = canonical || currentUrl;
+const effectiveOgUrl = ogUrl || currentUrl;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": CONTACT_INFO.siteName,
+  "url": CONTACT_INFO.siteUrl,
+  "logo": `${CONTACT_INFO.siteUrl}/assets/novory-identidad-horizontal-color-dark-svg.svg`,
+  "email": CONTACT_INFO.email,
+  "telephone": CONTACT_INFO.phoneDisplay,
+  "sameAs": [
+    CONTACT_INFO.socials.instagram,
+    CONTACT_INFO.socials.tiktok,
+    CONTACT_INFO.socials.github,
+  ]
+};
 ---
 
 <!doctype html>
@@ -39,13 +59,13 @@ const displayTitle = hideSuffix ? title : `${title} | Novory`;
     <meta name="generator" content={Astro.generator} />
     <title>{displayTitle}</title>
     <meta name="description" content={description} />
-    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="canonical" href={effectiveCanonical} />
     
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    {ogUrl && <meta property="og:url" content={ogUrl} />}
+    <meta property="og:url" content={effectiveOgUrl} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content="Novory Studio" />
     <meta name="theme-color" content="#4466ff" />
@@ -55,6 +75,9 @@ const displayTitle = hideSuffix ? title : `${title} | Novory`;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <!-- Schema.org Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     
     <ClientRouter />
     <style>

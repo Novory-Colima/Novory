@@ -359,12 +359,44 @@ const demos = [
       this.tabs.forEach((tab, index) => {
         tab.addEventListener("mouseenter", () => this.activateTab(tab));
         tab.addEventListener("focus", () => this.activateTab(tab));
+        tab.addEventListener("keydown", (e) => this.handleKeydown(e, index));
 
         // Silently preload the second project after 1s
         if (index === 0 && this.tabs[1]) {
           setTimeout(() => this.preloadImages(this.tabs[1].dataset.target!), 1000);
         }
       });
+    }
+
+    handleKeydown(e: KeyboardEvent, currentIndex: number) {
+      const count = this.tabs.length;
+      let targetIndex = -1;
+
+      switch (e.key) {
+        case "ArrowDown":
+        case "ArrowRight":
+          targetIndex = (currentIndex + 1) % count;
+          break;
+        case "ArrowUp":
+        case "ArrowLeft":
+          targetIndex = (currentIndex - 1 + count) % count;
+          break;
+        case "Home":
+          targetIndex = 0;
+          break;
+        case "End":
+          targetIndex = count - 1;
+          break;
+        default:
+          return;
+      }
+
+      e.preventDefault();
+      const targetTab = this.tabs[targetIndex];
+      if (targetTab) {
+        targetTab.focus();
+        this.activateTab(targetTab);
+      }
     }
 
     activateTab(selectedTab: HTMLElement) {

@@ -83,49 +83,52 @@ const trustItems = [
         <div class="bg-light-surface/60 dark:bg-white/5 backdrop-blur-xl p-8 md:p-10 lg:p-14 rounded-[20px] border border-light-border/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-500">
           <div class="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-brand-cyan/20 dark:bg-brand-cyan/10 blur-[80px] md:blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
 
-          <form id="contact-form" class="flex flex-col gap-6 md:gap-8 relative z-10 min-w-0">
+          <form id="contact-form" class="flex flex-col gap-6 md:gap-8 relative z-10 min-w-0" novalidate>
+            <!-- Banner de feedback / validación -->
+            <div id="form-feedback" class="hidden p-4 rounded-xl text-center font-medium text-sm transition-all duration-300"></div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div class="min-w-0">
-                <label for="name" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Tu Nombre</label>
+              <div class="flex flex-col gap-2 min-w-0">
+                <label for="name" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Tu Nombre</label>
                 <input type="text" id="name" name="name" required placeholder="Ej. Juan Pérez"
                   class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
 
-              <div class="min-w-0">
-                <label for="email" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Correo Electrónico</label>
+              <div class="flex flex-col gap-2 min-w-0">
+                <label for="email" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Correo Electrónico</label>
                 <input type="email" id="email" name="email" required placeholder="juan@ejemplo.com"
                   class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div class="min-w-0">
-                <label for="phone" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Teléfono / WhatsApp</label>
+              <div class="flex flex-col gap-2 min-w-0">
+                <label for="phone" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Teléfono / WhatsApp</label>
                 <input type="tel" id="phone" name="phone" required placeholder="+52 312 000 0000"
                   class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
 
-              <div class="min-w-0">
-                <label for="business" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Nombre del Negocio</label>
+              <div class="flex flex-col gap-2 min-w-0">
+                <label for="business" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Nombre del Negocio</label>
                 <input type="text" id="business" name="business" required placeholder="Mi Negocio Local"
                   class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
             </div>
 
-            <div class="min-w-0">
-              <label for="industry" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">¿A qué se dedica tu negocio?</label>
+            <div class="flex flex-col gap-2 min-w-0">
+              <label for="industry" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">¿A qué se dedica tu negocio?</label>
               <input type="text" id="industry" name="industry" required placeholder="Ej. Restaurante, Clínica Dental, Taller..."
                 class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
             </div>
 
-            <div class="min-w-0">
-              <label for="message" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase ml-1 transition-colors">Cuéntanos sobre tu problemática</label>
+            <div class="flex flex-col gap-2 min-w-0">
+              <label for="message" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Cuéntanos sobre tu problemática</label>
               <textarea id="message" name="message" rows="4" placeholder="Hola, me gustaría digitalizar mis pedidos..."
                 class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all resize-none placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0"></textarea>
             </div>
 
             <div class="pt-2 md:pt-4">
-              <Button variant="primary" size="hero" type="submit" class="w-full group/sub">
+              <Button variant="primary" size="hero" type="submit" class="w-full group/sub" id="submit-btn">
                 <span class="font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-xs md:text-sm">Agendar Asesoría Gratuita</span>
                 <Sparkles class="ml-2 md:ml-3 w-4 h-4 md:w-5 md:h-5 group-hover/sub:scale-125 transition-transform" />
               </Button>
@@ -164,6 +167,7 @@ const trustItems = [
       }, this);
 
       this.form = this.querySelector('#contact-form');
+      const feedback = this.querySelector('#form-feedback') as HTMLElement;
       if (!this.form) return;
 
       this.submitHandler = (e: Event) => {
@@ -171,21 +175,58 @@ const trustItems = [
         if (!this.form) return;
 
         const formData = new FormData(this.form);
-        const data = Object.fromEntries(formData.entries());
+        const data = Object.fromEntries(formData.entries()) as Record<string, string>;
+
+        const showFeedback = (msg: string, isError: boolean) => {
+          if (!feedback) return;
+          feedback.textContent = msg;
+          feedback.className = `p-4 rounded-xl text-center font-medium text-sm transition-all duration-300 ${
+            isError 
+              ? 'bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 block'
+              : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 block'
+          }`;
+        };
         
-        // Create Structured WhatsApp Message as per requirement✅👤🏪💼📧📞💬
+        // Client-side validation
+        if (!data.name?.trim()) {
+          showFeedback('Por favor ingresa tu nombre.', true);
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!data.email || !emailRegex.test(data.email.toString())) {
+          showFeedback('Por favor ingresa un correo electrónico válido.', true);
+          return;
+        }
+
+        const cleanPhone = (data.phone || '').toString().replace(/\D/g, '');
+        if (cleanPhone.length < 7) {
+          showFeedback('Por favor ingresa un número de teléfono válido (mínimo 7 dígitos).', true);
+          return;
+        }
+
+        if (!data.business?.trim()) {
+          showFeedback('Por favor ingresa el nombre de tu negocio.', true);
+          return;
+        }
+
+        showFeedback('¡Información validada! Redirigiendo a WhatsApp...', false);
+
+        // Create Structured WhatsApp Message
         const text = `✅ SOLICITUD DE ASESORÍA NOVORY\n\n` +
                      `👤 Nombre: ${data.name}\n` +
                      `🏪 Negocio: ${data.business}\n` +
-                     `💼 Giro: ${data.industry}\n` +
+                     `💼 Giro: ${data.industry || 'No especificado'}\n` +
                      `📧 Email: ${data.email}\n` +
                      `📞 Teléfono: ${data.phone}\n\n` +
-                     `💬 Problemática: ${data.message}`;
+                     `💬 Problemática: ${data.message || 'Sin mensaje'}`;
                      
         const encodedText = encodeURIComponent(text);
         const whatsappUrl = `https://api.whatsapp.com/send?phone=523121992198&text=${encodedText}`;
 
-        window.open(whatsappUrl, '_blank');
+        setTimeout(() => {
+          window.open(whatsappUrl, '_blank');
+        }, 400);
       };
 
       this.form.addEventListener('submit', this.submitHandler);

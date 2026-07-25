@@ -69,7 +69,12 @@ const faqSchema = {
     <div class="max-w-4xl mx-auto flex flex-col gap-4 md:gap-5 relative z-10 px-4 md:px-0">
       {faqs.map((faq, index) => (
         <div class="faq-item bg-light-base/60 dark:bg-white/1 backdrop-blur-md border border-light-border/50 dark:border-white/5 hover:bg-light-surface dark:hover:bg-white/2 hover:border-brand-blue/30 dark:hover:border-white/10 transition-all duration-500 group rounded-3xl shadow-sm dark:shadow-none">
-          <button class="w-full flex items-center justify-between p-6 md:p-8 lg:p-10 text-left cursor-pointer faq-trigger outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/50 rounded-3xl" aria-expanded="false">
+          <button 
+            id={`faq-button-${index}`}
+            aria-controls={`faq-panel-${index}`}
+            class="w-full flex items-center justify-between p-6 md:p-8 lg:p-10 text-left cursor-pointer faq-trigger outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/50 rounded-3xl" 
+            aria-expanded="false"
+          >
             <span class="text-lg md:text-xl lg:text-2xl font-bold text-text-dark-titles dark:text-white pr-6 md:pr-10 group-hover:text-brand-blue dark:group-hover:text-brand-cyan transition-colors duration-300 tracking-tight leading-snug">
               {faq.question}
             </span>
@@ -77,7 +82,12 @@ const faqSchema = {
                <ChevronDown class="w-5 h-5 md:w-6 md:h-6 text-text-dark dark:text-text-secondary group-hover:text-brand-blue dark:group-hover:text-brand-cyan transition-all duration-500 transform faq-icon" />
             </div>
           </button>
-          <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+          <div 
+            id={`faq-panel-${index}`}
+            role="region"
+            aria-labelledby={`faq-button-${index}`}
+            class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out"
+          >
             <div class="px-6 md:px-8 lg:px-10 pb-8 md:pb-10 border-t border-light-border/30 dark:border-white/2 pt-6 md:pt-8">
               <p class="text-text-dark dark:text-text-secondary text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl transition-colors">
                 {faq.answer}
