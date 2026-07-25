@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/atoms/Button.astro';
 import { withBase } from '../../utils/navigation';
 import { WHATSAPP_URLS } from '../../utils/whatsapp';
+import { formatDate } from '../../utils/date';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -16,11 +17,6 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
-const formatDate = (date: Date) => date.toLocaleDateString('es-ES', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description || "Artículo del blog de Novory."}>

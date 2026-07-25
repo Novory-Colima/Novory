@@ -145,8 +145,6 @@ const trustItems = [
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  gsap.registerPlugin(ScrollTrigger);
-
   class ContactSection extends HTMLElement {
     form: HTMLFormElement | null = null;
     submitHandler: ((e: Event) => void) | null = null;

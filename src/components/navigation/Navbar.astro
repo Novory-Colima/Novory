@@ -138,10 +138,10 @@ const navLinks = [
     const updateNavbar = () => {
       const scrolled = window.scrollY > 50;
       if (scrolled) {
-        navbar?.classList.add("bg-light-base/70", "dark:bg-dark-base/70", "backdrop-blur-xl", "border-b", "border-light-border/50", "dark:border-dark-border/50", "py-4", "shadow-sm");
+        navbar?.classList.add("navbar-scrolled", "backdrop-blur-xl", "border-b", "py-4", "shadow-sm");
         navbar?.classList.remove("py-6");
       } else {
-        navbar?.classList.remove("bg-light-base/70", "dark:bg-dark-base/70", "backdrop-blur-xl", "border-b", "border-light-border/50", "dark:border-dark-border/50", "py-4", "shadow-sm");
+        navbar?.classList.remove("navbar-scrolled", "backdrop-blur-xl", "border-b", "py-4", "shadow-sm");
         navbar?.classList.add("py-6");
       }
       scrollTicking = false;

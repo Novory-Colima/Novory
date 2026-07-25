@@ -20,7 +20,7 @@ const {
   title, 
   description = "Transformamos negocios locales con IA y desarrollo web. Implementamos chatbots 24/7, agentes de voz, agendamiento automático y SEO local para escalar tus ventas. ¡Agenda tu asesoría!",
   canonical,
-  ogImage = "https://novorystudio.com/assets/novory-identidad-horizontal-color-dark-svg.svg",
+  ogImage = "https://novorystudio.com/assets/novory-logotipo-horizontal-color-dark-og.png",
   ogType = "website",
   ogUrl,
   hideSuffix = false
@@ -54,7 +54,6 @@ const organizationSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={withBase('/assets/novory-isotipo-color-dark-svg.svg')} />
-    <link rel="shortcut icon" href={withBase('/favicon.svg')} />
     <link rel="manifest" href={withBase('/manifest.json')} />
     <meta name="generator" content={Astro.generator} />
     <title>{displayTitle}</title>
@@ -129,7 +128,7 @@ const organizationSchema = {
   <body class="bg-light-base dark:bg-dark-base text-text-dark dark:text-text-light selection:bg-brand-blue/20 selection:text-brand-blue dark:selection:bg-brand-cyan/30 dark:selection:text-white min-h-screen flex flex-col antialiased relative w-full max-w-full overflow-x-hidden">
     
     <!-- Ruido de fondo adaptativo -->
-    <div class="fixed inset-0 bg-noise opacity-30 dark:opacity-100 pointer-events-none z-50 mix-blend-overlay"></div>
+    <div class="fixed inset-0 bg-noise opacity-30 dark:opacity-100 pointer-events-none z-10 mix-blend-overlay"></div>
     
     <Navbar />
     

@@ -142,4 +142,12 @@ import Card from '../molecules/Card.astro';
   .animate-pulse-slow {
     animation: pulse-slow 8s ease-in-out infinite;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float-slow,
+    .animate-float-slow-delayed,
+    .animate-pulse-slow {
+      animation: none;
+    }
+  }
 </style>

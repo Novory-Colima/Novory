@@ -53,6 +53,8 @@
 
   /* TEXTOS Y NEUTRALES */
   --color-text-light-titles: #ffffff;
+  /* Párrafos y subtítulos modo oscuro (gris claro suave, usado en toda la app) */
+  --color-text-secondary: #B8C0D9;
   --color-text-light: #aaaaaa;
   --color-text-dark-titles: #222222;
   --color-text-dark: #444444;
@@ -65,6 +67,30 @@
 
   .dark {
     color-scheme: dark;
+  }
+
+  /* ============================================================
+   * TEMA OSCURO — Fundación CSS
+   * Garantiza fondo y color de texto aunque Tailwind tarde en
+   * procesar sus clases utilitarias dark: en html/body.
+   * ============================================================ */
+  html.dark {
+    background-color: #000000; /* dark-base */
+  }
+
+  html.dark body {
+    background-color: #000000; /* dark-base */
+    color: #aaaaaa;            /* text-light */
+  }
+
+  /* Modo claro explícito por seguridad */
+  html:not(.dark) {
+    background-color: #ffffff; /* light-base */
+  }
+
+  html:not(.dark) body {
+    background-color: #ffffff; /* light-base */
+    color: #444444;            /* text-dark */
   }
 
   * {
@@ -88,7 +114,7 @@
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.1;
-    color: var(--color-text-primary);
+    /* Color controlled by Tailwind classes in each component */
   }
 
   /* Typographic scale from Fase 4.1 */
@@ -113,21 +139,31 @@
 
   /* 24px approx */
 
-  p {
-    color: var(--color-text-secondary);
-  }
+  /* p color controlled by Tailwind classes in each component */
 
   a {
     transition: all var(--duration-fast) var(--ease-standard);
   }
 }
 
-/* Common component styles from Fase 4.2 */
+/* Common component styles */
 .glass-panel {
-  background: var(--color-glass-alpha);
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
-  border: 1px solid var(--color-border-alpha);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl);
+}
+
+/* Navbar scrolled state — fondo adaptativo por tema */
+/* (Se añade vía JS: navbar-scrolled, no dark: prefix, para compatibilidad con Tailwind v4 estático) */
+.navbar-scrolled {
+  background-color: rgba(255, 255, 255, 0.75);
+  border-color: rgba(204, 204, 204, 0.5);
+}
+
+html.dark .navbar-scrolled {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-color: rgba(51, 51, 51, 0.5);
 }
 
 .nav-link-underline {

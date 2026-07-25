@@ -175,8 +175,6 @@ const services = [
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
-
   class ServicesSection extends HTMLElement {
     ctx: gsap.Context | null = null;
     clickHandler: ((e: Event) => void) | null = null;

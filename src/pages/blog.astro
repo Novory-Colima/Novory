@@ -5,17 +5,11 @@ import Section from "../components/layout/Section.astro";
 import Card from "../components/molecules/Card.astro";
 import { Calendar, User } from "@lucide/astro";
 import { withBase } from "../utils/navigation";
-
+import { formatDate } from "../utils/date";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const formatDate = (date: Date) =>
-  date.toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 ---
 
 <BaseLayout title="Blog de Tecnología y Negocios Locales | Novory">
@@ -105,8 +99,6 @@ const formatDate = (date: Date) =>
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
 
   let ctx: gsap.Context | null = null;
 
