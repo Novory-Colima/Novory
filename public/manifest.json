@@ -1,0 +1,23 @@
+{
+  "name": "Novory Studio",
+  "short_name": "Novory",
+  "description": "Transformamos negocios locales con IA y desarrollo web. Chatbots 24/7, agentes de voz, agendamiento y SEO local.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050816",
+  "theme_color": "#4466ff",
+  "icons": [
+    {
+      "src": "/assets/novory-icono-color-dark-mini.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/novory-icono-color-dark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

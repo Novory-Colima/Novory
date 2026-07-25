@@ -2,6 +2,7 @@
 import Section from '../layout/Section.astro';
 import Button from '../atoms/Button.astro';
 import { CheckCircle2, Phone, Mail, Sparkles } from '@lucide/astro';
+import { CONTACT_INFO } from '../../utils/contact';
 import { WHATSAPP_URLS } from '../../utils/whatsapp';
 
 const trustItems = [
@@ -50,14 +51,14 @@ const trustItems = [
 
         <!-- Tarjetas de contacto: 1 columna en md+, alineadas al inicio de las viñetas -->
         <div class="md:col-span-1 w-full flex flex-col gap-4 justify-start self-start min-w-0">
-          <a href="mailto:hola@novory.com"
+          <a href={`mailto:${CONTACT_INFO.email}`}
              class="contact-card flex items-center gap-4 p-4 rounded-[14px] bg-light-surface/40 dark:bg-white/3 border border-light-border/40 dark:border-white/6 hover:bg-light-surface dark:hover:bg-white/6 transition-colors min-w-0 w-full">
             <div class="w-12 h-12 rounded-2xl bg-brand-blue/10 dark:bg-brand-cyan/10 flex items-center justify-center text-brand-blue dark:text-brand-cyan shrink-0">
               <Mail class="w-5 h-5 md:w-6 md:h-6" />
             </div>
             <div class="flex flex-col min-w-0">
               <span class="text-[10px] md:text-[11px] uppercase tracking-[0.18em] font-black text-text-dark dark:text-text-light">Email directo</span>
-              <span class="text-base md:text-lg font-bold text-text-dark-titles dark:text-white truncate">novory.col@gmail.com</span>
+              <span class="text-base md:text-lg font-bold text-text-dark-titles dark:text-white truncate">{CONTACT_INFO.email}</span>
             </div>
           </a>
 

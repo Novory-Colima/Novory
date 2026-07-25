@@ -1,12 +1,13 @@
 ---
 import { withBase } from "../../utils/navigation";
 import { WHATSAPP_URLS } from "../../utils/whatsapp";
+import { CONTACT_INFO } from "../../utils/contact";
 
 const currentYear = new Date().getFullYear();
 
-const contactEmail = "novory.col@gmail.com";
-const contactPhoneDisplay = "+52 312 199 2198";
-const contactPhoneRaw = "523121992198";
+const contactEmail = CONTACT_INFO.email;
+const contactPhoneDisplay = CONTACT_INFO.phoneDisplay;
+const contactPhoneRaw = CONTACT_INFO.phoneRaw;
 
 const navSections = [
   {
