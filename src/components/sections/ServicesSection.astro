@@ -2,6 +2,7 @@
 import Section from "../layout/Section.astro";
 import ServiceCard from "../molecules/ServiceCard.astro";
 import { Bot, MapPin, MessageCircle, Search, Zap } from "@lucide/astro";
+import { WHATSAPP_URLS } from "../../utils/whatsapp";
 
 const services = [
   {
@@ -14,7 +15,7 @@ const services = [
       "Arquitectura preparada para SEO y carga ultra-rápida.",
     ],
     ctaText: "Contáctanos",
-    ctaHref: "#contacto",
+    ctaHref: WHATSAPP_URLS.web,
   },
   {
     title: "SEO Local",
@@ -26,7 +27,7 @@ const services = [
       "Dominio en los resultados de búsqueda de mapas locales.",
     ],
     ctaText: "Contáctanos",
-    ctaHref: "#contacto",
+    ctaHref: WHATSAPP_URLS.seo,
   },
   {
     title: "Automatizaciones",
@@ -38,7 +39,7 @@ const services = [
       "Integraciones fluidas que eliminan tareas repetitivas.",
     ],
     ctaText: "Contáctanos",
-    ctaHref: "#contacto",
+    ctaHref: WHATSAPP_URLS.automation,
   },
 ];
 ---

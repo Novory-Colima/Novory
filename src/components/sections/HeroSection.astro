@@ -3,6 +3,7 @@ import Section from '../layout/Section.astro';
 import Button from '../atoms/Button.astro';
 import HeroVisual from '../ui/HeroVisual.astro';
 import { Check } from '@lucide/astro';
+import { WHATSAPP_URLS } from '../../utils/whatsapp';
 
 const trustIndicators = [
   'Sitios rápidos',
@@ -39,7 +40,7 @@ const trustIndicators = [
         </p>
 
         <div class="hero-buttons flex flex-col sm:flex-row items-center gap-4 md:gap-6 mt-2 md:mt-4">
-          <Button variant="primary" size="hero" href="#contacto" class="w-full sm:w-auto btn-shimmer">
+          <Button variant="primary" size="hero" href={WHATSAPP_URLS.advisory} target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto btn-shimmer">
             Agenda una asesoría
           </Button>
           <Button variant="secondary" size="hero" href="#servicios" class="w-full sm:w-auto">
