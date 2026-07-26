@@ -52,7 +52,7 @@ const trustItems = [
         <!-- Tarjetas de contacto: 1 columna en md+, alineadas al inicio de las viñetas -->
         <div class="md:col-span-1 w-full flex flex-col gap-4 justify-start self-start min-w-0">
           <a href={`mailto:${CONTACT_INFO.email}`}
-             class="contact-card flex items-center gap-4 p-4 rounded-[14px] bg-light-surface/40 dark:bg-white/3 border border-light-border/40 dark:border-white/6 hover:bg-light-surface dark:hover:bg-white/6 transition-colors min-w-0 w-full">
+             class="contact-card flex items-center gap-4 p-4 rounded-xl bg-light-surface/40 dark:bg-white/3 border border-light-border/40 dark:border-white/6 hover:bg-light-surface dark:hover:bg-white/6 transition-colors min-w-0 w-full">
             <div class="w-12 h-12 rounded-2xl bg-brand-blue/10 dark:bg-brand-cyan/10 flex items-center justify-center text-brand-blue dark:text-brand-cyan shrink-0">
               <Mail class="w-5 h-5 md:w-6 md:h-6" />
             </div>
@@ -63,7 +63,7 @@ const trustItems = [
           </a>
 
           <a href={WHATSAPP_URLS.contact} target="_blank" rel="noopener noreferrer"
-             class="contact-card flex items-center gap-4 p-4 rounded-[14px] bg-light-surface/40 dark:bg-white/3 border border-light-border/40 dark:border-white/6 hover:bg-light-surface dark:hover:bg-white/6 transition-colors min-w-0 w-full">
+             class="contact-card flex items-center gap-4 p-4 rounded-xl bg-light-surface/40 dark:bg-white/3 border border-light-border/40 dark:border-white/6 hover:bg-light-surface dark:hover:bg-white/6 transition-colors min-w-0 w-full">
             <div class="w-12 h-12 rounded-2xl bg-brand-cyan/20 dark:bg-brand-blue/12 flex items-center justify-center text-brand-blue dark:text-brand-cyan shrink-0">
               <Phone class="w-5 h-5 md:w-6 md:h-6" />
             </div>
@@ -80,7 +80,7 @@ const trustItems = [
 
       <!-- Formulario (abajo) -->
       <div class="contact-form-wrapper w-full min-w-0">
-        <div class="bg-light-surface/60 dark:bg-white/5 backdrop-blur-xl p-8 md:p-10 lg:p-14 rounded-[20px] border border-light-border/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-500">
+        <div class="bg-light-surface/60 dark:bg-white/5 backdrop-blur-xl p-8 md:p-10 lg:p-14 rounded-2xl border border-light-border/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-500">
           <div class="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-brand-cyan/20 dark:bg-brand-cyan/10 blur-[80px] md:blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none transition-colors"></div>
 
           <form id="contact-form" class="flex flex-col gap-6 md:gap-8 relative z-10 min-w-0" novalidate>
@@ -91,13 +91,13 @@ const trustItems = [
               <div class="flex flex-col gap-2 min-w-0">
                 <label for="name" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Tu Nombre</label>
                 <input type="text" id="name" name="name" required placeholder="Ej. Juan Pérez"
-                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
+                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-xl px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
 
               <div class="flex flex-col gap-2 min-w-0">
                 <label for="email" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Correo Electrónico</label>
                 <input type="email" id="email" name="email" required placeholder="juan@ejemplo.com"
-                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
+                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-xl px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
             </div>
 
@@ -105,26 +105,26 @@ const trustItems = [
               <div class="flex flex-col gap-2 min-w-0">
                 <label for="phone" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Teléfono / WhatsApp</label>
                 <input type="tel" id="phone" name="phone" required placeholder="+52 312 000 0000"
-                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
+                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-xl px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
 
               <div class="flex flex-col gap-2 min-w-0">
                 <label for="business" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Nombre del Negocio</label>
                 <input type="text" id="business" name="business" required placeholder="Mi Negocio Local"
-                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
+                  class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-xl px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
               </div>
             </div>
 
             <div class="flex flex-col gap-2 min-w-0">
               <label for="industry" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">¿A qué se dedica tu negocio?</label>
               <input type="text" id="industry" name="industry" required placeholder="Ej. Restaurante, Clínica Dental, Taller..."
-                class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
+                class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-xl px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0" />
             </div>
 
             <div class="flex flex-col gap-2 min-w-0">
               <label for="message" class="text-[10px] md:text-[11px] font-black text-text-dark dark:text-text-light tracking-[0.2em] uppercase transition-colors">Cuéntanos sobre tu problemática</label>
               <textarea id="message" name="message" rows="4" placeholder="Hola, me gustaría digitalizar mis pedidos..."
-                class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-[12px] px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all resize-none placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0"></textarea>
+                class="w-full bg-light-base dark:bg-dark-base/50 border border-light-border dark:border-white/10 rounded-xl px-6 py-4 md:px-8 md:py-5 text-text-dark-titles dark:text-white text-base md:text-lg outline-none focus:border-brand-blue dark:focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue/40 focus:shadow-[0_0_0_4px_rgba(68,102,255,0.1)] transition-all resize-none placeholder:text-text-dark/50 dark:placeholder:text-white/20 min-w-0"></textarea>
             </div>
 
             <div class="pt-2 md:pt-4">
