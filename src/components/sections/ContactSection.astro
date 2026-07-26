@@ -211,13 +211,13 @@ const trustItems = [
         showFeedback('¡Información validada! Redirigiendo a WhatsApp...', false);
 
         // Create Structured WhatsApp Message
-        const text = `✅ SOLICITUD DE ASESORÍA NOVORY\n\n` +
-                     `👤 Nombre: ${data.name}\n` +
-                     `🏪 Negocio: ${data.business}\n` +
-                     `💼 Giro: ${data.industry || 'No especificado'}\n` +
-                     `📧 Email: ${data.email}\n` +
-                     `📞 Teléfono: ${data.phone}\n\n` +
-                     `💬 Problemática: ${data.message || 'Sin mensaje'}`;
+        const text = `\u{2705} SOLICITUD DE ASESORÍA NOVORY\n\n` +
+                     `\u{1F464} Nombre: ${data.name}\n` +
+                     `\u{1F3EA} Negocio: ${data.business}\n` +
+                     `\u{1F4BC} Giro: ${data.industry || 'No especificado'}\n` +
+                     `\u{1F4E7} Email: ${data.email}\n` +
+                     `\u{1F4DE} Teléfono: ${data.phone}\n\n` +
+                     `\u{1F4AC} Problemática: ${data.message || 'Sin mensaje'}`;
                      
         const encodedText = encodeURIComponent(text);
         const whatsappUrl = `https://api.whatsapp.com/send?phone=523121992198&text=${encodedText}`;
