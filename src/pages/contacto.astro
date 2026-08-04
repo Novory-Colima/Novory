@@ -8,7 +8,7 @@ import FAQSection from "../components/sections/FAQSection.astro";
   title="Contacto | Agenda una Asesoría Gratuita"
   description="Ponte en contacto con Novory Studio. Agenda una asesoría tecnológica gratuita y resuelve tus dudas con nuestro equipo."
 >
-  <div class="pt-16 md:pt-20">
+  <div>
     <!-- Formulario de Contacto -->
     <ContactSection />
 
@@ -18,8 +18,16 @@ import FAQSection from "../components/sections/FAQSection.astro";
 </BaseLayout>
 
 <style is:global>
-  /* Reducir el padding superior del componente de contacto solo en esta página */
+  /* Alinear la primera sección del contacto con el espaciado estándar del sitio (112px/128px) */
   #contacto {
+    padding-top: 112px !important;
+  }
+  #contacto .py-10 {
     padding-top: 0 !important;
+  }
+  @media (min-width: 768px) {
+    #contacto {
+      padding-top: 128px !important;
+    }
   }
 </style>

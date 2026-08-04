@@ -6,9 +6,21 @@ import ProblemsSection from '../components/sections/ProblemsSection.astro';
 ---
 
 <BaseLayout title="Servicios | Soluciones Digitales Inteligentes">
-  <div class="pt-20">
+  <div>
     <ServicesSection />
     <BenefitsSection />
     <ProblemsSection />
   </div>
 </BaseLayout>
+
+<style is:global>
+  /* Alinear la primera sección de servicios con el espaciado estándar del sitio (112px/128px) */
+  #servicios {
+    padding-top: 112px !important;
+  }
+  @media (min-width: 768px) {
+    #servicios {
+      padding-top: 128px !important;
+    }
+  }
+</style>
