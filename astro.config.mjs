@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: "https://novorystudio.com",
+  prefetch: true,
   integrations: [sitemap()],
 
   vite: {
