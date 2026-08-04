@@ -4,16 +4,24 @@ import ToggleTheme from "../atoms/ToggleTheme.astro";
 import { withBase } from "../../utils/navigation";
 import { WHATSAPP_URLS } from "../../utils/whatsapp";
 
-const isHome = Astro.url.pathname === '/' || Astro.url.pathname === withBase('/') || Astro.url.pathname === withBase('').replace(/\/$/, '');
-const anchor = (id: string) => isHome ? `#${id}` : withBase(`#${id}`);
+const pathname = Astro.url.pathname;
 
 const navLinks = [
-  { name: "Inicio", href: anchor('inicio') },
-  { name: "Servicios", href: anchor('servicios') },
-  { name: "Blog", href: withBase('/blog') },
-  { name: "Nosotros", href: anchor('nosotros') },
-  { name: "Contacto", href: anchor('contacto') },
+  { name: "Inicio", href: withBase('/') },
+  { name: "Servicios", href: withBase('/servicios') },
+  { name: "Nosotros", href: withBase('/nosotros') },
+  { name: "Contacto", href: withBase('/contacto') },
 ];
+
+const isActive = (href: string) => {
+  const current = pathname.endsWith('/') && pathname !== '/' ? pathname.slice(0, -1) : pathname;
+  const target = href.endsWith('/') && href !== '/' ? href.slice(0, -1) : href;
+
+  if (target === '/' || target === withBase('/')) {
+    return current === '/' || current === withBase('/') || current === '';
+  }
+  return current === target || current.startsWith(`${target}/`);
+};
 ---
 
 <nav
@@ -35,15 +43,28 @@ const navLinks = [
     </a>
 
     <div class="hidden md:flex items-center gap-8">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="text-sm font-medium text-text-dark dark:text-text-light hover:text-brand-blue dark:hover:text-white transition-colors relative group"
-        >
-          {link.name}
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-blue dark:bg-brand-cyan transition-all duration-300 group-hover:w-full rounded-full"></span>
-        </a>
-      ))}
+      {navLinks.map((link) => {
+        const active = isActive(link.href);
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-colors relative group",
+              active
+                ? "text-brand-blue dark:text-brand-cyan font-semibold"
+                : "text-text-dark dark:text-text-light hover:text-brand-blue dark:hover:text-white"
+            ]}
+          >
+            {link.name}
+            <span
+              class:list={[
+                "absolute -bottom-1 left-0 h-0.5 bg-brand-blue dark:bg-brand-cyan transition-all duration-300 rounded-full",
+                active ? "w-full" : "w-0 group-hover:w-full"
+              ]}
+            ></span>
+          </a>
+        );
+      })}
     </div>
 
     <div class="hidden md:flex items-center gap-4">
@@ -101,14 +122,22 @@ const navLinks = [
 
     <!-- Links -->
     <div class="flex flex-col gap-2 p-6 sm:p-8 overflow-y-auto grow">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="mobile-nav-link text-3xl sm:text-4xl font-bold text-text-dark-titles dark:text-white hover:text-brand-blue dark:hover:text-brand-cyan transition-colors py-3 border-b border-light-border/30 dark:border-dark-border/30 last:border-0"
-        >
-          {link.name}
-        </a>
-      ))}
+      {navLinks.map((link) => {
+        const active = isActive(link.href);
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              "mobile-nav-link text-3xl sm:text-4xl font-bold transition-colors py-3 border-b border-light-border/30 dark:border-dark-border/30 last:border-0",
+              active
+                ? "text-brand-blue dark:text-brand-cyan"
+                : "text-text-dark-titles dark:text-white hover:text-brand-blue dark:hover:text-brand-cyan"
+            ]}
+          >
+            {link.name}
+          </a>
+        );
+      })}
     </div>
 
     <!-- Footer -->
