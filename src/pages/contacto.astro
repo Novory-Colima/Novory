@@ -1,12 +1,25 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactSection from '../components/sections/ContactSection.astro';
-import FAQSection from '../components/sections/FAQSection.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import FAQSection from "../components/sections/FAQSection.astro";
 ---
 
-<BaseLayout title="Contacto | Agenda una Asesoría Gratuita">
-  <div class="pt-20">
+<BaseLayout
+  title="Contacto | Agenda una Asesoría Gratuita"
+  description="Ponte en contacto con Novory Studio. Agenda una asesoría tecnológica gratuita y resuelve tus dudas con nuestro equipo."
+>
+  <div class="pt-16 md:pt-20">
+    <!-- Formulario de Contacto -->
     <ContactSection />
+
+    <!-- Preguntas Frecuentes (FAQ) -->
     <FAQSection />
   </div>
 </BaseLayout>
+
+<style is:global>
+  /* Reducir el padding superior del componente de contacto solo en esta página */
+  #contacto {
+    padding-top: 0 !important;
+  }
+</style>
