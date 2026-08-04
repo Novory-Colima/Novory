@@ -1,0 +1,70 @@
+---
+import Button from "./atoms/Button.astro";
+import Section from "./layout/Section.astro";
+import { withBase } from "../utils/navigation";
+
+interface Props {
+  titulo: string;
+  subtitulo: string;
+  textoBoton1: string;
+  linkBoton1: string;
+  textoBoton2: string;
+  linkBoton2: string;
+}
+
+const {
+  titulo,
+  subtitulo,
+  textoBoton1,
+  linkBoton1,
+  textoBoton2,
+  linkBoton2,
+} = Astro.props;
+---
+
+<Section class="bg-light-base dark:bg-dark-base relative overflow-hidden transition-colors duration-500 border-t border-light-border/40 dark:border-white/5">
+  <!-- Decorative background glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] aspect-square bg-brand-cyan/10 dark:bg-brand-blue/10 blur-[120px] rounded-full pointer-events-none transition-colors duration-700"></div>
+  
+  <div class="relative z-10 flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 md:px-0">
+    
+    <!-- Logos (Light / Dark) -->
+    <div class="mb-10 w-36 md:w-44 lg:w-52 mx-auto">
+      <img
+        src={withBase('/assets/novory-identidad-apilado-color-clear-svg.svg')}
+        alt="Novory Studio"
+        class="w-full h-auto dark:hidden"
+        loading="lazy"
+      />
+      <img
+        src={withBase('/assets/novory-identidad-apilado-color-dark-svg.svg')}
+        alt="Novory Studio"
+        class="w-full h-auto hidden dark:block"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Title and Subtitle -->
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-dark-titles dark:text-white tracking-tighter leading-[1.1] max-w-4xl mx-auto mb-6 transition-colors">
+      {titulo}
+    </h2>
+    
+    <p class="text-lg md:text-xl lg:text-2xl text-text-dark dark:text-text-secondary leading-relaxed max-w-2xl mx-auto mb-10 md:mb-12 transition-colors">
+      {subtitulo}
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 w-full sm:w-auto">
+      <Button variant="primary" size="hero" href={linkBoton1} class="w-full sm:w-auto btn-shimmer">
+        {textoBoton1}
+      </Button>
+      
+      <Button variant="secondary" size="hero" href={linkBoton2} target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex items-center justify-center gap-3 group">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="currentColor" class="w-6 h-6 md:w-7 md:h-7 text-text-dark-titles dark:text-white group-hover:text-[#25D366] transition-colors">
+          <path d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z"></path>
+        </svg>
+        {textoBoton2}
+      </Button>
+    </div>
+  </div>
+</Section>
