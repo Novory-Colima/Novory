@@ -1,0 +1,237 @@
+---
+import Section from "../layout/Section.astro";
+import ServiceCard from "../molecules/ServiceCard.astro";
+import { Zap, MapPin, Search, Bot, MessageCircle } from "@lucide/astro";
+import Button from "../atoms/Button.astro";
+import { WHATSAPP_URLS } from "../../utils/whatsapp";
+
+const services = [
+  {
+    title: "Desarrollo Web Estratégico & SEO",
+    description:
+      "Sitios modernos y rápidos, listos para convertir cada visita en un cliente potencial 24/7. Te posicionamos donde tus clientes están buscando activamente.",
+    benefits: [
+      "Mayor confianza y mejor imagen profesional.",
+      "Optimizado al 100% para dispositivos móviles.",
+      "Más visibilidad local y aumento de llamadas reales.",
+    ],
+    ctaText: "Contáctanos",
+    ctaHref: WHATSAPP_URLS.web,
+  },
+  {
+    title: "Automatizaciones con IA",
+    description:
+      "Sistemas que trabajan por ti mientras descansas: atención, captación y seguimiento sin fricción mediante inteligencia artificial.",
+    benefits: [
+      "Atención por WhatsApp automatizada e inteligente.",
+      "Formularios dinámicos que califican a tus prospectos.",
+      "Integraciones fluidas que eliminan tareas repetitivas.",
+    ],
+    ctaText: "Contáctanos",
+    ctaHref: WHATSAPP_URLS.automation,
+  },
+];
+---
+
+<services-teaser-section class="block">
+  <Section
+    id="servicios-teaser"
+    class="bg-light-base dark:bg-dark-base relative transition-colors duration-500"
+  >
+    <!-- Section Background Decorative Glow -->
+    <div
+      class="absolute left-0 top-1/2 -translate-y-1/2 w-100 md:w-125 h-100 md:h-125 bg-brand-cyan/15 dark:bg-brand-blue/5 blur-[120px] md:blur-[150px] rounded-full pointer-events-none transition-colors"
+    >
+    </div>
+
+    <div
+      class="max-w-4xl mx-auto text-center mb-16 md:mb-20 flex flex-col gap-4 md:gap-6 section-header services-header px-4"
+    >
+      <h2
+        class="text-text-dark-titles dark:text-white text-3xl md:text-5xl font-bold tracking-tight transition-colors"
+      >
+        Soluciones digitales diseñadas para <span
+          class="bg-clip-text text-transparent bg-linear-to-r from-brand-cyan via-brand-blue to-brand-purple"
+          >hacer crecer tu negocio.</span>
+      </h2>
+      <p
+        class="text-text-dark dark:text-text-secondary text-base md:text-xl leading-relaxed transition-colors"
+      >
+        Creamos herramientas inteligentes que trabajan para ti <br
+          class="hidden md:block"
+        /> incluso cuando tu negocio está cerrado.
+      </p>
+    </div>
+
+    <div
+      class="services-grid grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative z-10 max-w-5xl mx-auto"
+    >
+      <!-- Card 1: Web & SEO -->
+      <ServiceCard {...services[0]}>
+        <div slot="visual" class="visual-webdev absolute inset-0 p-3">
+          <div class="flex items-center gap-1 mb-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-red-400/70"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-yellow-400/70"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-green-400/70"></div>
+            <div class="ml-2 h-1 flex-1 rounded-full bg-black/10 dark:bg-white/15"></div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <div class="webdev-line webdev-line-1 h-2.5 w-3/4 rounded bg-brand-blue/55 dark:bg-brand-cyan/55"></div>
+            <div class="webdev-line webdev-line-2 h-1.5 w-full rounded bg-brand-blue/25 dark:bg-brand-cyan/25"></div>
+            <div class="webdev-line webdev-line-3 h-1.5 w-5/6 rounded bg-brand-blue/25 dark:bg-brand-cyan/25"></div>
+            <div class="flex items-center gap-2 mt-2 px-2 py-1.5 rounded border border-brand-blue/40 dark:border-brand-cyan/40 bg-brand-blue/8 dark:bg-brand-cyan/10 shadow-sm">
+               <div class="seo-pin relative w-4 h-4 flex items-center justify-center shrink-0">
+                  <span class="seo-pin-ripple absolute inset-0 rounded-full bg-brand-blue/40 dark:bg-brand-cyan/50"></span>
+                  <MapPin class="relative w-2.5 h-2.5 text-brand-blue dark:text-brand-cyan" fill="currentColor" />
+               </div>
+               <div class="h-1.5 w-1/2 rounded bg-brand-blue/55 dark:bg-brand-cyan/60"></div>
+            </div>
+          </div>
+        </div>
+      </ServiceCard>
+
+      <!-- Card 2: Automatizaciones -->
+      <ServiceCard {...services[1]}>
+        <div slot="visual" class="visual-auto absolute inset-0 flex items-center justify-center px-3">
+          <div class="absolute top-1/2 left-[18%] right-[18%] border-t border-dashed border-brand-blue/40 dark:border-brand-cyan/40"></div>
+          <div class="auto-dot auto-dot-1 absolute w-1 h-1 rounded-full bg-brand-blue dark:bg-brand-cyan"></div>
+          <div class="auto-dot auto-dot-2 absolute w-1 h-1 rounded-full bg-brand-blue dark:bg-brand-cyan"></div>
+          <div class="relative z-10 flex items-center justify-between w-full">
+            <div class="w-8 h-8 rounded-lg bg-light-surface dark:bg-white/12 border border-brand-blue/30 dark:border-brand-cyan/30 flex items-center justify-center text-brand-blue dark:text-brand-cyan shadow-sm">
+              <MessageCircle class="w-3.5 h-3.5" />
+            </div>
+            <div class="auto-hub w-10 h-10 rounded-lg bg-brand-blue dark:bg-brand-cyan border border-brand-blue/50 dark:border-brand-cyan/50 flex items-center justify-center text-white dark:text-dark-base shadow-md">
+              <Zap class="w-4 h-4" fill="currentColor" />
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-light-surface dark:bg-white/12 border border-brand-cyan/30 dark:border-brand-blue/30 flex items-center justify-center text-brand-blue dark:text-brand-cyan shadow-sm">
+              <Bot class="w-3.5 h-3.5" />
+            </div>
+          </div>
+        </div>
+      </ServiceCard>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="mt-12 md:mt-16 flex justify-center z-10 relative">
+      <Button 
+        href="/servicios" 
+        variant="primary" 
+        class="shadow-[0_0_20px_rgba(68,102,255,0.4)] dark:shadow-[0_0_20px_rgba(0,240,255,0.3)] group"
+      >
+        Descubre cómo lo hacemos
+        <span class="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-1">→</span>
+      </Button>
+    </div>
+  </Section>
+</services-teaser-section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  class ServicesTeaserSection extends HTMLElement {
+    ctx: gsap.Context | null = null;
+    clickHandler: ((e: Event) => void) | null = null;
+
+    connectedCallback() {
+      this.ctx = gsap.context(() => {
+        gsap.fromTo('.services-header', { y: 30, opacity: 0 }, {
+          scrollTrigger: { trigger: '.services-header', start: 'top 85%' },
+          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+        });
+
+        gsap.fromTo('.service-card', { y: 60, opacity: 0 }, {
+          scrollTrigger: { trigger: '.services-grid', start: 'top 82%' },
+          y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+          stagger: { each: 0.15, from: 'start' },
+        });
+      }, this);
+
+      this.clickHandler = (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('a')) return;
+        const card = target.closest('.service-card');
+        if (!card) return;
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          document.querySelectorAll('.service-card.is-flipped').forEach((el) => {
+            if (el !== card) el.classList.remove('is-flipped');
+          });
+          card.classList.toggle('is-flipped');
+        }
+      };
+
+      this.addEventListener('click', this.clickHandler);
+    }
+
+    disconnectedCallback() {
+      if (this.ctx) { this.ctx.revert(); this.ctx = null; }
+      if (this.clickHandler) this.removeEventListener('click', this.clickHandler);
+    }
+  }
+
+  if (!customElements.get("services-teaser-section")) {
+    customElements.define("services-teaser-section", ServicesTeaserSection);
+  }
+</script>
+
+<style>
+  /* -------- Visual: Desarrollo Web (skeleton pulse) -------- */
+  .webdev-line {
+    animation: webdev-pulse 3.6s ease-in-out infinite;
+  }
+  .webdev-line-1 { animation-delay: 0s; }
+  .webdev-line-2 { animation-delay: 0.18s; }
+  .webdev-line-3 { animation-delay: 0.36s; }
+  @keyframes webdev-pulse {
+    0%, 100% { opacity: 0.35; }
+    50%      { opacity: 1;    }
+  }
+
+  /* -------- Visual: SEO Local (pin ripple) -------- */
+  .seo-pin-ripple {
+    transform-origin: center;
+    animation: seo-ripple 2.2s ease-out infinite;
+  }
+  @keyframes seo-ripple {
+    0%   { transform: scale(0.6); opacity: 0.8; }
+    80%  { transform: scale(2.2); opacity: 0;   }
+    100% { transform: scale(2.2); opacity: 0;   }
+  }
+
+  /* -------- Visual: Automatizaciones (traveling dots + hub glow) -------- */
+  .auto-dot {
+    top: calc(50% - 2px);
+    opacity: 0;
+  }
+  .auto-dot-1 { animation: auto-travel-1 3.4s ease-in-out infinite; }
+  .auto-dot-2 { animation: auto-travel-2 3.4s ease-in-out infinite 1.7s; }
+  @keyframes auto-travel-1 {
+    0%       { left: 22%; opacity: 0; }
+    10%      { opacity: 1; }
+    90%      { opacity: 1; }
+    100%     { left: 50%; opacity: 0; }
+  }
+  @keyframes auto-travel-2 {
+    0%       { left: 50%; opacity: 0; }
+    10%      { opacity: 1; }
+    90%      { opacity: 1; }
+    100%     { left: 78%; opacity: 0; }
+  }
+  .auto-hub {
+    animation: auto-hub-pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes auto-hub-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(68, 102, 255, 0.55); }
+    50%      { box-shadow: 0 0 0 10px rgba(68, 102, 255, 0);  }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .webdev-line,
+    .seo-pin-ripple,
+    .auto-dot-1,
+    .auto-dot-2,
+    .auto-hub {
+      animation: none !important;
+    }
+  }
+</style>

@@ -3,13 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/sections/HeroSection.astro';
 import BusinessSection from '../components/sections/BusinessSection.astro';
 import ProblemsSection from '../components/sections/ProblemsSection.astro';
-import ServicesSection from '../components/sections/ServicesSection.astro';
-import ProcessSection from '../components/sections/ProcessSection.astro';
+import ServicesTeaserSection from '../components/sections/ServicesTeaserSection.astro';
 import DemosSection from '../components/sections/DemosSection.astro';
-import BenefitsSection from '../components/sections/BenefitsSection.astro';
-import AboutSection from '../components/sections/AboutSection.astro';
-import FAQSection from '../components/sections/FAQSection.astro';
-import ContactSection from '../components/sections/ContactSection.astro';
+import GlobalCTA from '../components/GlobalCTA.astro';
 ---
 
 <BaseLayout 
@@ -23,11 +19,14 @@ import ContactSection from '../components/sections/ContactSection.astro';
   <div id="inicio"><HeroSection /></div>
   <BusinessSection />
   <ProblemsSection />
-  <div id="servicios"><ServicesSection /></div>
+  <div id="servicios"><ServicesTeaserSection /></div>
   <DemosSection />
-  <ProcessSection />
-  <BenefitsSection />
-  <div id="nosotros"><AboutSection /></div>
-  <FAQSection />
-  <div id="contacto"><ContactSection /></div>
+  <GlobalCTA 
+    titulo="¿Y si el próximo caso de éxito digital es tu negocio?"
+    subtitulo="Creamos ecosistemas web diseñados para captar la atención, transmitir confianza y automatizar tus ventas."
+    textoBoton1="Quiero un proyecto así →"
+    linkBoton1="/contacto"
+    textoBoton2="Hablemos"
+    linkBoton2="https://wa.me/523121992198?text=Hola%20Novory%2C%20visit%C3%A9%20su%20p%C3%A1gina%20y%20me%20interesa%20saber%20c%C3%B3mo%20pueden%20ayudar%20a%20mi%20negocio."
+  />
 </BaseLayout>

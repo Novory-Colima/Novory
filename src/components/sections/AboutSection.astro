@@ -67,10 +67,11 @@ const values = [
         </div>
 
         <div
-          class="inline-flex flex-col gap-2 p-6 border-l-4 border-brand-blue dark:border-brand-cyan bg-brand-blue/5 dark:bg-brand-blue/10 rounded-r-2xl transition-colors"
+          class="magnetic-element relative inline-flex flex-col gap-2 p-6 border-l-4 border-brand-blue dark:border-brand-cyan bg-light-surface/40 dark:bg-white/5 backdrop-blur-md rounded-r-2xl transition-all duration-500 hover:bg-light-surface/80 dark:hover:bg-white/10 hover:shadow-[0_8px_30px_rgba(68,102,255,0.12)] dark:hover:shadow-[0_8px_30px_rgba(0,240,255,0.08)] group/manifesto overflow-hidden cursor-default"
         >
+          <div class="absolute inset-0 bg-linear-to-r from-transparent via-brand-blue/10 dark:via-brand-cyan/10 to-transparent -translate-x-[150%] group-hover/manifesto:animate-shimmer pointer-events-none"></div>
           <p
-            class="text-text-dark-titles dark:text-white font-medium italic text-lg md:text-xl leading-relaxed transition-colors"
+            class="relative z-10 text-text-dark-titles dark:text-white font-medium italic text-lg md:text-xl leading-relaxed transition-colors group-hover/manifesto:text-brand-blue dark:group-hover/manifesto:text-white duration-300"
           >
             "Diseñamos herramientas que ayudan a las personas a trabajar mejor,
             ahorrar tiempo y hacer crecer sus sueños."
@@ -127,11 +128,12 @@ const values = [
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
           {
             values.map((value) => (
-              <div class="flex items-center gap-4 p-4 md:p-5 rounded-lg bg-light-surface/30 dark:bg-white/1 border border-light-border/40 dark:border-white/5 hover:bg-light-surface dark:hover:bg-white/3 hover:border-brand-blue/30 dark:hover:border-brand-cyan/30 transition-all duration-300 group/value min-w-0">
-                <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/5 dark:bg-white/5 flex items-center justify-center text-brand-blue/60 dark:text-white/40 group-hover/value:text-brand-blue dark:group-hover/value:text-brand-cyan group-hover/value:bg-brand-blue/10 dark:group-hover/value:bg-brand-cyan/10 transition-colors">
+              <div class="magnetic-element relative flex items-center gap-4 p-4 md:p-5 rounded-lg bg-light-surface/30 dark:bg-white/5 backdrop-blur-sm border border-light-border/40 dark:border-white/10 hover:bg-light-surface/90 dark:hover:bg-white/10 hover:border-brand-blue/40 dark:hover:border-brand-cyan/40 transition-all duration-500 hover:shadow-lg hover:shadow-brand-blue/5 dark:hover:shadow-brand-cyan/10 group/value min-w-0 overflow-hidden cursor-default">
+                <div class="absolute inset-0 bg-linear-to-tr from-brand-blue/0 via-brand-blue/5 to-brand-blue/0 dark:from-brand-cyan/0 dark:via-brand-cyan/10 dark:to-brand-cyan/0 opacity-0 group-hover/value:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="relative z-10 w-10 h-10 shrink-0 rounded-xl bg-brand-blue/10 dark:bg-white/5 flex items-center justify-center text-brand-blue/70 dark:text-white/50 group-hover/value:text-white dark:group-hover/value:text-dark-base group-hover/value:bg-brand-blue dark:group-hover/value:bg-brand-cyan group-hover/value:scale-110 group-hover/value:shadow-[0_0_15px_rgba(68,102,255,0.4)] dark:group-hover/value:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all duration-300">
                   <value.icon class="w-5 h-5" />
                 </div>
-                <span class="text-sm md:text-base font-bold text-text-dark-titles dark:text-white/80 group-hover/value:text-brand-blue dark:group-hover/value:text-white transition-colors">
+                <span class="relative z-10 text-sm md:text-base font-bold text-text-dark-titles dark:text-white/80 group-hover/value:text-brand-blue dark:group-hover/value:text-white transition-colors duration-300">
                   {value.title}
                 </span>
               </div>
@@ -149,6 +151,8 @@ const values = [
 
   class AboutSection extends HTMLElement {
     ctx: gsap.Context | null = null;
+    magneticElements: HTMLElement[] = [];
+    magneticHandlers: {el: HTMLElement, move: (e: MouseEvent) => void, leave: () => void}[] = [];
 
     connectedCallback() {
       this.ctx = gsap.context(() => {
@@ -179,6 +183,40 @@ const values = [
           ease: "power3.out",
         });
       }, this);
+
+      // Magnetic effect setup
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        this.magneticElements = Array.from(this.querySelectorAll('.magnetic-element'));
+        
+        this.magneticElements.forEach(el => {
+          const move = (e: MouseEvent) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Subtle movement - adjust the divisor for stronger/weaker effect (higher = weaker)
+            gsap.to(el, {
+              x: x / 25,
+              y: y / 25,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          };
+          
+          const leave = () => {
+            gsap.to(el, {
+              x: 0,
+              y: 0,
+              duration: 0.6,
+              ease: "elastic.out(1, 0.3)"
+            });
+          };
+
+          el.addEventListener('mousemove', move);
+          el.addEventListener('mouseleave', leave);
+          this.magneticHandlers.push({ el, move, leave });
+        });
+      }
     }
 
     disconnectedCallback() {
@@ -186,6 +224,12 @@ const values = [
         this.ctx.revert();
         this.ctx = null;
       }
+      
+      this.magneticHandlers.forEach(({el, move, leave}) => {
+        el.removeEventListener('mousemove', move);
+        el.removeEventListener('mouseleave', leave);
+      });
+      this.magneticHandlers = [];
     }
   }
 
@@ -193,3 +237,17 @@ const values = [
     customElements.define("about-section", AboutSection);
   }
 </script>
+
+<style>
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-150%);
+    }
+    100% {
+      transform: translateX(150%);
+    }
+  }
+  .animate-shimmer {
+    animation: shimmer 1.5s infinite;
+  }
+</style>
